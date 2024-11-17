@@ -76,4 +76,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlin.serialization.converter)
     implementation(libs.kotlinx.serialization.json)
+
+    //Immutable
+    implementation(libs.kotlinx.collection.immutable)
 }
