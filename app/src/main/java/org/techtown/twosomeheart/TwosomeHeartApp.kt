@@ -2,11 +2,17 @@ package org.techtown.twosomeheart
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
+import timber.log.Timber
 
 class TwosomeHeartApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        setTimber()
         setLightMode()
+    }
+
+    private fun setTimber() {
+        Timber.plant(Timber.DebugTree())
     }
 
     private fun setLightMode() {
