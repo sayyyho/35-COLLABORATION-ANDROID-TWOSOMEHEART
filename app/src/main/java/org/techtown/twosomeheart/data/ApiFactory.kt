@@ -6,6 +6,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.techtown.twosomeheart.BuildConfig
+import org.techtown.twosomeheart.data.service.TwosomeService
 import retrofit2.Retrofit
 
 object ApiFactory {
