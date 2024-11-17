@@ -1,4 +1,4 @@
-package org.techtown.twosomeheart.util
+package org.techtown.twosomeheart.core.extension
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

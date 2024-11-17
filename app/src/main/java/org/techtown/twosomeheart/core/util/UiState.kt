@@ -1,4 +1,4 @@
-package org.techtown.twosomeheart.util
+package org.techtown.twosomeheart.core.util
 
 sealed class UiState<out T> {
     object Loading : UiState<Nothing>()
