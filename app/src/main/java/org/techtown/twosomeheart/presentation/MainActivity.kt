@@ -1,4 +1,4 @@
-package org.techtown.twosomeheart
+package org.techtown.twosomeheart.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
