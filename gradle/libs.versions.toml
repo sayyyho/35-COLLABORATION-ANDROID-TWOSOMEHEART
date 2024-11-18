@@ -11,14 +11,12 @@ composeBom = "2024.04.01"
 appcompat = "1.7.0"
 immutable = "0.3.8"
 androidxComposeNavigation = "2.8.2"
-# Third Party
 timber = "5.0.1"
 okhttp = "4.11.0"
 retrofit = "2.9.0"
 retrofitKotlinSerializationConverter = "1.0.0"
 kotlinxSerializationJson = "1.7.3"
 navigationCompose = "2.8.4"
-## Coil
 coil = "2.6.0"
 
 [libraries]
@@ -39,7 +37,6 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 kotlinx-collection-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "immutable" }
 androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxComposeNavigation" }
-# Third Party
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp" }
