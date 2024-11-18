@@ -1,0 +1,8 @@
+package org.techtown.twosomeheart.core.util
+
+sealed class UiState<out T> {
+    object Loading : UiState<Nothing>()
+    object Empty : UiState<Nothing>()
+    data class Success<T>(val data: T) : UiState<T>()
+    object Failure : UiState<Nothing>()
+}
