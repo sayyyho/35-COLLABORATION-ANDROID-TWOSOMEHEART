@@ -3,7 +3,7 @@ name: issue_template.md
 about: issue 생성용 템플릿입니다 :)
 title: "[type] 작업 내용"
 labels: ''
-assignees: hyeeum, kangyein9892, sayyyho
+assignees: ''
 
 ---
 
