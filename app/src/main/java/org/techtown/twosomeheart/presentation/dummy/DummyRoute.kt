@@ -1,6 +1,7 @@
 package org.techtown.twosomeheart.presentation.dummy
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -26,6 +28,8 @@ import org.techtown.twosomeheart.core.extension.noRippleClickable
 import org.techtown.twosomeheart.core.util.UiState
 import org.techtown.twosomeheart.data.dto.response.ResponseDummyDto
 import org.techtown.twosomeheart.presentation.dummy.component.DummyItem
+import org.techtown.twosomeheart.ui.theme.Red40
+import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 
 @Composable
 fun DummyRoute(
@@ -71,6 +75,7 @@ fun DummyScreen(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
+            .background(Red40)
             .padding(paddingValues),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -83,7 +88,7 @@ fun DummyScreen(
                             .noRippleClickable { navigateUp() },
                         textAlign = TextAlign.Center,
                         text = "로딩 중...",
-                        fontSize = 30.sp
+                        style = TwosomeHeartTheme.typography.caption3R10
                     )
                 }
             }
@@ -127,3 +132,14 @@ fun DummyScreen(
     }
 }
 
+@Composable
+@Preview
+fun DummyScreenPreview() {
+    TwosomeHeartTheme {
+        DummyScreen(
+            paddingValues = PaddingValues(),
+            navigateUp = {},
+            state = UiState.Loading
+        )
+    }
+}
