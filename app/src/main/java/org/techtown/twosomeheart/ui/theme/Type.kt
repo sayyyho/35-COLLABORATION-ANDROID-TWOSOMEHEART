@@ -35,145 +35,164 @@ val Typography = Typography(
     */
 )
 
-val head1_b_24 = TextStyle(
+val head1B24 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 24.sp,
     fontWeight = FontWeight(700),
     lineHeight = 36.sp
 )
 
-val head2_r_22 = TextStyle(
+val head2R22 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_regular)),
     fontSize = 22.sp,
     fontWeight = FontWeight(400),
     lineHeight = 36.sp
 )
 
-val head3_b_20 = TextStyle(
+val head3B20 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 20.sp,
     fontWeight = FontWeight(700),
     lineHeight = 30.sp
 )
 
-val head4_b_18 = TextStyle(
+val head4B18 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 18.sp,
     fontWeight = FontWeight(700),
     lineHeight = 48.sp
 )
-val head4_b_18_tight = TextStyle(
+
+val head4B18Tight = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 18.sp,
     fontWeight = FontWeight(700),
     lineHeight = 48.sp,
     letterSpacing = (-1).sp
 )
-val head4_m_18 = TextStyle(
+
+val head4M18 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_medium)),
     fontSize = 18.sp,
     fontWeight = FontWeight(500),
     lineHeight = 48.sp
 )
-val head4_r_18 = TextStyle(
+
+val head4R18 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_regular)),
     fontSize = 18.sp,
     fontWeight = FontWeight(400),
     lineHeight = 48.sp
 )
-val title1_b_16 = TextStyle(
+
+val titleB16 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 16.sp,
     fontWeight = FontWeight(700),
     lineHeight = 24.sp
 )
-val title1_r_16 = TextStyle(
+
+val title1R16 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_regular)),
     fontSize = 16.sp,
     fontWeight = FontWeight(400),
     lineHeight = 24.sp
 )
-val title2_b_15 = TextStyle(
+
+val title2B15 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 15.sp,
     fontWeight = FontWeight(700),
     lineHeight = 21.sp
 )
-val body1_b_14 = TextStyle(
+
+val body1B14 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 14.sp,
     fontWeight = FontWeight(700),
     lineHeight = 21.sp
 )
-val body1_b_14_tight = TextStyle(
+
+val body1B14Tight = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 14.sp,
     fontWeight = FontWeight(700),
     lineHeight = 21.sp,
     letterSpacing = (-1).sp
 )
-val body1_m_14 = TextStyle(
+
+val body1M14 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_medium)),
     fontSize = 14.sp,
     fontWeight = FontWeight(500),
     lineHeight = 21.sp
 )
-val body1_r_14 = TextStyle(
+
+val body1R14 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_regular)),
     fontSize = 14.sp,
     fontWeight = FontWeight(400),
     lineHeight = 21.sp
 )
-val body2_b_13 = TextStyle(
+
+val body2B13 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 13.sp,
     fontWeight = FontWeight(700),
     lineHeight = 21.sp
 )
-val body2_r_13 = TextStyle(
+
+val body2R13 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_regular)),
     fontSize = 13.sp,
     fontWeight = FontWeight(400),
     lineHeight = 21.sp
 )
-val caption1_b_12 = TextStyle(
+
+val caption1B12 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
     fontSize = 12.sp,
     fontWeight = FontWeight(700),
     lineHeight = 18.sp
 )
-val caption1_m_12 = TextStyle(
+
+val caption1M12 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_medium)),
     fontSize = 12.sp,
     fontWeight = FontWeight(500),
     lineHeight = 18.sp
 )
-val caption1_r_12_tight = TextStyle(
+
+val caption1R12Tight = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_regular)),
     fontSize = 12.sp,
     fontWeight = FontWeight(400),
     lineHeight = 18.sp,
     letterSpacing = (-0.3).sp
 )
-val caption2_m_11 = TextStyle(
+
+val caption2M11 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_medium)),
     fontSize = 11.sp,
     fontWeight = FontWeight(500),
     lineHeight = 18.sp
 )
-val caption2_r_11 = TextStyle(
+
+val caption2R11 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_regular)),
     fontSize = 11.sp,
     fontWeight = FontWeight(400),
     lineHeight = 18.sp
 )
-val caption3_m_10 = TextStyle(
+
+val caption3M10 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_medium)),
     fontSize = 10.sp,
     fontWeight = FontWeight(500),
     lineHeight = 18.sp
 )
-val caption3_r_10 = TextStyle(
+
+val caption3R10 = TextStyle(
     fontFamily = FontFamily(Font(R.font.notosanskr_regular)),
     fontSize = 10.sp,
     fontWeight = FontWeight(400),
