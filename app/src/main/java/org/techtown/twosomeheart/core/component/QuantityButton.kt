@@ -87,6 +87,69 @@ fun ModalQuantityButton(
     }
 }
 
+@Composable
+fun OptionQuantityButton(
+    onClickMinusButton: () -> Unit,
+    onClickPlusButton: () -> Unit,
+    modifier: Modifier = Modifier,
+    ammount: Int = 0,
+) {
+    Row(
+        modifier = modifier
+            .height(32.dp)
+            .border(width = 1.dp, shape = RoundedCornerShape(4.dp), color = Gray20)
+            .clip(RoundedCornerShape(4.dp))
+            .background(White),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Box(
+            modifier = Modifier.noRippleClickable(
+                onClick = {
+                    if (ammount == 0) else onClickMinusButton()
+                }
+            )
+        ) {
+            Icon(
+                imageVector = if (ammount == 0) ImageVector.vectorResource(id = R.drawable.ic_option_more_minus_disable) else ImageVector.vectorResource(
+                    id = R.drawable.ic_option_more_minus_able
+                ),
+                contentDescription = stringResource(R.string.minus),
+                tint = Color.Unspecified,
+                modifier = Modifier
+                    .size(24.dp)
+                    .padding(4.dp),
+            )
+        }
+
+        Box(
+            modifier = Modifier
+                .width(40.dp)
+                .height(32.dp)
+                .border(width = 1.dp, color = Gray20),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = ammount.toString(),
+                color = Black,
+                style = TwosomeHeartTheme.typography.caption1M12
+            )
+        }
+
+        Box(
+            modifier = Modifier.noRippleClickable(onClick = onClickPlusButton)
+        ) {
+            Icon(
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_option_more_plus),
+                contentDescription = stringResource(R.string.plus),
+                tint = Color.Unspecified,
+                modifier = Modifier
+                    .size(24.dp)
+                    .padding(4.dp),
+            )
+        }
+    }
+}
+
 @Preview
 @Composable
 fun QuantityButtonPreview() {
@@ -97,6 +160,15 @@ fun QuantityButtonPreview() {
             ModalQuantityButton(
                 onClickMinusButton = {},
                 onClickPlusButton = {}
+            )
+            OptionQuantityButton(
+                onClickMinusButton = {},
+                onClickPlusButton = {}
+            )
+            OptionQuantityButton(
+                onClickMinusButton = {},
+                onClickPlusButton = {},
+                ammount = 1
             )
         }
     }
