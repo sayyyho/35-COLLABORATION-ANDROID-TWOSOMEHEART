@@ -15,8 +15,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
@@ -38,7 +40,7 @@ fun BottomInformaion(
             modifier = Modifier.padding(top = 20.dp, bottom = 14.dp)
         ) {
             Text(
-                "주문 매장",
+                stringResource(R.string.menu_ordered_store),
                 style = TwosomeHeartTypography.caption1M12,
                 color = White
             )
@@ -46,20 +48,20 @@ fun BottomInformaion(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    "안양호계금명점",
+                    stringResource(R.string.menu_ordered_store_name),
                     style = TwosomeHeartTypography.body1B14,
                     color = White
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    "349m",
+                    stringResource(R.string.menu_ordered_store_distance),
                     style = TwosomeHeartTypography.caption1B12,
                     color = White
                 )
             }
         }
         Text(
-            text = "변경",
+            text = stringResource(R.string.menu_change),
             style = TwosomeHeartTypography.body2R13,
             modifier = Modifier
                 .padding(top = 23.dp, bottom = 20.dp)
