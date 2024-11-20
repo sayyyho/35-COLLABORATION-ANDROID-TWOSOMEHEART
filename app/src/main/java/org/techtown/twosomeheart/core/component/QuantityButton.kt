@@ -28,6 +28,7 @@ import org.techtown.twosomeheart.core.extension.noRippleClickable
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.Gray20
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
+import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
@@ -68,7 +69,7 @@ fun ModalQuantityButton(
             Text(
                 text = ammount.toString(),
                 color = Black,
-                style = TwosomeHeartTheme.typography.body1B14Tight
+                style = TwosomeHeartTypography.body1B14Tight
             )
         }
 
