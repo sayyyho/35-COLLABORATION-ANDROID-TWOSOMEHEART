@@ -14,6 +14,6 @@
 
     //menu status chip
     <string name="menu_status_new">New</string>
-    <string name="menu_status_best">best</string>
+    <string name="menu_status_best">Best</string>
 
 </resources>
