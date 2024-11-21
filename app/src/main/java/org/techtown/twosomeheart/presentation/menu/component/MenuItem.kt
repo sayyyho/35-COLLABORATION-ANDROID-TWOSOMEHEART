@@ -3,6 +3,7 @@ package org.techtown.twosomeheart.presentation.menu.component
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.techtown.twosomeheart.R
+import org.techtown.twosomeheart.core.component.MenuStatusChip
 import org.techtown.twosomeheart.core.util.PriceFormatter
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
@@ -31,8 +33,8 @@ fun MenuItem(
     menuPrice: Int,
     @DrawableRes menuImage: Int,
     modifier: Modifier = Modifier,
-    isBestMenu : Boolean = false,
-    ) {
+    isBestMenu: Boolean = false,
+) {
     Row(
         modifier = modifier
             .background(White)
@@ -46,7 +48,7 @@ fun MenuItem(
         Spacer(modifier = Modifier.width(14.dp))
 
         Column {
-            //chip 자리 - isBestMenu 사용하여 칩 추가
+            MenuStatusChip(isBestMenu = isBestMenu)
 
             Spacer(modifier = Modifier.height(4.dp))
 
@@ -76,10 +78,20 @@ fun MenuItem(
 @Composable
 fun MenuItemPreview() {
     TwosomeHeartTheme {
-        MenuItem(
-            menuName = "바나나 샷 라떼",
-            menuPrice = 1000,
-            menuImage = R.drawable.img_menu_banana_latte
-        )
+        Column(
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            MenuItem(
+                menuName = "바나나 샷 라떼",
+                menuPrice = 1000,
+                menuImage = R.drawable.img_menu_banana_latte,
+                isBestMenu = true
+            )
+            MenuItem(
+                menuName = "바나나 샷 라떼",
+                menuPrice = 1000,
+                menuImage = R.drawable.img_menu_banana_latte,
+            )
+        }
     }
 }
