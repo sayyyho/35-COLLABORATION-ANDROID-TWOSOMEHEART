@@ -20,7 +20,7 @@ import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
-fun BlackButton(
+fun BlackBottomButton(
     text: String,
     modifier: Modifier = Modifier,
     font: TextStyle = TwosomeHeartTypography.titleB16,
@@ -32,7 +32,6 @@ fun BlackButton(
             .fillMaxWidth()
             .background(Black)
             .padding(vertical = padding.dp),
-
         text = text,
         color = color,
         textAlign = TextAlign.Center,
@@ -50,23 +49,21 @@ fun BlackButtonPreview(
             verticalArrangement = Arrangement.spacedBy(20.dp),
             modifier = modifier.fillMaxWidth()
         ) {
-            BlackButton(
+            BlackBottomButton(
                 text = "주문하기",
                 modifier = Modifier,
                 padding = 15
             )
-            BlackButton(
+            BlackBottomButton(
                 text = "주문하기",
                 color = Red30,
                 modifier = Modifier
             )
-
-            BlackButton(
+            BlackBottomButton(
                 text = "선택하기",
                 modifier = Modifier
             )
         }
-
     }
 }
 
