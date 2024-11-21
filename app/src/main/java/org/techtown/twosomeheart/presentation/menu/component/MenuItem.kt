@@ -42,7 +42,7 @@ fun MenuItem(
     ) {
         Image(
             painter = painterResource(menuImage),
-            contentDescription = "menu image",
+            contentDescription = stringResource(R.string.menu_description_image),
         )
 
         Spacer(modifier = Modifier.width(14.dp))
