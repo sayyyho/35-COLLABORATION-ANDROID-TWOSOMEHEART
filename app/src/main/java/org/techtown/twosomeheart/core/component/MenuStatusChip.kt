@@ -1,16 +1,13 @@
 package org.techtown.twosomeheart.core.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,30 +24,21 @@ fun MenuStatusChip(
     modifier: Modifier = Modifier,
     isBestMenu: Boolean = false
 ) {
-    Box(
+    Text(
+        text = if (isBestMenu) stringResource(R.string.menu_status_best) else stringResource(R.string.menu_status_new),
+        style = TwosomeHeartTypography.caption3R10,
+        color = White,
         modifier = modifier
-            .width(28.dp)
-            .height(15.dp)
             .background(
-                color =
-                    if (isBestMenu) {
-                        Black
-                    } else {
-                        Red40
-                    }
-                , shape = RoundedCornerShape(size = 2.dp))
+                shape = RoundedCornerShape(size = 2.dp),
+                color = if (isBestMenu) Black else Red40
+            )
             .padding(
-                horizontal = if (isBestMenu) 3.5.dp else 3.dp,
+                start = if (isBestMenu) 3.5.dp else 3.dp,
+                end = if (isBestMenu) 2.5.dp else 3.dp,
             )
 
-    ) {
-        Text(
-            text = if (isBestMenu) stringResource(R.string.menu_status_best) else stringResource(R.string.menu_status_new),
-            style = TwosomeHeartTypography.caption3R10,
-            color = White,
-            modifier = Modifier.align(Alignment.Center)
-        )
-    }
+    )
 }
 
 @Preview(showBackground = true)
