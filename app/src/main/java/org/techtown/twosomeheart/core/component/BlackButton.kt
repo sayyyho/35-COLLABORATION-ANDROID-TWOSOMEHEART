@@ -8,28 +8,35 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.techtown.twosomeheart.ui.theme.White
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.Red30
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
+import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
+import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun BlackButton(
     text: String,
-    isActive: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    font: TextStyle = TwosomeHeartTypography.titleB16,
+    color: Color = White,
+    padding: Int = 11,
 ) {
     Text(
         modifier = modifier
             .fillMaxWidth()
             .background(Black)
-            .padding(vertical = if (isActive) 14.dp else 11.dp),
+            .padding(vertical = padding.dp),
+
         text = text,
-        color = if (isActive) Red30 else White,
-        textAlign = TextAlign.Center
+        color = color,
+        textAlign = TextAlign.Center,
+        style = font
     )
 }
 
@@ -44,13 +51,18 @@ fun BlackButtonPreview(
             modifier = modifier.fillMaxWidth()
         ) {
             BlackButton(
-                text = "선택하기",
-                isActive = false,
-                modifier = Modifier
+                text = "주문하기",
+                modifier = Modifier,
+                padding = 15
             )
             BlackButton(
+                text = "주문하기",
+                color = Red30,
+                modifier = Modifier
+            )
+
+            BlackButton(
                 text = "선택하기",
-                isActive = true,
                 modifier = Modifier
             )
         }
