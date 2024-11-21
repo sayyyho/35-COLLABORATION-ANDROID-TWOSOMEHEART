@@ -19,6 +19,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.techtown.twosomeheart.R
+import org.techtown.twosomeheart.core.util.PriceFormatter
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
@@ -59,7 +60,7 @@ fun MenuItem(
 
             Text(
                 text = buildAnnotatedString {
-                    append("$menuPrice")
+                    append(PriceFormatter.formatPrice(menuPrice))
                     withStyle(style = TwosomeHeartTypography.body2R13.toSpanStyle()) {
                         append(stringResource(R.string.won))
                     }
