@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import org.techtown.twosomeheart.presentation.dummy.navigation.dummyNavGraph
+import org.techtown.twosomeheart.presentation.menu.navigation.menuNavGraph
 
 @Composable
 fun MainScreen(
@@ -23,6 +24,10 @@ fun MainScreen(
                     startDestination = navigator.startDestination
                 ) {
                     dummyNavGraph(
+                        paddingValues = paddingValue,
+                        navigateUp = navigator::navigateUp,
+                    )
+                    menuNavGraph(
                         paddingValues = paddingValue,
                         navigateUp = navigator::navigateUp,
                     )

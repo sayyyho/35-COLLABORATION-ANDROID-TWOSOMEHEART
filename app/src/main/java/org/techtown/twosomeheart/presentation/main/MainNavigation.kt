@@ -6,12 +6,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.rememberNavController
 import org.techtown.twosomeheart.core.Route
-import org.techtown.twosomeheart.presentation.dummy.navigation.Dummy
 import org.techtown.twosomeheart.presentation.dummy.navigation.navigateDummy
+import org.techtown.twosomeheart.presentation.menu.navigation.Menu
+import org.techtown.twosomeheart.presentation.menu.navigation.navigateMenu
 
 class MainNavigation(
     val navController: NavHostController,
-    val startDestination: Route = Dummy
+    val startDestination: Route = Menu
 ) {
     fun navigateUp() {
         navController.navigateUp()
@@ -19,6 +20,10 @@ class MainNavigation(
 
     fun navigateToDummy(navOptions: NavOptions? = null) {
         navController.navigateDummy(navOptions = navOptions)
+    }
+
+    fun navigateToMenu(navOptions: NavOptions? = null) {
+        navController.navigateMenu(navOptions = navOptions)
     }
 }
 

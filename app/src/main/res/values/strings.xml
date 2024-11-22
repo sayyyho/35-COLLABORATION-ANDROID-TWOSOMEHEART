@@ -7,11 +7,20 @@
     <string name="plus">plus</string>
     <string name="won">원</string>
 
+    //top bar
+    <string name="top_bar_back">back</string>
+    <string name="top_bar_home">home</string>
+    <string name="top_bar_search">search</string>
+    <string name="top_bar_receipt">receipt</string>
+    <string name="top_bar_basket">basket</string>
+
     // menu view
     <string name="menu_ordered_store">주문 매장</string>
     <string name="menu_ordered_store_name">안양호계금명점</string>
     <string name="menu_ordered_store_distance">349m</string>
     <string name="menu_change">변경</string>
+    <string name="menu_floating_action_button">floating action button</string>
+    <string name="menu_top_bar">투썸오더</string>
     <string name="menu_description_image">menu image</string>
 
     //menu status chip
