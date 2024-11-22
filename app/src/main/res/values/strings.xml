@@ -11,5 +11,10 @@
     <string name="menu_ordered_store_name">안양호계금명점</string>
     <string name="menu_ordered_store_distance">349m</string>
     <string name="menu_change">변경</string>
+    <string name="menu_floating_action_button">floating action button</string>
+
+    //menu status chip
+    <string name="menu_status_new">New</string>
+    <string name="menu_status_best">Best</string>
 
 </resources>
