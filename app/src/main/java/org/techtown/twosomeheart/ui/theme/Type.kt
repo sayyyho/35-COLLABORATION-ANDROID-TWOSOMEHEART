@@ -33,7 +33,7 @@ data class TwosomeTypography(
     val head4B18Tight: TextStyle,
     val head4M18: TextStyle,
     val head4R18: TextStyle,
-    val titleB16: TextStyle,
+    val title1B16: TextStyle,
     val title1R16: TextStyle,
     val title2B15: TextStyle,
     val body1B14: TextStyle,
@@ -109,7 +109,7 @@ val TwosomeHeartTypography = TwosomeTypography(
         lineHeightStyle = lineHeightStyle
     ),
 
-    titleB16 = TextStyle(
+    title1B16 = TextStyle(
         fontFamily = FontFamily(Font(R.font.notosanskr_bold)),
         fontSize = 16.sp,
         fontWeight = FontWeight(700),
