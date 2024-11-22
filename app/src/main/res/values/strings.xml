@@ -12,6 +12,7 @@
     <string name="menu_ordered_store_distance">349m</string>
     <string name="menu_change">변경</string>
     <string name="menu_floating_action_button">floating action button</string>
+    <string name="menu_top_bar">투썸오더</string>
 
     //menu status chip
     <string name="menu_status_new">New</string>

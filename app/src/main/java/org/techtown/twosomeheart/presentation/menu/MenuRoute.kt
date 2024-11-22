@@ -91,7 +91,7 @@ fun MenuScreen(
                         contentDescription = "",
                     )
                 },
-                text = "투썸오더",
+                text = stringResource(R.string.menu_top_bar),
                 trailingIcon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_menu_search),
