@@ -81,35 +81,35 @@ fun MenuScreen(
                 leadingIcon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_back),
-                        contentDescription = "",
+                        contentDescription = stringResource(R.string.top_bar_back),
                         modifier = Modifier.noRippleClickable(onClick = navigateUp)
                     )
                 },
                 leadingIcon2 = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_home),
-                        contentDescription = "",
+                        contentDescription = stringResource(R.string.top_bar_home),
                     )
                 },
                 text = stringResource(R.string.menu_top_bar),
                 trailingIcon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_menu_search),
-                        contentDescription = "",
+                        contentDescription = stringResource(R.string.top_bar_search),
                         modifier = Modifier.noRippleClickable(onClick = navigateUp)
                     )
                 },
                 trailingIcon2 = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_menu_receipt),
-                        contentDescription = "",
+                        contentDescription = stringResource(R.string.top_bar_receipt),
                         modifier = Modifier.noRippleClickable(onClick = navigateUp)
                     )
                 },
                 trailingIcon3 = {
                     Icon(
-                        imageVector = ImageVector.vectorResource(R.drawable.ic_bag_numbered),
-                        contentDescription = "",
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_basket),
+                        contentDescription = stringResource(R.string.top_bar_basket),
                         modifier = Modifier.noRippleClickable(onClick = navigateUp),
                         tint = Color.Unspecified
                     )

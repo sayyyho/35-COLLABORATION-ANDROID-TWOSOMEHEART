@@ -7,6 +7,13 @@
     <string name="plus">plus</string>
     <string name="won">원</string>
 
+    //top bar
+    <string name="top_bar_back">back</string>
+    <string name="top_bar_home">home</string>
+    <string name="top_bar_search">search</string>
+    <string name="top_bar_receipt">receipt</string>
+    <string name="top_bar_basket">basket</string>
+
     // menu view
     <string name="menu_ordered_store">주문 매장</string>
     <string name="menu_ordered_store_name">안양호계금명점</string>
