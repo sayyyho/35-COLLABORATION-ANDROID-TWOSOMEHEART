@@ -10,13 +10,15 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.techtown.twosomeheart.core.extension.noRippleClickable
-import org.techtown.twosomeheart.presentation.detail.model.TemperatureType
+import org.techtown.twosomeheart.presentation.detail.model.TabType
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.Gray20
 import org.techtown.twosomeheart.ui.theme.Gray90
@@ -25,13 +27,13 @@ import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 
 @Composable
 fun TemperatureTabRow(
-    selectedTabIndex: Int,
-    onTabClick: (Int) -> Unit,
+    tabType: TabType,
     modifier: Modifier = Modifier,
-    tabText: List<String> = emptyList()
 ) {
+    val selectedTabIndex = remember { mutableIntStateOf(0) }
+
     TabRow(
-        selectedTabIndex = selectedTabIndex,
+        selectedTabIndex = selectedTabIndex.intValue,
         modifier = modifier
             .fillMaxWidth()
             .drawBehind {
@@ -46,7 +48,7 @@ fun TemperatureTabRow(
         indicator = { tabPositions ->
             Box(
                 Modifier
-                    .tabIndicatorOffset(tabPositions[selectedTabIndex])
+                    .tabIndicatorOffset(tabPositions[selectedTabIndex.intValue])
                     .height(2.dp)
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
@@ -54,15 +56,17 @@ fun TemperatureTabRow(
             )
         }
     ) {
-        tabText.forEachIndexed { index, title ->
+        tabType.type.forEachIndexed { index, type ->
+            val isSelected = selectedTabIndex.intValue == index
+
             Text(
-                text = title,
+                text = type,
                 color = Gray90,
-                style = if (index == selectedTabIndex) TwosomeHeartTypography.title1B16 else TwosomeHeartTypography.title1R16,
+                style = if (isSelected) TwosomeHeartTypography.title1B16 else TwosomeHeartTypography.title1R16,
                 modifier = Modifier
                     .wrapContentWidth()
                     .padding(vertical = 9.dp)
-                    .noRippleClickable { onTabClick(index) }
+                    .noRippleClickable { selectedTabIndex.intValue = index }
             )
         }
     }
@@ -76,9 +80,7 @@ fun TemperatureTabRow(
 private fun TemperatureTabRowPreview() {
     TwosomeHeartTheme {
         TemperatureTabRow(
-            selectedTabIndex = 0,
-            tabText = TemperatureType.entries.map { it.type },
-            onTabClick = {}
+            tabType = TabType.TEMPERATURE
         )
     }
 }
