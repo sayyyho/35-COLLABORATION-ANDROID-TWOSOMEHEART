@@ -23,6 +23,7 @@ import org.techtown.twosomeheart.ui.theme.Gray10
 import org.techtown.twosomeheart.ui.theme.Gray60
 import org.techtown.twosomeheart.ui.theme.Red40
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
+import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
