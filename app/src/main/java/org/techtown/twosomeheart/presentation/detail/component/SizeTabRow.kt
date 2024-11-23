@@ -86,7 +86,7 @@ fun SizeTabRow(
 
 @Preview
 @Composable
-private fun TemperatureTabRowPreview() {
+private fun SizeTabRowPreview() {
     TwosomeHeartTheme {
         Column(
             modifier = Modifier
