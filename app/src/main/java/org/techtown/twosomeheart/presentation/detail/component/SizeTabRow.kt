@@ -58,9 +58,9 @@ fun SizeTabRow(
                     text = title,
                     textAlign = TextAlign.Center,
                     color = if (index == selectedTabIndex) Black else Gray60,
+                    style = if (index == selectedTabIndex) TwosomeHeartTypography.body1B14 else TwosomeHeartTypography.body1R14,
                     modifier = Modifier
                         .drawBehind {
-                            // 빨간 줄: 선택된 탭의 텍스트 아래
                             if (index == selectedTabIndex) {
                                 val strokeWidth = 1.dp.toPx()
                                 val yPosition = size.height
