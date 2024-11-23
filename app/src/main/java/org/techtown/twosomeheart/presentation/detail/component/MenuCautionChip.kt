@@ -1,23 +1,20 @@
 package org.techtown.twosomeheart.presentation.detail.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.techtown.twosomeheart.R
+import org.techtown.twosomeheart.ui.theme.Gray10
 import org.techtown.twosomeheart.ui.theme.Gray70
 import org.techtown.twosomeheart.ui.theme.Red30
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
-import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun MenuCautionChip(
@@ -28,7 +25,7 @@ fun MenuCautionChip(
     Text(
         text = text,
         style = TwosomeHeartTypography.caption3M10,
-        color = White,
+        color = Gray10,
         modifier = modifier
             .background(
                 shape = RoundedCornerShape(size = 2.dp),
@@ -46,12 +43,11 @@ fun MenuCautionChip(
 @Composable
 fun MenuStatusChipPreview() {
     TwosomeHeartTheme {
-        Column{
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             MenuCautionChip(
                 text = "우유",
                 isAllergen = true
             )
-            Spacer(Modifier.height(8.dp))
             MenuCautionChip(text = "고카페인")
         }
     }
