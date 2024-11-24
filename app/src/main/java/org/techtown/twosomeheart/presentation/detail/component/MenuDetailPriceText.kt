@@ -28,7 +28,7 @@ fun MenuDetailPriceText(
             modifier = Modifier.padding(vertical = 8.5.dp)
         )
         Text(
-            text = stringResource(R.string.menu_detail_price_won),
+            text = stringResource(R.string.won),
             style = TwosomeHeartTypography.head4B18,
             color = Black,
             modifier = Modifier.padding(top = 5.dp)
