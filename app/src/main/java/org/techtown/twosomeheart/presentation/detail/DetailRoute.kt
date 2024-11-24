@@ -48,7 +48,7 @@ fun DetailRoute(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    LaunchedEffect(true) {
+    LaunchedEffect(viewModel) {
         viewModel.getDetailDummy()
     }
 
