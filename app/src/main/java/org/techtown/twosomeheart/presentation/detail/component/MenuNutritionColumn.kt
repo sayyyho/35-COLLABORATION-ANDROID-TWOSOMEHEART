@@ -59,17 +59,15 @@ fun MenuNutritionColumn(
     ){
         MenuNutritionColumnHeader(isExpanded = isExpanded)
 
-        if (!isExpanded.value) {
+        if(isExpanded.value) {
+            MenuNutritionColumnBody(nutritionText = nutritionText)
+        } else {
             HorizontalDivider(
                 thickness = 1.dp,
                 color = Gray10
             )
 
             Spacer(modifier = Modifier.height(22.dp))
-        }
-
-        if (isExpanded.value) {
-            MenuNutritionColumnBody(nutritionText = nutritionText)
         }
     }
 }
