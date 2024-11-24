@@ -43,7 +43,7 @@ import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun MenuNutritionColumn(
-    nutritionText: String,
+    nutritionText: List<String>?,
     modifier: Modifier = Modifier
 ) {
     val isExpanded = remember { mutableStateOf(false) }
@@ -61,7 +61,7 @@ fun MenuNutritionColumn(
         MenuNutritionColumnHeader(isExpanded = isExpanded)
 
         if(isExpanded.value) {
-            MenuNutritionColumnBody(nutritionText = nutritionText)
+            MenuNutritionColumnBody(nutritionTexts = nutritionText)
         } else {
             HorizontalDivider(
                 thickness = 1.dp,
@@ -104,7 +104,7 @@ fun MenuNutritionColumnHeader(
 
 @Composable
 fun MenuNutritionColumnBody(
-    nutritionText: String,
+    nutritionTexts: List<String>?,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -119,7 +119,7 @@ fun MenuNutritionColumnBody(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        NutritionText(nutritionText = nutritionText)
+        NutritionText(nutritionTexts = nutritionTexts)
 
         Spacer(modifier = Modifier.height(27.dp))
 
@@ -152,24 +152,25 @@ fun MenuNutritionColumnBody(
 
 @Composable
 fun NutritionText(
-    nutritionText: String,
+    nutritionTexts: List<String>?,
     modifier: Modifier = Modifier
 ) {
-    val lines = nutritionText.split("\n")
-
-    Column(
-        modifier = modifier
-            .padding(horizontal = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
-    ) {
-        lines.forEach { line ->
-            Text(
-                text = line,
-                style = TwosomeHeartTypography.body1R14,
-                color = Gray80
-            )
+    if(nutritionTexts != null){
+        Column(
+            modifier = modifier
+                .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            nutritionTexts.forEach { nutritionText ->
+                Text(
+                    text = nutritionText,
+                    style = TwosomeHeartTypography.body1R14,
+                    color = Gray80
+                )
+            }
         }
     }
+
 }
 
 @Composable
@@ -205,8 +206,16 @@ fun NutritionWarningText(
 fun MenuNutritionColumnPreview() {
     TwosomeHeartTheme {
         MenuNutritionColumn(
-            nutritionText ="1회 제공량: 325ml\n총 제공량: 1잔\n열량(Kcal): 260\n당류(g/%): 30/30\n단백질(g/%): 7/13\n포화지방(g/%): 5/33\n나트륨(mg/%): 160/8\n카페인(mg/%): 92"
+            nutritionText = listOf(
+                "1회 제공량: 325ml",
+                "총 제공량: 1잔",
+                "열량(Kcal): 260",
+                "당류(g/%): 30/30",
+                "단백질(g/%): 7/13",
+                "포화지방(g/%): 5/33",
+                "나트륨(mg/%): 160/8",
+                "카페인(mg/%): 92"
+            )
         )
     }
-
 }

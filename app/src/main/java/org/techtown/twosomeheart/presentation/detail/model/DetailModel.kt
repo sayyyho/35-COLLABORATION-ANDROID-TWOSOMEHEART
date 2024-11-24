@@ -7,7 +7,7 @@ data class DetailModel(
     val menuDescription: String,
     val menuPrice: Int,
     val menuCaution: String?,
-    val menuNutrition: String,
+    val menuNutrition: List<String>?,
     val menuAllergy: String?,
     val menuImageUrl: String
 )
