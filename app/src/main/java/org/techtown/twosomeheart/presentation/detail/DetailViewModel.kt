@@ -30,7 +30,7 @@ class DetailViewModel: ViewModel() {
             "1회 제공량: 325ml\n총 제공량: 1잔\n열량(Kcal): 260\n당류(g/%): 30/30\n단백질(g/%): 7/13\n포화지방(g/%): 5/33\n나트륨(mg/%): 160/8\n카페인(mg/%): 92"
         ),
         menuAllergy = "우유",
-        menuImageUrl = "dummy"
+        menuImageUrl = "https://private-user-images.githubusercontent.com/69308068/389300533-8d353883-fb4b-4608-b0b4-24d2bc074133.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzI0NzY4OTMsIm5iZiI6MTczMjQ3NjU5MywicGF0aCI6Ii82OTMwODA2OC8zODkzMDA1MzMtOGQzNTM4ODMtZmI0Yi00NjA4LWIwYjQtMjRkMmJjMDc0MTMzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDExMjQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMTI0VDE5Mjk1M1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTI5MTRlNGNjODE0ODJkYWI3YzgwZmU4NDFkNTBkMTE2MmUyYTkwZDBhMmQwZTZiNzhkZDZkOTVmYzYwZTlhZDgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.IMOWSpla8sBIJZzTXv3oyo8AmecUl8uyim89XBdI1TM"
     )
 
     private fun splitNutritionText(nutritionTexts: String): List<String>? {
