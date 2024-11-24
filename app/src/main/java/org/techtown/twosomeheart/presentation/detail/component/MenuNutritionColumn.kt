@@ -204,24 +204,6 @@ fun NutritionWarningText(
     }
 }
 
-@Composable
-fun MenuNutritionMoreButton(
-    isExpanded: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-
-    IconButton(
-        onClick = onClick,
-        modifier = modifier
-            .noRippleClickable {
-                onClick()
-            }
-    ) {
-
-    }
-}
-
 @Preview
 @Composable
 fun MenuNutritionColumnPreview() {
