@@ -27,6 +27,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.toPersistentList
 import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.extension.noRippleClickable
 import org.techtown.twosomeheart.presentation.detail.model.TabType
@@ -138,7 +140,7 @@ fun MenuNutritionColumnBody(
                 stringResource(R.string.menu_detail_nutrition_warning_text1),
                 stringResource(R.string.menu_detail_nutrition_warning_text2),
                 stringResource(R.string.menu_detail_nutrition_warning_text3)
-            )
+            ).toPersistentList()
         )
 
         Spacer(modifier = Modifier.height(64.dp))
@@ -176,7 +178,7 @@ fun NutritionText(
 
 @Composable
 fun NutritionWarningText(
-    nutritionWarningTexts: List<String>,
+    nutritionWarningTexts: PersistentList<String>,
     modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
