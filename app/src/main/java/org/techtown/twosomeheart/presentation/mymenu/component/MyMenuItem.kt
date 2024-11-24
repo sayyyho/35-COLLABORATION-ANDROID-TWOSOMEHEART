@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,6 +38,8 @@ fun MyMenuItem(
     @DrawableRes menuImage: Int,
     modifier: Modifier = Modifier,
     menuOption: String,
+    isChecked: Boolean = false,
+    onCheckedChange: (Boolean) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -44,9 +47,12 @@ fun MyMenuItem(
             .background(TwosomeHeartColors.White)
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(R.drawable.ic_checkbox_diselect),
+            imageVector = ImageVector.vectorResource(
+                if (isChecked) R.drawable.ic_mymenu_checkbox_select else R.drawable.ic_checkbox_diselect
+            ),
             contentDescription = "",
             tint = Color.Unspecified,
+            modifier = Modifier.clickable { onCheckedChange(!isChecked) }
         )
         Row(
             modifier = modifier
@@ -132,7 +138,9 @@ fun MyMenuItemPreview() {
                 menuName = "바나나샷 아메리카노",
                 menuPrice = 5800,
                 menuImage = R.drawable.img_banana_ameicano2,
-                menuOption = "아이스/라지/블랙그라운드/포장"
+                menuOption = "아이스/라지/블랙그라운드/포장",
+                isChecked = true,
+                onCheckedChange = { isChecked ->  !isChecked } // 상태 업데이트
             )
         }
     }

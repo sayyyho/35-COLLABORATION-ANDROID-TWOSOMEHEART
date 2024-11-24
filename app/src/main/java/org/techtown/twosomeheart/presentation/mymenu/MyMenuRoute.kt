@@ -35,6 +35,7 @@ import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.Topbar
 import org.techtown.twosomeheart.core.util.UiState
 import org.techtown.twosomeheart.presentation.menu.component.MenuItem
+import org.techtown.twosomeheart.presentation.mymenu.component.MyMenuItem
 import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartColors
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
@@ -43,8 +44,8 @@ import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun MyMenuRoute(
+
     paddingValues: PaddingValues,
-//    navigateUp: () -> Unit,
     viewModel: MyMenuViewModel = viewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -141,27 +142,29 @@ fun MyMenuScreen(
             )
             when (state) {
                 is UiState.Loading -> {}
-
                 is UiState.Empty -> {}
-
                 is UiState.Failure -> {}
                 is UiState.Success -> {
                     LazyColumn(
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 24.dp)
                     ) {
                         itemsIndexed(state.data) { index, item ->
-                            MenuItem(
+                            MyMenuItem(
                                 menuName = item.menuName,
                                 menuPrice = item.menuPrice,
                                 menuImage = item.menuImage,
+                                menuOption = item.menuOption,
+                                isChecked = item.isChecked,
+                                onCheckedChange = item.onCheckedChange
                             )
                             if (index != state.data.lastIndex) {
-                                Spacer(modifier = Modifier.height(24.dp))
+                                Spacer(modifier = Modifier.height(40.dp))
                             }
                         }
                     }
                 }
             }
+
         }
     }
 }
@@ -179,13 +182,17 @@ fun MyMenuScreenPreview() {
                         menuName = "바나나 샷 라떼",
                         menuPrice = 5500,
                         menuImage = R.drawable.img_menu_banana_latte,
-                        menuOption = "아이스/라지/블랙그라운드/포장"
+                        menuOption = "아이스/라지/블랙그라운드/포장",
+                        isChecked = true,
+                        onCheckedChange = { isChecked -> !isChecked }
                     ),
                     MyMenuModel(
                         menuName = "바나나 샷 아메리카노",
                         menuPrice = 5800,
                         menuImage = R.drawable.img_menu_banana_ameicano,
-                        menuOption = "아이스/라지/블랙그라운드/포장/개인컵"
+                        menuOption = "아이스/라지/블랙그라운드/포장/개인컵",
+                        isChecked = false,
+                        onCheckedChange = { isChecked -> !isChecked }
                     ),
                 )
             )

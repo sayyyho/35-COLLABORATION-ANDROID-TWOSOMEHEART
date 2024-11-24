@@ -27,13 +27,17 @@ class MyMenuViewModel : ViewModel() {
             menuName = "바나나 샷 라떼",
             menuPrice = 5500,
             menuImage = R.drawable.img_menu_banana_latte,
-            menuOption = "아이스/라지/블랙그라운드/포장"
+            menuOption = "아이스/라지/블랙그라운드/포장",
+            isChecked = false,
+            onCheckedChange = { isChecked -> !isChecked }
         ),
         MyMenuModel(
             menuName = "바나나 샷 아메리카노",
             menuPrice = 5800,
             menuImage = R.drawable.img_menu_banana_ameicano,
-            menuOption = "아이스/라지/블랙그라운드/포장"
+            menuOption = "아이스/라지/블랙그라운드/포장",
+            isChecked = true,
+            onCheckedChange = { isChecked -> !isChecked }
         ),
 
     )
