@@ -81,23 +81,20 @@ fun MenuNutritionColumnHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 22.dp),
+            .padding(vertical = 22.dp, horizontal = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = stringResource(R.string.menu_detail_nutrition_title_text),
             color = Black,
-            style = TwosomeHeartTypography.title1B16,
-            modifier = Modifier
-                .padding(start = 16.dp)
+            style = TwosomeHeartTypography.title1B16
         )
 
         Icon(
             imageVector = if (isExpanded.value) ImageVector.vectorResource(R.drawable.ic_detail_arrow_up) else ImageVector.vectorResource(R.drawable.ic_detail_arrow_down),
             contentDescription = stringResource(R.string.menu_detail_nutrition_button),
             modifier = Modifier
-                .padding(end = 16.dp)
                 .noRippleClickable {
                     isExpanded.value = !isExpanded.value
                 }
