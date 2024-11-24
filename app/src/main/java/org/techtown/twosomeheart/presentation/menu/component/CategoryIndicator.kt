@@ -58,7 +58,7 @@ fun CategoryIndicator(
                 ) {
                     Text(
                         text = type,
-                        style = if (isSelected) TwosomeHeartTypography.titleB16 else TwosomeHeartTypography.title1R16,
+                        style = if (isSelected) TwosomeHeartTypography.title1B16 else TwosomeHeartTypography.title1R16,
                         maxLines = 1,
                         textAlign = TextAlign.Center,
                         color = if (isSelected) Black else Gray90,
