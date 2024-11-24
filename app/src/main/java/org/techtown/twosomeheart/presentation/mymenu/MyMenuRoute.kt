@@ -1,6 +1,5 @@
 package org.techtown.twosomeheart.presentation.mymenu
 
-import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -8,10 +7,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,7 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,10 +33,9 @@ import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.Topbar
-import org.techtown.twosomeheart.core.extension.noRippleClickable
 import org.techtown.twosomeheart.core.util.UiState
-import org.techtown.twosomeheart.presentation.menu.MenuViewModel
-import org.techtown.twosomeheart.presentation.menu.model.MenuModel
+import org.techtown.twosomeheart.presentation.menu.component.MenuItem
+import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartColors
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
@@ -44,8 +44,8 @@ import org.techtown.twosomeheart.ui.theme.White
 @Composable
 fun MyMenuRoute(
     paddingValues: PaddingValues,
-    navigateUp: () -> Unit,
-    viewModel: MenuViewModel = viewModel()
+//    navigateUp: () -> Unit,
+    viewModel: MyMenuViewModel = viewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -55,7 +55,6 @@ fun MyMenuRoute(
 
     MyMenuScreen(
         paddingValues = paddingValues,
-        navigateUp = navigateUp,
         state = state.uiState
     )
 }
@@ -63,8 +62,7 @@ fun MyMenuRoute(
 @Composable
 fun MyMenuScreen(
     paddingValues: PaddingValues,
-    navigateUp: () -> Unit,
-    state: UiState<PersistentList<MenuModel>>,
+    state: UiState<PersistentList<MyMenuModel>>,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -97,6 +95,7 @@ fun MyMenuScreen(
             )
             Text(
                 text = "총 3개",
+                // TODO 서버통신 값 할당
                 style = TwosomeHeartTypography.caption1R12Tight,
                 color = TwosomeHeartColors.Gray90,
                 modifier = Modifier.padding(start = 16.dp, top = 23.dp)
@@ -140,9 +139,31 @@ fun MyMenuScreen(
                     )
                     .border(width = 1.dp, color = Color.Black)
             )
+            when (state) {
+                is UiState.Loading -> {}
+
+                is UiState.Empty -> {}
+
+                is UiState.Failure -> {}
+                is UiState.Success -> {
+                    LazyColumn(
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 24.dp)
+                    ) {
+                        itemsIndexed(state.data) { index, item ->
+                            MenuItem(
+                                menuName = item.menuName,
+                                menuPrice = item.menuPrice,
+                                menuImage = item.menuImage,
+                            )
+                            if (index != state.data.lastIndex) {
+                                Spacer(modifier = Modifier.height(24.dp))
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
-
 }
 
 
@@ -152,18 +173,19 @@ fun MyMenuScreenPreview() {
     TwosomeHeartTheme {
         MyMenuScreen(
             paddingValues = PaddingValues(),
-            navigateUp = {},
             state = UiState.Success(
                 persistentListOf(
-                    MenuModel(
+                    MyMenuModel(
                         menuName = "바나나 샷 라떼",
                         menuPrice = 5500,
                         menuImage = R.drawable.img_menu_banana_latte,
+                        menuOption = "아이스/라지/블랙그라운드/포장"
                     ),
-                    MenuModel(
+                    MyMenuModel(
                         menuName = "바나나 샷 아메리카노",
                         menuPrice = 5800,
                         menuImage = R.drawable.img_menu_banana_ameicano,
+                        menuOption = "아이스/라지/블랙그라운드/포장/개인컵"
                     ),
                 )
             )

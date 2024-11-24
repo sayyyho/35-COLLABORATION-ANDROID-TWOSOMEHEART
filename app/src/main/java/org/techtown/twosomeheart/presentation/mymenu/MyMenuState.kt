@@ -1,4 +1,4 @@
-package org.techtown.twosomeheart.presentation.menu
+package org.techtown.twosomeheart.presentation.mymenu
 
 import kotlinx.collections.immutable.PersistentList
 import org.techtown.twosomeheart.core.util.UiState

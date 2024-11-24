@@ -1,4 +1,10 @@
 package org.techtown.twosomeheart.presentation.mymenu.model
 
-class MyMenuModel {
-}
+import androidx.annotation.DrawableRes
+
+data class MyMenuModel(
+    val menuName: String,
+    val menuPrice: Int,
+    @DrawableRes val menuImage: Int,
+    val menuOption: String
+)
