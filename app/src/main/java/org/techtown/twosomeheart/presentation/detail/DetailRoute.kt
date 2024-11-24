@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -66,87 +67,94 @@ fun DetailScreen(
     navigateUp: () -> Unit,
     state: UiState<DetailModel>,
     modifier: Modifier = Modifier
-){
-    Column(
+) {
+    Scaffold(
         modifier = modifier
-            .padding(paddingValues)
             .background(White)
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ){
-        Topbar(
-            leadingIcon = {
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.ic_back),
-                    contentDescription = stringResource(R.string.top_bar_back),
-                    modifier = Modifier.noRippleClickable(onClick = navigateUp)
-                )
-            },
-            leadingIcon2 = {
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.ic_home),
-                    contentDescription = stringResource(R.string.top_bar_home),
-                )
-            },
-            text = stringResource(R.string.menu_detail_top_bar),
-            trailingIcon3 = {
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.ic_basket),
-                    contentDescription = stringResource(R.string.top_bar_basket),
-                    modifier = Modifier.noRippleClickable(onClick = navigateUp),
-                    tint = Color.Unspecified
-                )
-            }
-        )
-
-        when (state) {
-            is UiState.Loading -> {}
-
-            is UiState.Empty -> {}
-
-            is UiState.Failure -> {}
-
-            is UiState.Success -> {
-                Image(
-                    painter = painterResource(R.drawable.img_detail_banana_latte),
-                    contentDescription = stringResource(R.string.menu_detail_image),
-                    modifier = Modifier.fillMaxWidth(),
-                    contentScale = ContentScale.Crop
-                )
-
-                Spacer(modifier = Modifier.height(26.dp))
-
-                MenuDetailContent(
-                    // TODO: detailmodel best menu 처리 어떻게 할건지 생각
-                    isBestMenu = true,
-                    menuName = state.data.menuName,
-                    menuDescription = state.data.menuDescription,
-                    menuPrice = state.data.menuPrice,
-                )
-
-                HorizontalDivider(
-                    thickness = 4.dp,
-                    color = Gray20
-                )
-
-                MenuNutritionColumn(
-                    nutritionText = state.data.menuNutrition
-                )
-
-                if(state.data.menuAllergy != null){
-                    MenuDetailAllergyText(
-                        allergyText = state.data.menuAllergy
+            .padding(paddingValues)
+            .fillMaxSize(),
+        topBar = {
+            Topbar(
+                leadingIcon = {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_back),
+                        contentDescription = stringResource(R.string.top_bar_back),
+                        modifier = Modifier.noRippleClickable(onClick = navigateUp)
+                    )
+                },
+                leadingIcon2 = {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_home),
+                        contentDescription = stringResource(R.string.top_bar_home),
+                    )
+                },
+                text = stringResource(R.string.menu_detail_top_bar),
+                trailingIcon3 = {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_basket),
+                        contentDescription = stringResource(R.string.top_bar_basket),
+                        modifier = Modifier.noRippleClickable(onClick = navigateUp),
+                        tint = Color.Unspecified
                     )
                 }
+            )
+        },
+        bottomBar = {
+            BlackBottomButton(
+                text = stringResource(R.string.menu_detail_order_text),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            )
+        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
+        ) {
+            when (state) {
+                is UiState.Loading -> {}
 
-                Spacer(modifier = Modifier.height(58.dp))
+                is UiState.Empty -> {}
 
-                BlackBottomButton(
-                    text = stringResource(R.string.menu_detail_order_text),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                )
+                is UiState.Failure -> {}
+
+                is UiState.Success -> {
+                    Image(
+                        painter = painterResource(R.drawable.img_detail_banana_latte),
+                        contentDescription = stringResource(R.string.menu_detail_image),
+                        modifier = Modifier.fillMaxWidth(),
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Spacer(modifier = Modifier.height(26.dp))
+
+                    MenuDetailContent(
+                        isBestMenu = true,
+                        menuName = state.data.menuName,
+                        menuDescription = state.data.menuDescription,
+                        menuPrice = state.data.menuPrice,
+                    )
+
+                    HorizontalDivider(
+                        thickness = 4.dp,
+                        color = Gray20
+                    )
+
+                    MenuNutritionColumn(
+                        nutritionText = state.data.menuNutrition
+                    )
+
+                    if (state.data.menuAllergy != null) {
+                        MenuDetailAllergyText(
+                            allergyText = state.data.menuAllergy
+                        )
+
+                        Spacer(modifier = Modifier.height(58.dp))
+                    }
+                }
             }
         }
     }
