@@ -54,8 +54,6 @@ fun MenuDetailContent(
         )
 
         Row(
-            modifier = Modifier
-                .fillMaxHeight(),
             horizontalArrangement = Arrangement.spacedBy(4.5.dp)
         ) {
             // TODO: menu caution 처리 어떻게 할건지 생각
