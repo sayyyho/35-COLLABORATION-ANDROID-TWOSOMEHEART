@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.techtown.twosomeheart.core.component.MenuStatusChip
+import org.techtown.twosomeheart.core.util.PriceFormatter.formatPrice
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 
@@ -20,7 +21,7 @@ fun MenuDetailContent(
     isBestMenu: Boolean,
     menuName: String,
     menuDescription: String,
-    menuPrice: String,
+    menuPrice: Int,
     modifier: Modifier = Modifier
 ){
     Column(
@@ -49,7 +50,7 @@ fun MenuDetailContent(
         Spacer(modifier = Modifier.height(10.dp))
 
         MenuDetailPriceText(
-            price = menuPrice
+            price = formatPrice(menuPrice)
         )
 
         Row(
