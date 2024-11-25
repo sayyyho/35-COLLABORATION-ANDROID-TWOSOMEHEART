@@ -1,5 +1,6 @@
 package org.techtown.twosomeheart.presentation.detail.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import org.techtown.twosomeheart.core.component.MenuStatusChip
 import org.techtown.twosomeheart.core.util.PriceFormatter.formatPrice
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
+import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun MenuDetailContent(
@@ -27,6 +29,7 @@ fun MenuDetailContent(
     Column(
         modifier = modifier
             .padding(start = 16.dp)
+            .background(White)
     ) {
         MenuStatusChip(isBestMenu = isBestMenu)
 
