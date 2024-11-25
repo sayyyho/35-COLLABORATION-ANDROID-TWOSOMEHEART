@@ -35,6 +35,7 @@ import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.Topbar
 import org.techtown.twosomeheart.core.util.UiState
 import org.techtown.twosomeheart.presentation.menu.component.MenuItem
+import org.techtown.twosomeheart.presentation.mymenu.component.MyBottomSheet
 import org.techtown.twosomeheart.presentation.mymenu.component.MyMenuItem
 import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartColors
@@ -164,7 +165,7 @@ fun MyMenuScreen(
                     }
                 }
             }
-
+            MyBottomSheet()
         }
     }
 }

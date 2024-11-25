@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,6 +30,7 @@ fun MyBottomSheet(
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .shadow(elevation = 18.dp, spotColor = Color(0x26000000), ambientColor = Color(0x26000000))
             .clip(shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp))
             .background(Color.White)
             .padding(15.dp, 16.dp)
