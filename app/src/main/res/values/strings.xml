@@ -27,4 +27,16 @@
     <string name="menu_status_new">New</string>
     <string name="menu_status_best">Best</string>
 
+    //menu detail view
+    <string name="menu_detail_nutrition_button">제품 영양 정보 버튼</string>
+    <string name="menu_detail_nutrition_title_text">제품 영양 정보</string>
+    <string name="menu_detail_dot_nutrition_warning">제품 영양 정보 구분점</string>
+    <string name="menu_detail_nutrition_warning_text1">제품 이미지는 실제 제품과 다소 차이가 있을 수 있습니다.\n(매장 계절에 따라 대체 과일 데코레이션으로 운영될 수 있습니다.)</string>
+    <string name="menu_detail_nutrition_warning_text2">제품의 취급여부는 매장별로 상이할 수 있습니다.</string>
+    <string name="menu_detail_nutrition_warning_text3">어린이, 임산부 등 카페인 민감자는 섭취에 주의해주시기 바랍니다.</string>
+    <string name="menu_detail_top_bar">커피/음료</string>
+    <string name="menu_detail_allergy_title_text">알레르기 유발요인</string>
+    <string name="menu_detail_order_text">주문하기</string>
+    <string name="menu_detail_image">메뉴 상세보기 이미지</string>
+
 </resources>

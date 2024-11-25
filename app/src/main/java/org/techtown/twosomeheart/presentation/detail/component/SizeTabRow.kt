@@ -57,7 +57,7 @@ fun SizeTabRow(
             horizontalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             tabType.type.forEachIndexed { index, type ->
-                val isSelected = selectedTabIndex.value == index
+                val isSelected = selectedTabIndex.intValue == index
                 Text(
                     text = type,
                     textAlign = TextAlign.Center,

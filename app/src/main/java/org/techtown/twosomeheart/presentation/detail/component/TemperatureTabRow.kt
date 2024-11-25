@@ -24,6 +24,7 @@ import org.techtown.twosomeheart.ui.theme.Gray20
 import org.techtown.twosomeheart.ui.theme.Gray90
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
+import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun TemperatureTabRow(
@@ -54,7 +55,8 @@ fun TemperatureTabRow(
                     .padding(horizontal = 16.dp)
                     .background(Black)
             )
-        }
+        },
+        containerColor = White
     ) {
         tabType.type.forEachIndexed { index, type ->
             val isSelected = selectedTabIndex.intValue == index
