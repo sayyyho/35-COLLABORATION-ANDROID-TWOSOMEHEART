@@ -43,7 +43,7 @@ import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun MenuNutritionColumn(
-    nutritionText: List<String>?,
+    nutritionText: PersistentList<String>?,
     modifier: Modifier = Modifier
 ) {
     val isExpanded = remember { mutableStateOf(false) }
@@ -104,7 +104,7 @@ fun MenuNutritionColumnHeader(
 
 @Composable
 fun MenuNutritionColumnBody(
-    nutritionTexts: List<String>?,
+    nutritionTexts: PersistentList<String>?,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -152,7 +152,7 @@ fun MenuNutritionColumnBody(
 
 @Composable
 fun NutritionText(
-    nutritionTexts: List<String>?,
+    nutritionTexts: PersistentList<String>?,
     modifier: Modifier = Modifier
 ) {
     if(nutritionTexts != null){
@@ -215,7 +215,7 @@ fun MenuNutritionColumnPreview() {
                 "포화지방(g/%): 5/33",
                 "나트륨(mg/%): 160/8",
                 "카페인(mg/%): 92"
-            )
+            ).toPersistentList()
         )
     }
 }
