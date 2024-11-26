@@ -206,16 +206,8 @@ fun SizeButton(
 
                     Text(
                         text = stringResource(R.string.menu_detail_modal_size_regular_text),
-                        color = if (isSelected){
-                            Black
-                        } else {
-                            Gray60
-                        },
-                        style = if (isSelected){
-                            TwosomeHeartTypography.body2B13
-                        } else {
-                            TwosomeHeartTypography.body2R13
-                        },
+                        color = if (isSelected) Black else Gray60,
+                        style = if (isSelected) TwosomeHeartTypography.body2B13 else TwosomeHeartTypography.body2R13,
                         textAlign = TextAlign.Center
                     )
                 }
@@ -229,16 +221,8 @@ fun SizeButton(
 
                     Text(
                         text = stringResource(R.string.menu_detail_modal_size_large_text),
-                        color = if (isSelected){
-                            Black
-                        } else {
-                            Gray60
-                        },
-                        style = if (isSelected){
-                            TwosomeHeartTypography.body2B13
-                        } else {
-                            TwosomeHeartTypography.body2R13
-                        },
+                        color = if (isSelected) Black else Gray60,
+                        style = if (isSelected) TwosomeHeartTypography.body2B13 else TwosomeHeartTypography.body2R13,
                         textAlign = TextAlign.Center
                     )
                 }

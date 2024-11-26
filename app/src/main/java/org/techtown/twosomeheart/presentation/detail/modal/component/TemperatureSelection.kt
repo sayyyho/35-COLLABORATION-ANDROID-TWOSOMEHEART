@@ -181,16 +181,8 @@ fun TemperatureButton(
     ) {
         Text(
             text = temperatureType.type,
-            color = if (isSelected){
-                White
-            } else {
-                Gray60
-            },
-            style = if (isSelected){
-                TwosomeHeartTypography.body2B13
-            } else {
-                TwosomeHeartTypography.body2R13
-            },
+            color = if (isSelected) White else Gray60,
+            style = if (isSelected) TwosomeHeartTypography.body2B13 else TwosomeHeartTypography.body2R13,
             textAlign = TextAlign.Center
         )
     }
