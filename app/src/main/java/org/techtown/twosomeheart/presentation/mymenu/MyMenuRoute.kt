@@ -35,7 +35,6 @@ import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.Topbar
 import org.techtown.twosomeheart.core.extension.noRippleClickable
 import org.techtown.twosomeheart.core.util.UiState
-import org.techtown.twosomeheart.presentation.menu.MenuViewModel
 import org.techtown.twosomeheart.presentation.mymenu.component.MyBottomSheet
 import org.techtown.twosomeheart.presentation.mymenu.component.MyMenuItem
 import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
@@ -59,7 +58,9 @@ fun MyMenuRoute(
     MyMenuScreen(
         paddingValues = paddingValues,
         state = state.uiState,
-        navigateUp = navigateUp
+        navigateUp = navigateUp,
+        viewModel = viewModel
+
     )
 }
 
@@ -68,7 +69,8 @@ fun MyMenuScreen(
     paddingValues: PaddingValues,
     state: UiState<PersistentList<MyMenuModel>>,
     navigateUp: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: MyMenuViewModel
 ) {
     Box(
         modifier = modifier
@@ -162,7 +164,7 @@ fun MyMenuScreen(
                                 menuImage = item.menuImage,
                                 menuOption = item.menuOption,
                                 isChecked = item.isChecked,
-                                onCheckedChange = item.onCheckedChange
+                                onCheckedChange = { viewModel.toggleItemChecked(index) }
                             )
                             if (index != state.data.lastIndex) {
                                 Spacer(modifier = Modifier.height(40.dp))
@@ -171,10 +173,15 @@ fun MyMenuScreen(
                     }
                 }
             }
-            MyBottomSheet()
+            MyBottomSheet(
+                price = 5500,
+                count = 1,
+                place = "삼성역점"
+            )
         }
     }
 }
+
 
 
 @Preview
@@ -184,6 +191,7 @@ fun MyMenuScreenPreview() {
         MyMenuScreen(
             paddingValues = PaddingValues(),
             navigateUp = {},
+            viewModel = MyMenuViewModel(),
             state = UiState.Success(
                 persistentListOf(
                     MyMenuModel(
@@ -192,7 +200,6 @@ fun MyMenuScreenPreview() {
                         menuImage = R.drawable.img_menu_banana_latte,
                         menuOption = "아이스/라지/블랙그라운드/포장",
                         isChecked = true,
-                        onCheckedChange = { isChecked -> !isChecked }
                     ),
                     MyMenuModel(
                         menuName = "바나나 샷 아메리카노",
@@ -200,7 +207,6 @@ fun MyMenuScreenPreview() {
                         menuImage = R.drawable.img_menu_banana_ameicano,
                         menuOption = "아이스/라지/블랙그라운드/포장/개인컵",
                         isChecked = false,
-                        onCheckedChange = { isChecked -> !isChecked }
                     ),
                 )
             )

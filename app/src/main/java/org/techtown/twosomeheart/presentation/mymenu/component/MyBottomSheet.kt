@@ -25,12 +25,19 @@ import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 
 @Composable
 fun MyBottomSheet(
+    price: Int,
+    count: Int,
+    place: String,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .shadow(elevation = 18.dp, spotColor = Color(0x26000000), ambientColor = Color(0x26000000))
+            .shadow(
+                elevation = 18.dp,
+                spotColor = Color(0x26000000),
+                ambientColor = Color(0x26000000)
+            )
             .clip(shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp))
             .background(Color.White)
             .padding(15.dp, 16.dp)
@@ -45,7 +52,7 @@ fun MyBottomSheet(
                 style = TwosomeHeartTypography.body2R13
             )
             Text(
-                text = "삼성역점",
+                text = place,
                 style = TwosomeHeartTypography.title1B16
             )
         }
@@ -64,13 +71,13 @@ fun MyBottomSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "5,800원",
+                    text = "${price}원",
                     style = TwosomeHeartTypography.title1B16
                 )
                 Spacer(modifier = Modifier.width(3.dp))
                 Text(
                     modifier = Modifier.padding(top = 3.dp),
-                    text = "(1EA)",
+                    text = "(${count}EA)",
                     style = TwosomeHeartTypography.caption1M12
                 )
             }
@@ -88,6 +95,6 @@ fun MyBottomSheet(
 @Composable
 fun MyBottomSheetPreview() {
     TwosomeHeartTheme {
-        MyBottomSheet()
+        MyBottomSheet(price = 5500, count = 1, place = "삼성역점")
     }
 }

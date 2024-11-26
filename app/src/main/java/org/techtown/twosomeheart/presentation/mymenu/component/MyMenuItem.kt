@@ -39,7 +39,7 @@ fun MyMenuItem(
     modifier: Modifier = Modifier,
     menuOption: String,
     isChecked: Boolean = false,
-    onCheckedChange: (Boolean) -> Unit,
+    onCheckedChange: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -52,7 +52,7 @@ fun MyMenuItem(
             ),
             contentDescription = "",
             tint = Color.Unspecified,
-            modifier = Modifier.clickable { onCheckedChange(!isChecked) }
+            modifier = Modifier.clickable { onCheckedChange() }
         )
         Row(
             modifier = modifier
@@ -139,8 +139,8 @@ fun MyMenuItemPreview() {
                 menuPrice = 5800,
                 menuImage = R.drawable.img_banana_ameicano2,
                 menuOption = "아이스/라지/블랙그라운드/포장",
-                isChecked = true,
-                onCheckedChange = { isChecked ->  !isChecked } // 상태 업데이트
+                isChecked = false,
+                onCheckedChange = {}
             )
         }
     }

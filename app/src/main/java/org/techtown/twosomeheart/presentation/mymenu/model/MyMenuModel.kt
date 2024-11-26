@@ -8,5 +8,4 @@ data class MyMenuModel(
     @DrawableRes val menuImage: Int,
     val menuOption: String,
     val isChecked: Boolean,
-    val onCheckedChange: (Boolean) -> Unit,
 )
