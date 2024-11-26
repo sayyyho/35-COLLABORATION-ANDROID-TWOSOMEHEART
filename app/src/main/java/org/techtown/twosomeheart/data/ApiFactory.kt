@@ -24,7 +24,7 @@ object ApiFactory {
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(getLogOkHttpClient())
-        //.addInterceptor(HeaderInterceptor())
+        .addInterceptor(HeaderInterceptor())
         .build()
 
     private fun createRetrofit(baseUrl: String): Retrofit {
