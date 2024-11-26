@@ -40,7 +40,11 @@
     <string name="menu_detail_image">메뉴 상세보기 이미지</string>
 
     // menu detail modal view
-    <string name ="menu_detail_modal_temperature_text">온도</string>"
     <string name ="menu_detail_modal_temperature_text">온도</string>
+    <string name ="menu_detail_modal_size_text">사이즈</string>
+    <string name ="menu_detail_modal_size_regular_text">레귤러 (325ml)</string>
+    <string name ="menu_detail_modal_size_large_text">라지 (425ml)</string>
+
+
 
 </resources>
