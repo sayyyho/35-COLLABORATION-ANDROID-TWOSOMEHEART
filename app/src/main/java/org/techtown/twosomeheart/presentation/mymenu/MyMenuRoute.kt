@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,12 +22,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.collections.immutable.PersistentList
@@ -173,15 +178,16 @@ fun MyMenuScreen(
                     }
                 }
             }
-            MyBottomSheet(
-                price = 5500,
-                count = 1,
-                place = "삼성역점"
-            )
         }
+        MyBottomSheet(
+            modifier = Modifier
+                .align(Alignment.BottomCenter),
+            price = 5500,
+            count = 1,
+            place = "삼성역점",
+        )
     }
 }
-
 
 
 @Preview
@@ -200,6 +206,13 @@ fun MyMenuScreenPreview() {
                         menuImage = R.drawable.img_menu_banana_latte,
                         menuOption = "아이스/라지/블랙그라운드/포장",
                         isChecked = true,
+                    ),
+                    MyMenuModel(
+                        menuName = "바나나 샷 아메리카노",
+                        menuPrice = 5800,
+                        menuImage = R.drawable.img_menu_banana_ameicano,
+                        menuOption = "아이스/라지/블랙그라운드/포장/개인컵",
+                        isChecked = false,
                     ),
                     MyMenuModel(
                         menuName = "바나나 샷 아메리카노",
