@@ -50,7 +50,10 @@
     <string name ="menu_detail_modal_pickup_caution">픽업방식 주의사항</string>
     <string name ="menu_detail_modal_coffeebean_text">원두</string>
     <string name ="menu_detail_modal_coffeebean_caution">원두 주의사항</string>
-
+    <string name ="menu_detail_modal_personal_cup_checkbox">개인컵 사용 체크박스</string>
+    <string name ="menu_detail_modal_personal_cup_text">개인컵 사용</string>
+    <string name ="menu_detail_modal_personal_cup_price_text">-300원</string>
+    <string name ="menu_detail_modal_personal_cup_caution">개인컵 사용 안내</string>
 
 
 </resources>
