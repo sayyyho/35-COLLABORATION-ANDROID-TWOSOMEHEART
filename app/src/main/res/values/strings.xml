@@ -48,6 +48,8 @@
     <string name ="menu_detail_modal_pickup_togo_text">일회용컵</string>
     <string name ="menu_detail_modal_pickup_forhere_text">머그컵</string>
     <string name ="menu_detail_modal_pickup_caution">픽업방식 주의사항</string>
+    <string name ="menu_detail_modal_coffeebean_text">원두</string>
+    <string name ="menu_detail_modal_coffeebean_caution">원두 주의사항</string>
 
 
 
