@@ -50,7 +50,7 @@ fun DetailRoute(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        viewModel.getDetailDummy()
+        viewModel.getMenuDetail()
     }
 
     DetailScreen(
