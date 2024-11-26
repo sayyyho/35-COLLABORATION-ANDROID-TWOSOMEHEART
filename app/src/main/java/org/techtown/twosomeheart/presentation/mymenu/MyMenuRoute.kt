@@ -14,24 +14,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.collections.immutable.PersistentList
@@ -40,6 +38,7 @@ import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.Topbar
 import org.techtown.twosomeheart.core.extension.noRippleClickable
 import org.techtown.twosomeheart.core.util.UiState
+import org.techtown.twosomeheart.presentation.mymenu.component.CustomDialog
 import org.techtown.twosomeheart.presentation.mymenu.component.MyBottomSheet
 import org.techtown.twosomeheart.presentation.mymenu.component.MyMenuItem
 import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
@@ -77,6 +76,7 @@ fun MyMenuScreen(
     modifier: Modifier = Modifier,
     viewModel: MyMenuViewModel
 ) {
+    var isDialogVisible by remember { mutableStateOf(false) }
     Box(
         modifier = modifier
             .padding(paddingValues)
@@ -186,6 +186,15 @@ fun MyMenuScreen(
             count = 1,
             place = "삼성역점",
         )
+        if (isDialogVisible) {
+            CustomDialog(
+                title = "선택된 상품을 My 투썸에서 삭제할까요?",
+                onClickCancel = { isDialogVisible = false }, // 다이얼로그 닫기
+                onClickConfirm = {
+                    isDialogVisible = false
+                }
+            )
+        }
     }
 }
 
