@@ -31,7 +31,8 @@ import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun PersonalCupSelection(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: (Boolean) -> Unit
 ) {
     val isPersonalCup = remember { mutableStateOf(false) }
 
@@ -47,6 +48,7 @@ fun PersonalCupSelection(
             tint = Color.Unspecified,
             modifier = Modifier.noRippleClickable {
                 isPersonalCup.value = !isPersonalCup.value
+                onClick(isPersonalCup.value)
             }
         )
 
@@ -96,5 +98,7 @@ fun PersonalCupSelection(
 @Preview
 @Composable
 fun PresonalCupSelection() {
-    PersonalCupSelection()
+    PersonalCupSelection(
+        onClick = {}
+    )
 }
