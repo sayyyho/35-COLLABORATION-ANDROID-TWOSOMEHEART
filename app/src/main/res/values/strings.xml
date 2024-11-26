@@ -41,5 +41,6 @@
 
     // menu detail modal view
     <string name ="menu_detail_modal_temperature_text">온도</string>"
+    <string name ="menu_detail_modal_temperature_text">온도</string>
 
 </resources>

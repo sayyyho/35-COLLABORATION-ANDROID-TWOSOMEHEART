@@ -23,9 +23,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.extension.noRippleClickable
+import org.techtown.twosomeheart.presentation.detail.model.SizeType
 import org.techtown.twosomeheart.presentation.detail.model.TemperatureType
 import org.techtown.twosomeheart.ui.theme.Blue10
 import org.techtown.twosomeheart.ui.theme.Gray30
@@ -71,11 +74,10 @@ fun TemperatureSelection(
                         onClick(TemperatureType.HOT)
                     }
                 },
-                modifier = if (selectedType.value == null) {
-                    Modifier.offset(x = 1.dp)
-                } else {
-                    Modifier
-                }
+                modifier = Modifier
+                    .zIndex(
+                        if (selectedType.value == TemperatureType.HOT) 1f else 0f
+                    )
             )
 
             TemperatureButton(
@@ -86,7 +88,17 @@ fun TemperatureSelection(
                         selectedType.value = TemperatureType.ICE
                         onClick(TemperatureType.ICE)
                     }
-                }
+                },
+                modifier = Modifier
+                    .offset {
+                        IntOffset(
+                            x = (-2).dp.roundToPx(),
+                            y = 0
+                        )
+                    }
+                    .zIndex(
+                        if (selectedType.value == TemperatureType.ICE) 1f else 0f
+                    )
             )
         }
     }
@@ -104,7 +116,7 @@ fun TemperatureButton(
         modifier = modifier
             .noRippleClickable { onClick() }
             .border(
-                width = if (isSelected) 0.dp else 1.dp,
+                width = 1.dp,
                 color = if (isSelected) Color.Transparent else Gray30,
                 shape = when (temperatureType) {
                     TemperatureType.HOT -> RoundedCornerShape(
