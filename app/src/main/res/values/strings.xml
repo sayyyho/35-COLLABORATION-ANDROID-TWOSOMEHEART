@@ -55,5 +55,6 @@
     <string name ="menu_detail_modal_personal_cup_price_text">-300원</string>
     <string name ="menu_detail_modal_personal_cup_caution">개인컵 사용 안내</string>
     <string name ="menu_detail_modal_personal_option">퍼스널 옵션</string>
+    <string name ="menu_detail_modal_shop">장바구니</string>
 
 </resources>
