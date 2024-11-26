@@ -9,6 +9,7 @@ import org.techtown.twosomeheart.core.Route
 import org.techtown.twosomeheart.presentation.dummy.navigation.navigateDummy
 import org.techtown.twosomeheart.presentation.menu.navigation.Menu
 import org.techtown.twosomeheart.presentation.menu.navigation.navigateMenu
+import org.techtown.twosomeheart.presentation.mymenu.navigation.navigateMyMenu
 
 class MainNavigation(
     val navController: NavHostController,
@@ -24,6 +25,9 @@ class MainNavigation(
 
     fun navigateToMenu(navOptions: NavOptions? = null) {
         navController.navigateMenu(navOptions = navOptions)
+    }
+    fun navigateToMyMenu(navOptions: NavOptions? = null) {
+        navController.navigateMyMenu(navOptions = navOptions)
     }
 }
 

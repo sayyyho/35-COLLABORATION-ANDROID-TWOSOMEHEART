@@ -33,8 +33,9 @@ import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.Topbar
+import org.techtown.twosomeheart.core.extension.noRippleClickable
 import org.techtown.twosomeheart.core.util.UiState
-import org.techtown.twosomeheart.presentation.menu.component.MenuItem
+import org.techtown.twosomeheart.presentation.menu.MenuViewModel
 import org.techtown.twosomeheart.presentation.mymenu.component.MyBottomSheet
 import org.techtown.twosomeheart.presentation.mymenu.component.MyMenuItem
 import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
@@ -45,7 +46,7 @@ import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun MyMenuRoute(
-
+    navigateUp: () -> Unit,
     paddingValues: PaddingValues,
     viewModel: MyMenuViewModel = viewModel()
 ) {
@@ -57,7 +58,8 @@ fun MyMenuRoute(
 
     MyMenuScreen(
         paddingValues = paddingValues,
-        state = state.uiState
+        state = state.uiState,
+        navigateUp = navigateUp
     )
 }
 
@@ -65,6 +67,7 @@ fun MyMenuRoute(
 fun MyMenuScreen(
     paddingValues: PaddingValues,
     state: UiState<PersistentList<MyMenuModel>>,
+    navigateUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -78,13 +81,16 @@ fun MyMenuScreen(
                 leadingIcon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_back),
-                        contentDescription = ""
+                        contentDescription = "",
+                        modifier = Modifier.noRippleClickable(onClick = navigateUp)
+
                     )
                 },
                 leadingIcon2 = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_home),
-                        contentDescription = ""
+                        contentDescription = "",
+                        modifier = Modifier.noRippleClickable(onClick = navigateUp)
                     )
                 },
                 text = "투썸오더",
@@ -177,6 +183,7 @@ fun MyMenuScreenPreview() {
     TwosomeHeartTheme {
         MyMenuScreen(
             paddingValues = PaddingValues(),
+            navigateUp = {},
             state = UiState.Success(
                 persistentListOf(
                     MyMenuModel(
