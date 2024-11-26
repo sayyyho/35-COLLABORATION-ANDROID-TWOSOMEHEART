@@ -44,6 +44,10 @@
     <string name ="menu_detail_modal_size_text">사이즈</string>
     <string name ="menu_detail_modal_size_regular_text">레귤러 (325ml)</string>
     <string name ="menu_detail_modal_size_large_text">라지 (425ml)</string>
+    <string name ="menu_detail_modal_pickup_text">픽업방식</string>
+    <string name ="menu_detail_modal_pickup_togo_text">일회용컵</string>
+    <string name ="menu_detail_modal_pickup_forhere_text">머그컵</string>
+    <string name ="menu_detail_modal_pickup_caution">픽업방식 주의사항</string>
 
 
 
