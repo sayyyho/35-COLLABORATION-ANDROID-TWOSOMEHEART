@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import org.techtown.twosomeheart.presentation.dummy.navigation.dummyNavGraph
 import org.techtown.twosomeheart.presentation.menu.navigation.menuNavGraph
+import org.techtown.twosomeheart.presentation.option.navigation.optionNavGraph
 
 @Composable
 fun MainScreen(
@@ -28,6 +29,10 @@ fun MainScreen(
                         navigateUp = navigator::navigateUp,
                     )
                     menuNavGraph(
+                        paddingValues = paddingValue,
+                        navigateUp = navigator::navigateUp,
+                    )
+                    optionNavGraph(
                         paddingValues = paddingValue,
                         navigateUp = navigator::navigateUp,
                     )
