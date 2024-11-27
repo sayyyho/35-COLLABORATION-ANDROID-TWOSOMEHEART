@@ -1,11 +1,7 @@
 package org.techtown.twosomeheart.presentation.option
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -17,6 +13,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.techtown.twosomeheart.R
@@ -122,6 +119,7 @@ fun OptionScreen(
                     optionTypeQuantity = shotQuantity,
                     isExpanded = isExpanded(Option.SHOT),
                     updateExpandedState = { onClickExpandButton(Option.SHOT) },
+                    optionText = buildOptionText(shotQuantity, "샷 시럽 추가"),
                     option1 = {
                         TwoOptionTab(
                             R.string.option_density,
@@ -131,6 +129,8 @@ fun OptionScreen(
                     },
                     option2 = {
                         OptionQuantityRow(
+                            optionName = "샷",
+                            optionPrice = 500,
                             optionType = OptionType.SHOT,
                             onClickMinusButton = { onClickMinusButton(OptionType.SHOT, "샷") },
                             onClickPlusButton = { onClickPlusButton(OptionType.SHOT, "샷") },
@@ -145,8 +145,15 @@ fun OptionScreen(
                     optionTypeQuantity = vanilaSyrupQuantity + caramelSyrupQuantity + hazelnutsSyrupQuantity,
                     isExpanded = isExpanded(Option.SYRUP),
                     updateExpandedState = { onClickExpandButton(Option.SYRUP) },
+                    optionText = buildOptionText(
+                        vanilaSyrupQuantity, "바닐라 시럽 추가",
+                        hazelnutsSyrupQuantity, "헤이즐넛 시럽 추가",
+                        caramelSyrupQuantity, "캬라멜 시럽 추가"
+                    ),
                     option1 = {
                         OptionQuantityRow(
+                            optionName = "바닐라시럽",
+                            optionPrice = 500,
                             optionType = OptionType.SYRUP,
                             onClickMinusButton = { onClickMinusButton(OptionType.SYRUP, "바닐라시럽") },
                             onClickPlusButton = { onClickPlusButton(OptionType.SYRUP, "바닐라시럽") },
@@ -155,6 +162,8 @@ fun OptionScreen(
                     },
                     option2 = {
                         OptionQuantityRow(
+                            optionName = "헤이즐넛시럽",
+                            optionPrice = 500,
                             optionType = OptionType.SYRUP,
                             onClickMinusButton = { onClickMinusButton(OptionType.SYRUP, "헤이즐넛시럽") },
                             onClickPlusButton = { onClickPlusButton(OptionType.SYRUP, "헤이즐넛시럽") },
@@ -163,6 +172,8 @@ fun OptionScreen(
                     },
                     option3 = {
                         OptionQuantityRow(
+                            optionName = "캬라멜시럽",
+                            optionPrice = 500,
                             optionType = OptionType.SYRUP,
                             onClickMinusButton = { onClickMinusButton(OptionType.SYRUP, "캬라멜시럽") },
                             onClickPlusButton = { onClickPlusButton(OptionType.SYRUP, "캬라멜시럽") },
@@ -177,8 +188,11 @@ fun OptionScreen(
                     optionTypeQuantity = creamQuantity,
                     isExpanded = isExpanded(Option.CREAM),
                     updateExpandedState = { onClickExpandButton(Option.CREAM) },
+                    optionText = buildOptionText(creamQuantity, "휘핑크림 추가"),
                     option1 = {
                         OptionQuantityRow(
+                            optionName = "휘핑크림",
+                            optionPrice = 500,
                             optionType = OptionType.CREAM,
                             onClickMinusButton = { onClickMinusButton(OptionType.CREAM, "휘핑크림") },
                             onClickPlusButton = { onClickPlusButton(OptionType.CREAM, "휘핑크림") },
@@ -193,8 +207,14 @@ fun OptionScreen(
                     optionTypeQuantity = caramelDrizzleQuantity + chocolateDrizzleQuantity,
                     isExpanded = isExpanded(Option.DRIZZLE),
                     updateExpandedState = { onClickExpandButton(Option.DRIZZLE) },
+                    optionText = buildOptionText(
+                        caramelDrizzleQuantity, "캬라멜드리즐 추가",
+                        chocolateDrizzleQuantity, "초콜릿드리즐 추가"
+                    ),
                     option1 = {
                         OptionQuantityRow(
+                            optionName = "캬라멜드리즐",
+                            optionPrice = 500,
                             optionType = OptionType.DRIZZLE,
                             onClickMinusButton = {
                                 onClickMinusButton(
@@ -208,6 +228,8 @@ fun OptionScreen(
                     },
                     option2 = {
                         OptionQuantityRow(
+                            optionName = "초콜릿드리즐",
+                            optionPrice = 500,
                             optionType = OptionType.DRIZZLE,
                             onClickMinusButton = {
                                 onClickMinusButton(
@@ -223,25 +245,25 @@ fun OptionScreen(
             }
         }
 
-        BottomTotalPrice(
-            totalPrice = totalPrice,
-            onClickResetButton = resetTotalPrice,
-        )
+        BottomTotalPrice(totalPrice = totalPrice, onClickResetButton = resetTotalPrice)
     }
 }
 
-@Preview
 @Composable
-fun OptionScreenPreview() {
+fun buildOptionText(vararg quantitiesAndLabels: Any): String {
+    val builder = StringBuilder()
+    for (i in quantitiesAndLabels.indices step 2) {
+        val quantity = quantitiesAndLabels[i] as Int
+        val label = quantitiesAndLabels[i + 1] as String
+        if (quantity > 0) builder.append("$label $quantity 개, ")
+    }
+    return builder.dropLast(2).toString()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
     TwosomeHeartTheme {
-        OptionScreen(
-            paddingValues = PaddingValues(),
-            navigateUp = {},
-            onClickPlusButton = { _, _ -> },
-            onClickMinusButton = { _, _ -> },
-            isExpanded = { _ -> false },
-            onClickExpandButton = {},
-            resetTotalPrice = {}
-        )
+        OptionRoute(paddingValues = PaddingValues(0.dp), navigateUp = {})
     }
 }
