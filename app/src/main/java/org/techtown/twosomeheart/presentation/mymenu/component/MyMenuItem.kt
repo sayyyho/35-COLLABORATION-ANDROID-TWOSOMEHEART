@@ -86,7 +86,7 @@ fun MyMenuItem(
                     }
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_mymenu_move),
-                        contentDescription = "",
+                        contentDescription = stringResource(R.string.my_menu_item_move_ic),
                         tint = Color.Unspecified,
                     )
                 }

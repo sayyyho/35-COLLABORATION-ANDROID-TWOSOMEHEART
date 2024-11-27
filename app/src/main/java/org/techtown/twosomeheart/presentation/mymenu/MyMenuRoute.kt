@@ -71,7 +71,6 @@ fun MyMenuRoute(
     )
 }
 
-@SuppressLint("ResourceType")
 @Composable
 fun MyMenuScreen(
     modifier: Modifier = Modifier,
@@ -155,7 +154,7 @@ fun MyMenuScreen(
                                 R.drawable.ic_modal_checkbox_diselect
                             }
                         ),
-                        contentDescription = "",
+                        contentDescription = stringResource(R.string.my_menu_select),
                         tint = Color.Unspecified,
 
                         )

@@ -16,8 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.BlackBottomButton
 import org.techtown.twosomeheart.core.util.PriceFormatter
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartColors
@@ -52,7 +54,7 @@ fun MyMenuBottomSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "주문매장",
+                    text = stringResource(R.string.menu_ordered_store),
                     style = TwosomeHeartTypography.body2R13
                 )
                 Text(
@@ -68,7 +70,7 @@ fun MyMenuBottomSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "주문금액",
+                    text = stringResource(R.string.my_menu_order_price),
                     style = TwosomeHeartTypography.body2R13
                 )
                 Row(
@@ -88,7 +90,7 @@ fun MyMenuBottomSheet(
 
             }
             BlackBottomButton(
-                text = "주문하기",
+                text = stringResource(R.string.my_menu_order_message),
                 color = TwosomeHeartColors.Red30,
                 padding = 14
             )

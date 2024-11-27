@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -21,14 +20,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import org.techtown.twosomeheart.ui.theme.TwosomeHeartColors
+import org.techtown.twosomeheart.R
+import org.techtown.twosomeheart.ui.theme.Black
+import org.techtown.twosomeheart.ui.theme.Gray20
+import org.techtown.twosomeheart.ui.theme.Red40
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
+import org.techtown.twosomeheart.ui.theme.White
 
 
 @Composable
@@ -51,7 +55,7 @@ fun CustomDialog(
                 modifier = Modifier
                     .width(LocalConfiguration.current.screenWidthDp.dp * 0.8f)
                     .background(
-                        color = Color.White,
+                        color = White,
                     ),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -78,15 +82,15 @@ fun CustomDialog(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxHeight()
-                            .border(width = 1.dp, color = TwosomeHeartColors.Gray20),
+                            .border(width = 1.dp, color = Gray20),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = TwosomeHeartColors.White,
-                            contentColor = TwosomeHeartColors.Black,
+                            containerColor = White,
+                            contentColor = Black,
                         ),
                     ) {
 
                         Text(
-                            text = "취소",
+                            text = stringResource(R.string.my_menu_dialog_cancel),
                             textAlign = TextAlign.Center,
                             style = TwosomeHeartTypography.body1R14
                         )
@@ -98,15 +102,15 @@ fun CustomDialog(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxHeight()
-                            .border(width = 1.dp, color = TwosomeHeartColors.Gray20),
+                            .border(width = 1.dp, color = Gray20),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = TwosomeHeartColors.White,
-                            contentColor = TwosomeHeartColors.Red40,
+                            containerColor = White,
+                            contentColor = Red40,
                         ),
                     ) {
                         
                         Text(
-                            text = "확인",
+                            text = stringResource(R.string.my_menu_dialog_confirm),
                             textAlign = TextAlign.Center,
                             style = TwosomeHeartTypography.body1R14
                         )
