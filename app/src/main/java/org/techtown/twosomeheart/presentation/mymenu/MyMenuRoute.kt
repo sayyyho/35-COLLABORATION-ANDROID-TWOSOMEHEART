@@ -176,8 +176,6 @@ fun MyMenuScreen(
                         textDecoration = TextDecoration.Underline
                     ),
                     color = TwosomeHeartColors.Gray90,
-
-
                     )
             }
 
