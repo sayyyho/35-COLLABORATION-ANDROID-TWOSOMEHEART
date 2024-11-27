@@ -10,4 +10,8 @@ interface TwosomeService {
     suspend fun getMenuLists(
         @Path("menuId") menuId: Int = 2
     ): ResponseMenuDetailDto
+  
+  
+    @GET("api/v1/likes")
+    suspend fun getMyMenu(): ResponseMyMenuDto
 }
