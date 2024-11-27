@@ -114,14 +114,27 @@ fun DetailModalBottomSheet(
 
                     })
 
-                    Spacer(Modifier.height(24.dp))
+                    Spacer(Modifier.height(16.dp))
+
+                    PersonalCupSelection(
+                        onClick = {
+
+                        }
+                    )
+
+                    Spacer(Modifier.height(40.dp))
 
                     PersonalOptionSelection(
                         onClick = {},
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
+
+
                 }
             }
+
+
+            Spacer(modifier = Modifier.height(24.dp))
 
             DetailModalBottomBar(
                 price = "1,000원",
