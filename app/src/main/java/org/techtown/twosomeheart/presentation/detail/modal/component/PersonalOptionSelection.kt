@@ -77,8 +77,7 @@ fun PersonalOptionSelection(
             modifier = Modifier
                 .padding(
                     top = 13.dp,
-                    bottom = 12.dp,
-                    end = 10.dp
+                    bottom = 12.dp
                 )
                 .noRippleClickable {
                     onClick()
