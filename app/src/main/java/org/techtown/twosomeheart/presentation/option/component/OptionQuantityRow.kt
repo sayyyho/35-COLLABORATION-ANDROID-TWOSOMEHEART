@@ -23,6 +23,7 @@ import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 @Composable
 fun OptionQuantityRow(
     optionName: String,
+    optionPrice: Int,
     optionType: OptionType,
     onClickMinusButton: (OptionType) -> Unit,
     onClickPlusButton: (OptionType) -> Unit,
@@ -43,7 +44,7 @@ fun OptionQuantityRow(
             )
 
             Text(
-                text = "(+1에 ${optionType.type.first().second}원)", //TODO : 각각의 가격이 나와야함. 지금 다 500원이라서 눈치 못채고 있었음
+                text = "(+1에 ${optionPrice}원)",
                 style = TwosomeHeartTypography.caption1B12,
                 color = Gray60,
                 modifier = Modifier.padding(7.dp)
@@ -68,7 +69,8 @@ fun OptionQuantityRowPreview() {
             optionName = "샷",
             optionType = OptionType.SHOT,
             onClickMinusButton = {},
-            onClickPlusButton = {}
+            onClickPlusButton = {},
+            optionPrice = 0
         )
     }
 }
