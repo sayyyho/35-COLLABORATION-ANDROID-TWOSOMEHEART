@@ -6,6 +6,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import org.techtown.twosomeheart.presentation.detail.navigation.detailNavGraph
 import org.techtown.twosomeheart.presentation.dummy.navigation.dummyNavGraph
 import org.techtown.twosomeheart.presentation.menu.navigation.menuNavGraph
 import org.techtown.twosomeheart.presentation.mymenu.navigation.myMenuNavGraph
@@ -33,6 +34,10 @@ fun MainScreen(
                         navigateUp = navigator::navigateUp,
                     )
                     myMenuNavGraph(
+                        paddingValues = paddingValue,
+                        navigateUp = navigator::navigateUp,
+                    )
+                    detailNavGraph(
                         paddingValues = paddingValue,
                         navigateUp = navigator::navigateUp,
                     )
