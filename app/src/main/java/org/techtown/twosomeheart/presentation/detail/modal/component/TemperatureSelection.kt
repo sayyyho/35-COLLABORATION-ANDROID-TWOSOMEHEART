@@ -60,9 +60,7 @@ fun TemperatureSelection(
 
         Row(
             modifier = Modifier
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+                .fillMaxWidth()
         ) {
 
             TemperatureButton(
@@ -75,6 +73,7 @@ fun TemperatureSelection(
                     }
                 },
                 modifier = Modifier
+                    .weight(1f)
                     .zIndex(
                         if (selectedType.value == TemperatureType.HOT) 1f else 0f
                     )
@@ -96,6 +95,7 @@ fun TemperatureSelection(
                             y = 0
                         )
                     }
+                    .weight(1f)
                     .zIndex(
                         if (selectedType.value == TemperatureType.ICE) 1f else 0f
                     )

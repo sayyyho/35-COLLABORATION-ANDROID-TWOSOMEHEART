@@ -76,6 +76,7 @@ fun SizeSelection(
                     }
                 },
                 modifier = Modifier
+                    .weight(1f)
                     .zIndex(
                         if (selectedType.value == SizeType.REGULAR) 1f else 0f
                     )
@@ -91,6 +92,7 @@ fun SizeSelection(
                     }
                 },
                 modifier = Modifier
+                    .weight(1f)
                     .offset {
                         IntOffset(
                             x = (-2).dp.roundToPx(),

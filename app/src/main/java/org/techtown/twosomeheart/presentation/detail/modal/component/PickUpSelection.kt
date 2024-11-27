@@ -85,6 +85,7 @@ fun PickUpSelection(
                     }
                 },
                 modifier = Modifier
+                    .weight(1f)
                     .zIndex(
                         if (selectedType.value == PickUpType.TOGO) 1f else 0f
                     )
@@ -100,6 +101,7 @@ fun PickUpSelection(
                     }
                 },
                 modifier = Modifier
+                    .weight(1f)
                     .offset {
                         IntOffset(
                             x = (-2).dp.roundToPx(),

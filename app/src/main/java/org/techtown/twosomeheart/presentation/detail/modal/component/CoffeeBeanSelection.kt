@@ -87,6 +87,7 @@ fun CoffeeBeanSelection(
                     }
                 },
                 modifier = Modifier
+                    .weight(1f)
                     .offset{
                         IntOffset(
                             x = 2.dp.roundToPx(),
@@ -108,12 +109,7 @@ fun CoffeeBeanSelection(
                     }
                 },
                 modifier = Modifier
-                    /*.offset{
-                        IntOffset(
-                            x = 2.dp.roundToPx(),
-                            y = 0
-                        )
-                    }*/
+                    .weight(1f)
                     .zIndex(
                         if (selectedType.value == CoffeeBeanType.AROMANOTE) 1f else 0f
                     )
@@ -129,6 +125,7 @@ fun CoffeeBeanSelection(
                     }
                 },
                 modifier = Modifier
+                    .weight(1f)
                     .offset {
                         IntOffset(
                             x = (-2).dp.roundToPx(),
