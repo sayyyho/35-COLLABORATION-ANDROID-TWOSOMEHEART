@@ -27,7 +27,20 @@
     <string name="menu_status_new">New</string>
     <string name="menu_status_best">Best</string>
 
-    //menu detail view
+    // my menu view
+    <string name="my_menu_dialog_title">선택된 상품을 My 투썸에서 삭제할까요?</string>
+    <string name="my_menu_all_select_title">전체선택</string>
+    <string name="my_menu_select_delete_title">선택삭제</string>
+    <string name="my_menu_select_price">5500</string>
+    <string name="my_menu_select_count">1</string>
+    <string name="my_menu_select">선택</string>
+    <string name="my_menu_dialog_confirm">확인</string>
+    <string name="my_menu_dialog_cancel">취소</string>
+    <string name="my_menu_item_move_ic">이동 아이콘</string>
+    <string name="my_menu_order_message">주문하기</string>
+    <string name="my_menu_order_price">주문 금액</string>
+
+  //menu detail view
     <string name="menu_detail_nutrition_button">제품 영양 정보 버튼</string>
     <string name="menu_detail_nutrition_title_text">제품 영양 정보</string>
     <string name="menu_detail_dot_nutrition_warning">제품 영양 정보 구분점</string>
