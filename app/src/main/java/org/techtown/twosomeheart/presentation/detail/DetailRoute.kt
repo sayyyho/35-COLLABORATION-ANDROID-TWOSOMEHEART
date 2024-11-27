@@ -16,6 +16,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -36,6 +38,7 @@ import org.techtown.twosomeheart.core.util.UiState
 import org.techtown.twosomeheart.presentation.detail.component.MenuDetailAllergyText
 import org.techtown.twosomeheart.presentation.detail.component.MenuDetailContent
 import org.techtown.twosomeheart.presentation.detail.component.MenuNutritionColumn
+import org.techtown.twosomeheart.presentation.detail.modal.component.DetailModalBottomSheet
 import org.techtown.twosomeheart.presentation.detail.model.DetailModel
 import org.techtown.twosomeheart.ui.theme.Gray20
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
@@ -56,7 +59,8 @@ fun DetailRoute(
     DetailScreen(
         paddingValues = paddingValues,
         navigateUp = navigateUp,
-        state = state.uiState
+        state = state.uiState,
+        onStarButtonClick = {}
     )
 
 }
@@ -66,8 +70,12 @@ fun DetailScreen(
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
     state: UiState<DetailModel>,
+    onStarButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+
+    val showBottomSheet =  remember { mutableStateOf(false) }
+
     Scaffold(
         modifier = modifier
             .background(White)
@@ -105,9 +113,13 @@ fun DetailScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
+                    .noRippleClickable {
+                        showBottomSheet.value = true
+                    }
             )
         }
     ) { innerPadding ->
+
         Column(
             modifier = Modifier
                 .padding(innerPadding)
@@ -122,6 +134,18 @@ fun DetailScreen(
                 is UiState.Failure -> {}
 
                 is UiState.Success -> {
+
+                    if(showBottomSheet.value){
+                        DetailModalBottomSheet(
+                            menuName = state.data.menuName,
+                            onStarButtonClick = {
+                                onStarButtonClick()
+                            },
+                            onDismissRequest = {
+                                showBottomSheet.value = false
+                            }
+                        )
+                    }
 
                     AsyncImage(
                         model = state.data.menuImageUrl,
@@ -189,7 +213,8 @@ fun DetailScreenPreview() {
                     menuAllergy = "우유",
                     menuImageUrl = "https://private-user-images.githubusercontent.com/69308068/389300533-8d353883-fb4b-4608-b0b4-24d2bc074133.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzI1MzI2OTksIm5iZiI6MTczMjUzMjM5OSwicGF0aCI6Ii82OTMwODA2OC8zODkzMDA1MzMtOGQzNTM4ODMtZmI0Yi00NjA4LWIwYjQtMjRkMmJjMDc0MTMzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDExMjUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMTI1VDEwNTk1OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMwZTViNmNmMDUwODlmYjRiNGUzZDYzYmY5MmQxOTE0ZTkyMzI3ODJkNDk2MjljZjZjMTRkODE1MzNiM2JkMzkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.BcvGmMQweWhlRzbTBNEGhu9K6WTQOUE6Fkntktloog0"
                 )
-            )
+            ),
+            onStarButtonClick = {}
         )
     }
 }
