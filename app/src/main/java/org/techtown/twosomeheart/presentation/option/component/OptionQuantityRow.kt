@@ -10,10 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.OptionQuantityButton
 import org.techtown.twosomeheart.presentation.option.model.OptionType
 import org.techtown.twosomeheart.ui.theme.Gray10
@@ -24,6 +22,7 @@ import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 
 @Composable
 fun OptionQuantityRow(
+    optionName: String,
     optionType: OptionType,
     onClickMinusButton: (OptionType) -> Unit,
     onClickPlusButton: (OptionType) -> Unit,
@@ -38,11 +37,7 @@ fun OptionQuantityRow(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text =
-                stringResource(
-                    R.string.option_name_add,
-                    optionType.type.first().first
-                ),//TODO : 각각의 이름이 나와야함. 바닐라시럽/헤이즐넛시럽/캬라멜시럽
+                text = optionName,
                 style = TwosomeHeartTypography.body1M14,
                 color = Gray90,
             )
@@ -70,6 +65,7 @@ fun OptionQuantityRow(
 fun OptionQuantityRowPreview() {
     TwosomeHeartTheme {
         OptionQuantityRow(
+            optionName = "샷",
             optionType = OptionType.SHOT,
             onClickMinusButton = {},
             onClickPlusButton = {}
