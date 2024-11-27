@@ -38,15 +38,4 @@
     <string name="option_lightly">연하게</string>
     <string name="option_plus">"+ "</string>
     <string name="option_blank" />
-    <string name="option_name_add">%1$s 추가</string>
-    <string name="option_add_price">(+1에 %1$s원)</string>
-    <string name="option_shot">샷</string>
-    <string name="option_syrup">시럽</string>
-    <string name="option_cream">휘핑크림</string>
-    <string name="option_drizzle">드리즐</string>
-    <string name="option_vanila_syrup">바닐라시럽</string>
-    <string name="option_h_syrup">헤이즐넛시럽</string>
-    <string name="option_k_syrup">캬라멜시럽</string>
-    <string name="option_c_drizzle">캬라멜드리즐</string>
-    <string name="option_chocolate_drizzle">초콜릿드리즐</string>
 </resources>
