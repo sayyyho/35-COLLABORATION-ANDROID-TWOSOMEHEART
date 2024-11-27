@@ -50,7 +50,7 @@ fun DetailRoute(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        viewModel.getDetailDummy()
+        viewModel.getMenuDetail()
     }
 
     DetailScreen(
@@ -133,7 +133,7 @@ fun DetailScreen(
                     Spacer(modifier = Modifier.height(26.dp))
 
                     MenuDetailContent(
-                        isBestMenu = true,
+                        isBestMenu = state.data.menuStatus == "BEST",
                         menuName = state.data.menuName,
                         menuDescription = state.data.menuDescription,
                         menuPrice = state.data.menuPrice,
