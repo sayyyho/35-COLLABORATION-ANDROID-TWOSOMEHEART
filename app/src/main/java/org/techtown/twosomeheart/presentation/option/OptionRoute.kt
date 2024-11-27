@@ -51,10 +51,10 @@ fun OptionRoute(
     OptionScreen(
         paddingValues = paddingValues,
         navigateUp = navigateUp,
-        onClickPlusButton = viewModel::plusOptionQuantity,
-        onClickMinusButton = viewModel::minusOptionQuantity,
         isExpanded = { option -> state.expandedOption == option },
         onClickExpandButton = viewModel::updateExpandedOption,
+        onClickPlusButton = viewModel::plusOptionQuantity,
+        onClickMinusButton = viewModel::minusOptionQuantity,
         shotQuantity = state.shotQuantity,
         vanilaSyrupQuantity = state.vanilaSyrupQuantity,
         caramelSyrupQuantity = state.caramelSyrupQuantity,
@@ -71,10 +71,10 @@ fun OptionRoute(
 fun OptionScreen(
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
-    onClickMinusButton: (OptionType, String) -> Unit,
-    onClickPlusButton: (OptionType, String) -> Unit,
     isExpanded: (Option) -> Boolean,
     onClickExpandButton: (Option) -> Unit,
+    onClickMinusButton: (OptionType, String) -> Unit,
+    onClickPlusButton: (OptionType, String) -> Unit,
     resetTotalPrice: () -> Unit,
     modifier: Modifier = Modifier,
     shotQuantity: Int = 0,
@@ -119,7 +119,7 @@ fun OptionScreen(
                     optionTypeQuantity = shotQuantity,
                     isExpanded = isExpanded(Option.SHOT),
                     updateExpandedState = { onClickExpandButton(Option.SHOT) },
-                    optionText = buildOptionText(shotQuantity, "샷 시럽 추가"),
+                    optionText = buildOptionText(shotQuantity, "샷추가"),
                     option1 = {
                         TwoOptionTab(
                             R.string.option_density,
@@ -146,9 +146,9 @@ fun OptionScreen(
                     isExpanded = isExpanded(Option.SYRUP),
                     updateExpandedState = { onClickExpandButton(Option.SYRUP) },
                     optionText = buildOptionText(
-                        vanilaSyrupQuantity, "바닐라 시럽 추가",
-                        hazelnutsSyrupQuantity, "헤이즐넛 시럽 추가",
-                        caramelSyrupQuantity, "캬라멜 시럽 추가"
+                        vanilaSyrupQuantity, "바닐라시럽추가",
+                        hazelnutsSyrupQuantity, "헤이즐넛시럽추가",
+                        caramelSyrupQuantity, "캬라멜시럽추가"
                     ),
                     option1 = {
                         OptionQuantityRow(
@@ -208,8 +208,8 @@ fun OptionScreen(
                     isExpanded = isExpanded(Option.DRIZZLE),
                     updateExpandedState = { onClickExpandButton(Option.DRIZZLE) },
                     optionText = buildOptionText(
-                        caramelDrizzleQuantity, "캬라멜드리즐 추가",
-                        chocolateDrizzleQuantity, "초콜릿드리즐 추가"
+                        caramelDrizzleQuantity, "캬라멜드리즐추가",
+                        chocolateDrizzleQuantity, "초콜릿드리즐추가"
                     ),
                     option1 = {
                         OptionQuantityRow(
@@ -255,7 +255,7 @@ fun buildOptionText(vararg quantitiesAndLabels: Any): String {
     for (i in quantitiesAndLabels.indices step 2) {
         val quantity = quantitiesAndLabels[i] as Int
         val label = quantitiesAndLabels[i + 1] as String
-        if (quantity > 0) builder.append("$label $quantity 개, ")
+        if (quantity > 0) builder.append("${label}x${quantity}, ")
     }
     return builder.dropLast(2).toString()
 }
