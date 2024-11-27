@@ -9,11 +9,12 @@ import org.techtown.twosomeheart.core.Route
 import org.techtown.twosomeheart.presentation.dummy.navigation.navigateDummy
 import org.techtown.twosomeheart.presentation.menu.navigation.Menu
 import org.techtown.twosomeheart.presentation.menu.navigation.navigateMenu
+import org.techtown.twosomeheart.presentation.mymenu.navigation.MyMenu
 import org.techtown.twosomeheart.presentation.mymenu.navigation.navigateMyMenu
 
 class MainNavigation(
     val navController: NavHostController,
-    val startDestination: Route = Menu
+    val startDestination: Route = MyMenu
 ) {
     fun navigateUp() {
         navController.navigateUp()

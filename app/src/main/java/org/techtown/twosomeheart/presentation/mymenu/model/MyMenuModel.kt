@@ -5,7 +5,7 @@ import androidx.annotation.DrawableRes
 data class MyMenuModel(
     val menuName: String,
     val menuPrice: Int,
-    @DrawableRes val menuImage: Int,
+    val menuImage: String,
     val menuOption: String,
     val isChecked: Boolean,
 )

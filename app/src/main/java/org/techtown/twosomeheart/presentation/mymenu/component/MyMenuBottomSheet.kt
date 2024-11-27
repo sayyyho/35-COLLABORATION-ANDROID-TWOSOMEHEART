@@ -16,29 +16,34 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.techtown.twosomeheart.core.component.BlackBottomButton
+import org.techtown.twosomeheart.core.util.PriceFormatter
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartColors
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 
 @Composable
-fun MyBottomSheet(
-    modifier: Modifier = Modifier,
+fun MyMenuBottomSheet(
     price: Int,
-    count: Int,
+    count: String,
     place: String,
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
-            .shadow(elevation = 18.dp, shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)) // shadow를 먼저 적용
+            .shadow(
+                elevation = 18.dp,
+                shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp)
+            )
             .clip(shape = RoundedCornerShape(topStart = 18.dp, topEnd = 18.dp))
             .fillMaxWidth()
-            .background(Color.White)
-            .padding(15.dp, 16.dp)
+            .background(TwosomeHeartColors.White)
+            .padding(
+                horizontal = 15.dp,
+                vertical = 16.dp
+            )
     ) {
         Column {
             Row(
@@ -70,7 +75,7 @@ fun MyBottomSheet(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "${price}원",
+                        text = PriceFormatter.formatPriceWon(price),
                         style = TwosomeHeartTypography.title1B16
                     )
                     Spacer(modifier = Modifier.width(3.dp))
@@ -95,6 +100,6 @@ fun MyBottomSheet(
 @Composable
 fun MyBottomSheetPreview() {
     TwosomeHeartTheme {
-        MyBottomSheet(price = 5500, count = 1, place = "삼성역점")
+        MyMenuBottomSheet(price = 5500, count = "1", place = "삼성역점")
     }
 }

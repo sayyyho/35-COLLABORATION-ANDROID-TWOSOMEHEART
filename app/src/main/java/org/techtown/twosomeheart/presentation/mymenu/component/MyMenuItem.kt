@@ -1,26 +1,22 @@
 package org.techtown.twosomeheart.presentation.mymenu.component
 
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
@@ -30,16 +26,19 @@ import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartColors
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
+import coil.compose.AsyncImage
+import org.techtown.twosomeheart.core.extension.noRippleClickable
+import org.techtown.twosomeheart.core.util.PriceFormatter
 
 @Composable
 fun MyMenuItem(
-    menuName: String,
-    menuPrice: Int,
-    @DrawableRes menuImage: Int,
     modifier: Modifier = Modifier,
-    menuOption: String,
     isChecked: Boolean = false,
     onCheckedChange: () -> Unit,
+    menuName: String,
+    menuPrice: Int,
+    menuImage: String,
+    menuOption: String,
 ) {
     Column(
         modifier = modifier
@@ -48,24 +47,24 @@ fun MyMenuItem(
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(
-                if (isChecked) R.drawable.ic_mymenu_checkbox_select else R.drawable.ic_checkbox_diselect
+                if (isChecked) R.drawable.ic_mymenu_checkbox_select else R.drawable.ic_modal_checkbox_diselect
             ),
             contentDescription = "",
             tint = Color.Unspecified,
-            modifier = Modifier.clickable { onCheckedChange() }
+            modifier = Modifier.noRippleClickable { onCheckedChange() }
         )
         Row(
             modifier = modifier
                 .padding(top = 10.dp, bottom = 17.dp)
                 .fillMaxWidth()
         ) {
-            Image(
-                painter = painterResource(menuImage),
+            AsyncImage(
+                model = menuImage,
                 contentDescription = stringResource(R.string.menu_description_image),
-                modifier = modifier
+                modifier = Modifier
                     .padding(end = 16.dp)
-                    .width(87.dp)
-                    .height(87.dp)
+                    .size(87.dp),
+                contentScale = ContentScale.Crop
             )
             Column {
                 Row(
@@ -81,7 +80,7 @@ fun MyMenuItem(
                             style = TwosomeHeartTypography.body1R14
                         )
                         Text(
-                            text = "${menuPrice}원",
+                            text = PriceFormatter.formatPriceWon(menuPrice),
                             style = TwosomeHeartTypography.title1B16
                         )
                     }
@@ -100,12 +99,14 @@ fun MyMenuItem(
 
         }
         Row(
-            modifier = Modifier.fillMaxWidth().padding(end = 23.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = 23.dp),
         ) {
             Text(
                 modifier = Modifier
                     .weight(1f)
-                    .border(width = 1.dp, color = Color(0xFF000000))
+                    .border(width = 1.dp, color = TwosomeHeartColors.Black)
                     .padding(vertical = 8.5.dp),
                 text = "장바구니 담기",
                 style = TwosomeHeartTypography.body2B13,
@@ -115,7 +116,7 @@ fun MyMenuItem(
             Text(
                 modifier = Modifier
                     .weight(1f)
-                    .border(width = 1.dp, color = Color(0xFF000000))
+                    .border(width = 1.dp, color = TwosomeHeartColors.Black)
                     .padding(vertical = 8.5.dp),
                 text = "지금 바로 주문",
                 style = TwosomeHeartTypography.body2B13,
@@ -123,7 +124,6 @@ fun MyMenuItem(
             )
         }
     }
-
 }
 
 
@@ -137,7 +137,7 @@ fun MyMenuItemPreview() {
             MyMenuItem(
                 menuName = "바나나샷 아메리카노",
                 menuPrice = 5800,
-                menuImage = R.drawable.img_banana_ameicano2,
+                menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
                 menuOption = "아이스/라지/블랙그라운드/포장",
                 isChecked = false,
                 onCheckedChange = {}

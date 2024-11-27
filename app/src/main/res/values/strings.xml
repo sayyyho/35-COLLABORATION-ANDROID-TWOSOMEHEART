@@ -27,4 +27,10 @@
     <string name="menu_status_new">New</string>
     <string name="menu_status_best">Best</string>
 
+    // my menu view
+    <string name="my_menu_dialog_title">선택된 상품을 My 투썸에서 삭제할까요?</string>
+    <string name="my_menu_all_select_title">전체선택</string>
+    <string name="my_menu_select_delete_title">선택삭제</string>
+    <string name="my_menu_select_price">5500</string>
+    <string name="my_menu_select_count">1</string>
 </resources>
