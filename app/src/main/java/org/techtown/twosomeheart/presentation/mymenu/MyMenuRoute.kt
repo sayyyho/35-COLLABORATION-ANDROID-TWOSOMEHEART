@@ -60,7 +60,7 @@ fun MyMenuRoute(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(true) {
-        viewModel.getMenuDummy()
+        viewModel.getMyMenu()
     }
 
     MyMenuScreen(
@@ -193,7 +193,6 @@ fun MyMenuScreen(
                 is UiState.Empty -> {}
                 is UiState.Failure -> {}
                 is UiState.Success -> {
-
                     LazyColumn(
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 24.dp)
                     ) {

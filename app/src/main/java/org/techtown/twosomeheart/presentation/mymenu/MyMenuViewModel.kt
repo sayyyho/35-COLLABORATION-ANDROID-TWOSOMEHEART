@@ -1,24 +1,52 @@
 package org.techtown.twosomeheart.presentation.mymenu
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import org.techtown.twosomeheart.core.util.UiState
+import org.techtown.twosomeheart.data.ApiFactory
 import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
 
 class MyMenuViewModel : ViewModel() {
 
-    private val _state = MutableStateFlow(MyMenuState())
-    val state: StateFlow<MyMenuState> = _state.asStateFlow()
+    private val twosomeService by lazy { ApiFactory.ServicePool.twosomeService }
 
-    fun getMenuDummy() {
-        _state.value = _state.value.copy(
-            uiState = UiState.Success(menuDummy)
-        )
+    private val _state = MutableStateFlow(MyMenuState())
+    val state: StateFlow<MyMenuState>
+        get() = _state.asStateFlow()
+
+    fun getMyMenu() {
+        viewModelScope.launch {
+            runCatching {
+                twosomeService.getMyMenu() // BaseResponse<ResponseMyMenuDto> 반환
+            }.onSuccess { response ->
+                val favoriteList = response.data.favoriteList.map { item ->
+                    MyMenuModel(
+                        menuName = item.name,
+                        menuPrice = item.price,
+                        menuImage = item.imageUrl,
+                        menuOption = "${item.temperature}/${item.size}/${item.coffeeBean}/${item.togo}${if(item.personal){"/개인컵"}else{""}}",
+                        isChecked = false // 기본값 설정
+                    )
+                }.toPersistentList()
+
+                _state.value = _state.value.copy(
+                    uiState = UiState.Success(favoriteList)
+                )
+            }.onFailure { throwable ->
+                _state.value = _state.value.copy(
+                    uiState = UiState.Failure
+                )
+            }
+        }
     }
 
     fun toggleItemChecked(index: Int, isAll: Boolean = false, selectState: Boolean = true) {
@@ -40,35 +68,4 @@ class MyMenuViewModel : ViewModel() {
             )
         }
     }
-
-    private val menuDummy: PersistentList<MyMenuModel> = persistentListOf(
-        MyMenuModel(
-            menuName = "바나나 샷 라떼",
-            menuPrice = 5500,
-            menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
-            menuOption = "아이스/라지/블랙그라운드/포장",
-            isChecked = false
-        ),
-        MyMenuModel(
-            menuName = "바나나 샷 아메리카노",
-            menuPrice = 5800,
-            menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
-            menuOption = "/블랙그라운드/포장",
-            isChecked = false
-        ),
-        MyMenuModel(
-            menuName = "바나나 샷 아메리카노",
-            menuPrice = 5800,
-            menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
-            menuOption = "/블랙그라운드/포장",
-            isChecked = false
-        ),
-        MyMenuModel(
-            menuName = "바나나 샷 아메리카노",
-            menuPrice = 5800,
-            menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
-            menuOption = "/블랙그라운드/포장",
-            isChecked = false
-        ),
-    )
 }
