@@ -37,6 +37,7 @@ fun MainScreen(
                         paddingValues = paddingValue,
                         navigateUp = navigator::navigateUp,
                     )
+
                     detailNavGraph(
                         paddingValues = paddingValue,
                         navigateUp = navigator::navigateUp,

@@ -31,6 +31,7 @@ class MainNavigation(
     fun navigateToMyMenu(navOptions: NavOptions? = null) {
         navController.navigateMyMenu(navOptions = navOptions)
     }
+
     fun navigateToDetail(navOptions: NavOptions? = null) {
         navController.navigateDetail(navOptions = navOptions)
     }
