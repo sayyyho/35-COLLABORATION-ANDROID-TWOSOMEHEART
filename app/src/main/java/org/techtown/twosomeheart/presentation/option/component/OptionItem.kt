@@ -41,6 +41,7 @@ import org.techtown.twosomeheart.ui.theme.White
 fun OptionItem(
     option: Option,
     optionType: OptionType,
+    optionText: String,
     updateExpandedState: () -> Unit,
     modifier: Modifier = Modifier,
     optionTypeQuantity: Int = 0,
@@ -108,7 +109,7 @@ fun OptionItem(
 
             Text(
                 text = if (isOptionIncreased) {
-                    optionType.type.joinToString(separator = ", ") { "${optionType.type.first().first}추가 x${optionTypeQuantity}" } //TODO: 리팩토링 -> 일부러 문자열 추출 x
+                    optionText//TODO: 리팩토링 -> 일부러 문자열 추출 x
                 } else "",
                 style = TwosomeHeartTypography.caption3R10,
                 color = Gray70,
@@ -160,6 +161,7 @@ fun OptionItemPreview() {
                 optionType = OptionType.SHOT,
                 isExpanded = false,
                 updateExpandedState = { },
+                optionText = ""
             )
 
             OptionItem(
@@ -168,6 +170,7 @@ fun OptionItemPreview() {
                 optionTypeQuantity = 1,
                 isExpanded = true,
                 updateExpandedState = { },
+                optionText = ""
             )
         }
     }
