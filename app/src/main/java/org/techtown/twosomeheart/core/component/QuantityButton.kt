@@ -36,7 +36,7 @@ fun ModalQuantityButton(
     onClickMinusButton: () -> Unit,
     onClickPlusButton: () -> Unit,
     modifier: Modifier = Modifier,
-    ammount: Int = 1,
+    amount: Int = 1,
 ) {
     Row(
         modifier = modifier
@@ -47,7 +47,12 @@ fun ModalQuantityButton(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Box(
-            modifier = Modifier.noRippleClickable(onClick = onClickMinusButton)
+            modifier = Modifier
+                .noRippleClickable(
+                    onClick = {
+                        if(amount == 1) return@noRippleClickable else onClickMinusButton()
+                    }
+                )
         ) {
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_modal_minus),
@@ -67,7 +72,7 @@ fun ModalQuantityButton(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = ammount.toString(),
+                text = amount.toString(),
                 color = Black,
                 style = TwosomeHeartTypography.body1B14Tight
             )
@@ -93,7 +98,7 @@ fun OptionQuantityButton(
     onClickMinusButton: () -> Unit,
     onClickPlusButton: () -> Unit,
     modifier: Modifier = Modifier,
-    ammount: Int = 0,
+    amount: Int = 0,
 ) {
     Row(
         modifier = modifier
@@ -106,12 +111,12 @@ fun OptionQuantityButton(
         Box(
             modifier = Modifier.noRippleClickable(
                 onClick = {
-                    if (ammount == 0) else onClickMinusButton()
+                    if (amount == 0) return@noRippleClickable else onClickMinusButton()
                 }
             )
         ) {
             Icon(
-                imageVector = if (ammount == 0) ImageVector.vectorResource(id = R.drawable.ic_option_more_minus_disable) else ImageVector.vectorResource(
+                imageVector = if (amount == 0) ImageVector.vectorResource(id = R.drawable.ic_option_more_minus_disable) else ImageVector.vectorResource(
                     id = R.drawable.ic_option_more_minus_able
                 ),
                 contentDescription = stringResource(R.string.minus),
@@ -130,7 +135,7 @@ fun OptionQuantityButton(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = ammount.toString(),
+                text = amount.toString(),
                 color = Black,
                 style = TwosomeHeartTheme.typography.caption1M12
             )
@@ -169,7 +174,7 @@ fun QuantityButtonPreview() {
             OptionQuantityButton(
                 onClickMinusButton = {},
                 onClickPlusButton = {},
-                ammount = 1
+                amount = 1
             )
         }
     }

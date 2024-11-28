@@ -27,6 +27,18 @@
     <string name="menu_status_new">New</string>
     <string name="menu_status_best">Best</string>
 
+    //option
+    <string name="option_reset">초기화</string>
+    <string name="option_select">선택하기</string>
+    <string name="option_personal_option">퍼스널 옵션</string>
+    <string name="option_close">닫기</string>
+    <string name="option_expand_button">expand button</string>
+    <string name="option_density">농도</string>
+    <string name="option_normal">기본</string>
+    <string name="option_lightly">연하게</string>
+    <string name="option_plus">"+ "</string>
+    <string name="option_blank" />
+
     // my menu view
     <string name="my_menu_dialog_title">선택된 상품을 My 투썸에서 삭제할까요?</string>
     <string name="my_menu_all_select_title">전체선택</string>
@@ -41,7 +53,8 @@
     <string name="my_menu_order_price">주문 금액</string>
     <string name="my_menu_navigate_text">My 투썸</string>
 
-  //menu detail view
+ 
+    //menu detail view
     <string name="menu_detail_nutrition_button">제품 영양 정보 버튼</string>
     <string name="menu_detail_nutrition_title_text">제품 영양 정보</string>
     <string name="menu_detail_dot_nutrition_warning">제품 영양 정보 구분점</string>
@@ -52,4 +65,25 @@
     <string name="menu_detail_allergy_title_text">알레르기 유발요인</string>
     <string name="menu_detail_order_text">주문하기</string>
     <string name="menu_detail_image">메뉴 상세보기 이미지</string>
+
+
+    // menu detail modal view
+    <string name ="menu_detail_modal_temperature_text">온도</string>
+    <string name ="menu_detail_modal_size_text">사이즈</string>
+    <string name ="menu_detail_modal_size_regular_text">레귤러 (325ml)</string>
+    <string name ="menu_detail_modal_size_large_text">라지 (425ml)</string>
+    <string name ="menu_detail_modal_pickup_text">픽업방식</string>
+    <string name ="menu_detail_modal_pickup_togo_text">일회용컵</string>
+    <string name ="menu_detail_modal_pickup_forhere_text">머그컵</string>
+    <string name ="menu_detail_modal_pickup_caution">픽업방식 주의사항</string>
+    <string name ="menu_detail_modal_coffeebean_text">원두</string>
+    <string name ="menu_detail_modal_coffeebean_caution">원두 주의사항</string>
+    <string name ="menu_detail_modal_personal_cup_checkbox">개인컵 사용 체크박스</string>
+    <string name ="menu_detail_modal_personal_cup_text">개인컵 사용</string>
+    <string name ="menu_detail_modal_personal_cup_price_text">-300원</string>
+    <string name ="menu_detail_modal_personal_cup_caution">개인컵 사용 안내</string>
+    <string name ="menu_detail_modal_personal_option">퍼스널 옵션</string>
+    <string name ="menu_detail_modal_shop">장바구니</string>
+    <string name ="menu_detail_modal_bar">모달 바텀 버튼</string>
+
 </resources>
