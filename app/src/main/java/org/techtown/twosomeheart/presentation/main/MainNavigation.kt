@@ -10,12 +10,12 @@ import org.techtown.twosomeheart.presentation.detail.navigation.navigateDetail
 import org.techtown.twosomeheart.presentation.dummy.navigation.navigateDummy
 import org.techtown.twosomeheart.presentation.menu.navigation.Menu
 import org.techtown.twosomeheart.presentation.menu.navigation.navigateMenu
-import org.techtown.twosomeheart.presentation.mymenu.navigation.MyMenu
 import org.techtown.twosomeheart.presentation.mymenu.navigation.navigateMyMenu
+import org.techtown.twosomeheart.presentation.option.navigation.navigateOption
 
 class MainNavigation(
     val navController: NavHostController,
-    val startDestination: Route = MyMenu
+    val startDestination: Route = Menu
 ) {
     fun navigateUp() {
         navController.navigateUp()
@@ -28,12 +28,17 @@ class MainNavigation(
     fun navigateToMenu(navOptions: NavOptions? = null) {
         navController.navigateMenu(navOptions = navOptions)
     }
+
     fun navigateToMyMenu(navOptions: NavOptions? = null) {
         navController.navigateMyMenu(navOptions = navOptions)
     }
 
-    fun navigateToDetail(navOptions: NavOptions? = null) {
-        navController.navigateDetail(navOptions = navOptions)
+    fun navigateToDetail(menuId: Long, navOptions: NavOptions? = null) {
+        navController.navigateDetail(menuId = menuId, navOptions = navOptions)
+    }
+
+    fun navigateToOption(navOptions: NavOptions? = null) {
+        navController.navigateOption(navOptions = navOptions)
     }
 }
 

@@ -70,9 +70,11 @@ import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun DetailRoute(
+    menuId: Long,
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
     navigateToMyMenu: () -> Unit,
+    navigateToOption: () -> Unit,
     viewModel: DetailViewModel = viewModel()
 ) {
     val detailState by viewModel.detailState.collectAsStateWithLifecycle()
@@ -80,7 +82,7 @@ fun DetailRoute(
     val modalState by viewModel.detailModalState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        viewModel.getMenuDetail()
+        viewModel.getMenuDetail(menuId)
     }
 
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -126,7 +128,8 @@ fun DetailRoute(
         updateMenuPrice = viewModel::updateLikePrice,
         updateIsEnabled = viewModel::updateIsEnabled,
         updateIsShowBottomSheet = viewModel::updateIsShowBottomSheet,
-        snackBarHost = snackBarHost
+        snackBarHost = snackBarHost,
+        onOptionButtonClick = navigateToOption
     )
 
 }
@@ -155,6 +158,7 @@ fun DetailScreen(
     modifier: Modifier = Modifier,
     isEnabled: Boolean = false,
     isShowBottomSheet: Boolean = false,
+    onOptionButtonClick: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
     val coroutineScope = rememberCoroutineScope()
@@ -269,7 +273,8 @@ fun DetailScreen(
                             onPersonalCupButtonClick = { isPersonalCup ->
                                 onPersonalCupButtonClick(isPersonalCup)
                             },
-                            isEnabled = isEnabled
+                            isEnabled = isEnabled,
+                            onOptionButtonClick = { onOptionButtonClick() }
                         )
                     }
 
@@ -287,6 +292,8 @@ fun DetailScreen(
                         menuName = detailState.data.menuName,
                         menuDescription = detailState.data.menuDescription,
                         menuPrice = detailState.data.menuPrice,
+                        menuCaution = detailState.data.menuCaution,
+                        menuAllergy = detailState.data.menuAllergy
                     )
 
                     HorizontalDivider(
@@ -406,7 +413,8 @@ fun DetailScreenPreview() {
             updateMenuPrice = { },
             updateIsEnabled = { },
             snackBarHost = SnackbarHostState(),
-            updateIsShowBottomSheet = {}
+            updateIsShowBottomSheet = {},
+            onOptionButtonClick = {}
         )
     }
 }

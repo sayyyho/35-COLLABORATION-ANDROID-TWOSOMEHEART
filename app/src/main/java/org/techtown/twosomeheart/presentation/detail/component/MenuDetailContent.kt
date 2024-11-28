@@ -24,8 +24,13 @@ fun MenuDetailContent(
     menuName: String,
     menuDescription: String,
     menuPrice: Int,
+    menuCaution : String?,
+    menuAllergy : String?,
     modifier: Modifier = Modifier
 ){
+    val cautionList = menuCaution?.split(",")?.map { it.trim() } ?: emptyList()
+    val cautionAndAllergyList = (cautionList + listOfNotNull(menuAllergy)).distinct()
+
     Column(
         modifier = modifier
             .padding(start = 16.dp)
@@ -59,12 +64,12 @@ fun MenuDetailContent(
         Row(
             horizontalArrangement = Arrangement.spacedBy(4.5.dp)
         ) {
-            // TODO: menu caution 처리 어떻게 할건지 생각
-            MenuCautionChip(text = "고카페인")
-            MenuCautionChip(
-                text = "우유",
-                isAllergen = true
-            )
+            cautionAndAllergyList.forEach { item ->
+                MenuCautionChip(
+                    text = item,
+                    isAllergen = (menuAllergy == item)
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(22.dp))

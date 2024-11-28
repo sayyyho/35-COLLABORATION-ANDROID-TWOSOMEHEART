@@ -22,7 +22,7 @@ import org.techtown.twosomeheart.presentation.detail.model.PickUpType
 import org.techtown.twosomeheart.presentation.detail.model.SizeType
 import org.techtown.twosomeheart.presentation.detail.model.TemperatureType
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel : ViewModel() {
 
     private val _detailState = MutableStateFlow(DetailState())
     val detailState: StateFlow<DetailState>
@@ -35,10 +35,10 @@ class DetailViewModel: ViewModel() {
     private var _sideEffect = MutableSharedFlow<DetailModalSideEffect>()
     val sideEffect = _sideEffect.asSharedFlow()
 
-    fun getMenuDetail() {
+    fun getMenuDetail(menuId: Long) {
         viewModelScope.launch {
             runCatching {
-                twosomeService.getMenuLists()
+                twosomeService.getMenuLists(menuId = menuId)
             }.onSuccess { detail ->
                 _detailState.value = _detailState.value.copy(
                     uiState = UiState.Success(

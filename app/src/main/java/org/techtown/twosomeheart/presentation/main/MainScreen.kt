@@ -9,8 +9,8 @@ import androidx.navigation.compose.NavHost
 import org.techtown.twosomeheart.presentation.detail.navigation.detailNavGraph
 import org.techtown.twosomeheart.presentation.dummy.navigation.dummyNavGraph
 import org.techtown.twosomeheart.presentation.menu.navigation.menuNavGraph
-import org.techtown.twosomeheart.presentation.option.navigation.optionNavGraph
 import org.techtown.twosomeheart.presentation.mymenu.navigation.myMenuNavGraph
+import org.techtown.twosomeheart.presentation.option.navigation.optionNavGraph
 
 @Composable
 fun MainScreen(
@@ -33,10 +33,14 @@ fun MainScreen(
                     menuNavGraph(
                         paddingValues = paddingValue,
                         navigateUp = navigator::navigateUp,
+                        navigateDetail = { menuId ->
+                            navigator.navigateToDetail(menuId)
+                        },
+                        navigateMyMenu = navigator::navigateToMyMenu
                     )
                     optionNavGraph(
                         paddingValues = paddingValue,
-                        navigateUp = navigator::navigateUp,
+                        navigateUp = navigator::navigateUp
                     )
                     myMenuNavGraph(
                         paddingValues = paddingValue,
@@ -45,7 +49,8 @@ fun MainScreen(
                     detailNavGraph(
                         paddingValues = paddingValue,
                         navigateUp = navigator::navigateUp,
-                        navigateToMyMenu = { /*navigator::navigateToMyMenu*/ }
+                        navigateToMyMenu = navigator::navigateToMyMenu,
+                        navigateToOption = navigator::navigateToOption
                     )
                 }
             }
