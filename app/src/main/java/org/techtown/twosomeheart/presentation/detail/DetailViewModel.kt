@@ -12,16 +12,16 @@ import org.techtown.twosomeheart.core.util.UiState
 import org.techtown.twosomeheart.data.ApiFactory.ServicePool.twosomeService
 import org.techtown.twosomeheart.presentation.detail.model.DetailModel
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel : ViewModel() {
 
     private val _state = MutableStateFlow(DetailState())
     val state: StateFlow<DetailState>
         get() = _state.asStateFlow()
 
-    fun getMenuDetail() {
+    fun getMenuDetail(menuId: Long) {
         viewModelScope.launch {
             runCatching {
-                twosomeService.getMenuLists()
+                twosomeService.getMenuLists(menuId = menuId)
             }.onSuccess { detail ->
                 _state.value = _state.value.copy(
                     uiState = UiState.Success(
