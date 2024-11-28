@@ -25,13 +25,17 @@ fun NavController.navigateDetail(
 fun NavGraphBuilder.detailNavGraph(
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
-) {
+    navigateToMyMenu: () -> Unit,
+    navigateToOption: () -> Unit,
+    ) {
     composable<Detail> { backStackEntry ->
         val menuId = backStackEntry.toRoute<Detail>()
         DetailRoute(
             paddingValues = paddingValues,
             navigateUp = navigateUp,
-            menuId = menuId.menuId
+            menuId = menuId.menuId,
+            navigateToMyMenu = navigateToMyMenu,
+            navigateToOption = navigateToOption
         )
     }
 }

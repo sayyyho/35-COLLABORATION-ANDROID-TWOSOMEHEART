@@ -53,6 +53,7 @@ fun DetailModalBottomSheet(
     onCoffeeBeanButtonClick: (CoffeeBeanType) -> Unit,
     onPickUpButtonClick: (PickUpType) -> Unit,
     onPersonalCupButtonClick: (Boolean) -> Unit,
+    onOptionButtonClick : () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = false,
 ) {
@@ -148,7 +149,7 @@ fun DetailModalBottomSheet(
                     Spacer(Modifier.height(40.dp))
 
                     PersonalOptionSelection(
-                        onClick = { },
+                        onClick = onOptionButtonClick,
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
 
@@ -185,6 +186,7 @@ fun DetailModalBottomSheetPreview() {
         onCoffeeBeanButtonClick = {},
         onPickUpButtonClick = {},
         onPersonalCupButtonClick = {},
+        onOptionButtonClick = {},
         modifier = Modifier,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     )

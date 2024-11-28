@@ -74,6 +74,7 @@ fun DetailRoute(
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
     navigateToMyMenu: () -> Unit,
+    navigateToOption: () -> Unit,
     viewModel: DetailViewModel = viewModel()
 ) {
     val detailState by viewModel.detailState.collectAsStateWithLifecycle()
@@ -127,7 +128,8 @@ fun DetailRoute(
         updateMenuPrice = viewModel::updateLikePrice,
         updateIsEnabled = viewModel::updateIsEnabled,
         updateIsShowBottomSheet = viewModel::updateIsShowBottomSheet,
-        snackBarHost = snackBarHost
+        snackBarHost = snackBarHost,
+        onOptionButtonClick = navigateToOption
     )
 
 }
@@ -156,6 +158,7 @@ fun DetailScreen(
     modifier: Modifier = Modifier,
     isEnabled: Boolean = false,
     isShowBottomSheet: Boolean = false,
+    onOptionButtonClick: () -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
     val coroutineScope = rememberCoroutineScope()
@@ -270,7 +273,8 @@ fun DetailScreen(
                             onPersonalCupButtonClick = { isPersonalCup ->
                                 onPersonalCupButtonClick(isPersonalCup)
                             },
-                            isEnabled = isEnabled
+                            isEnabled = isEnabled,
+                            onOptionButtonClick = { onOptionButtonClick() }
                         )
                     }
 
@@ -409,7 +413,8 @@ fun DetailScreenPreview() {
             updateMenuPrice = { },
             updateIsEnabled = { },
             snackBarHost = SnackbarHostState(),
-            updateIsShowBottomSheet = {}
+            updateIsShowBottomSheet = {},
+            onOptionButtonClick = {}
         )
     }
 }

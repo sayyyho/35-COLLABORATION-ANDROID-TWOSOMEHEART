@@ -144,6 +144,7 @@ fun MenuScreen(
                                 menuName = item.menuName,
                                 menuPrice = item.menuPrice,
                                 menuImage = item.menuImage,
+                                isBestMenu = item.isBestMenu,
                                 modifier = Modifier.noRippleClickable(onClick = {
                                     navigateDetail(
                                         item.menuId
