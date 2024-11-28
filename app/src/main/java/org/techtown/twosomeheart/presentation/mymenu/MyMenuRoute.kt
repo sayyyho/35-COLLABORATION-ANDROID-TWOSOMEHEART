@@ -46,6 +46,7 @@ import org.techtown.twosomeheart.presentation.mymenu.component.CustomDialog
 import org.techtown.twosomeheart.presentation.mymenu.component.MyMenuBottomSheet
 import org.techtown.twosomeheart.presentation.mymenu.component.MyMenuItem
 import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
+import org.techtown.twosomeheart.presentation.mymenu.model.SelectedSummary
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartColors
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
@@ -58,6 +59,7 @@ fun MyMenuRoute(
     viewModel: MyMenuViewModel = viewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val selectedSummary by viewModel.selectedSummary.collectAsStateWithLifecycle()
 
     LaunchedEffect(true) {
         viewModel.getMyMenu()
@@ -67,7 +69,9 @@ fun MyMenuRoute(
         paddingValues = paddingValues,
         state = state.uiState,
         navigateUp = navigateUp,
-        toggleItemChecked = viewModel::toggleItemChecked
+        toggleItemChecked = viewModel::toggleItemChecked,
+        deleteSelectedItems = viewModel::deleteSelectedItems,
+        selectedSummary = selectedSummary
     )
 }
 
@@ -77,8 +81,11 @@ fun MyMenuScreen(
     paddingValues: PaddingValues,
     state: UiState<PersistentList<MyMenuModel>>,
     navigateUp: () -> Unit,
-    toggleItemChecked: (Int, Boolean, Boolean) -> Unit
+    toggleItemChecked: (Int, Boolean, Boolean) -> Unit,
+    deleteSelectedItems: (isAll: Boolean) -> Unit,
+    selectedSummary: SelectedSummary
 ) {
+
 
     val isMyBottomSheetVisible by remember(state) {
         derivedStateOf {
@@ -113,7 +120,7 @@ fun MyMenuScreen(
                         modifier = Modifier.noRippleClickable(onClick = navigateUp)
                     )
                 },
-                text = stringResource(R.string.menu_top_bar),
+                text = stringResource(R.string.my_menu_navigate_text),
                 trailingIcon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_mymenu_plus),
@@ -123,8 +130,14 @@ fun MyMenuScreen(
             )
 
             Text(
-                text = "총 3개",
-                // TODO 서버통신 값 할당
+                text = when (state) {
+                    is UiState.Loading -> ""
+                    is UiState.Empty -> "항목이 없습니다."
+                    is UiState.Failure -> "불러오기에 실패했습니다."
+                    is UiState.Success -> {
+                        "총 ${state.data.size}개"
+                    }
+                },
                 style = TwosomeHeartTypography.caption1R12Tight,
                 color = TwosomeHeartColors.Gray90,
                 modifier = Modifier.padding(start = 16.dp, top = 23.dp)
@@ -224,8 +237,8 @@ fun MyMenuScreen(
             MyMenuBottomSheet(
                 modifier = Modifier
                     .align(Alignment.BottomCenter),
-                price = 5500,
-                count = stringResource(R.string.my_menu_select_count),
+                price = selectedSummary.totalPrice, // 선택된 총 금액 전달
+                count = selectedSummary.itemCount.toString(), // 선택된 총 개수 전달
                 place = stringResource(R.string.menu_ordered_store_name),
             )
         }
@@ -233,8 +246,9 @@ fun MyMenuScreen(
         if (isDialogVisible) {
             CustomDialog(
                 title = stringResource(R.string.my_menu_dialog_title),
-                onClickCancel = { isDialogVisible = false }, // 다이얼로그 닫기
+                onClickCancel = { isDialogVisible = false },
                 onClickConfirm = {
+                    deleteSelectedItems(isAllSelect) // 선택 여부에 따라 전체/부분 삭제
                     isDialogVisible = false
                 }
             )
@@ -251,6 +265,11 @@ fun MyMenuScreenPreview() {
             paddingValues = PaddingValues(),
             navigateUp = {},
             toggleItemChecked = { _, _, _ -> },
+            deleteSelectedItems = {},
+            selectedSummary = SelectedSummary(
+                itemCount = 0,
+                totalPrice = 0
+            ),
             state = UiState.Success(
                 persistentListOf(
                     MyMenuModel(
@@ -259,6 +278,7 @@ fun MyMenuScreenPreview() {
                         menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
                         menuOption = "아이스/라지/블랙그라운드/포장",
                         isChecked = true,
+                        id = 1,
                     ),
                     MyMenuModel(
                         menuName = "바나나 샷 아메리카노",
@@ -266,21 +286,8 @@ fun MyMenuScreenPreview() {
                         menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
                         menuOption = "아이스/라지/블랙그라운드/포장/개인컵",
                         isChecked = false,
-                    ),
-                    MyMenuModel(
-                        menuName = "바나나 샷 아메리카노",
-                        menuPrice = 5800,
-                        menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
-                        menuOption = "아이스/라지/블랙그라운드/포장/개인컵",
-                        isChecked = false,
-                    ),
-                    MyMenuModel(
-                        menuName = "바나나 샷 아메리카노",
-                        menuPrice = 5800,
-                        menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
-                        menuOption = "아이스/라지/블랙그라운드/포장/개인컵",
-                        isChecked = false,
-                    ),
+                        id = 2
+                    )
                 )
             )
         )
