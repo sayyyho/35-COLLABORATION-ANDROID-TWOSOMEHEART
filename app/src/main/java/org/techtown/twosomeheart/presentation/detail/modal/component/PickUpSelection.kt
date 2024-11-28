@@ -43,7 +43,7 @@ fun PickUpSelection(
     onClick: (PickUpType) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val selectedType = remember { mutableStateOf<PickUpType?>(null) }
+    val selectedType = remember { mutableStateOf(PickUpType.NOTHING) }
 
     Column(
         modifier = modifier
@@ -131,21 +131,20 @@ fun PickUpButton(
                 width = 1.dp,
                 color = if (isSelected) Black else Gray30,
                 shape = when (pickUpType) {
-                    PickUpType.TOGO -> {
+                    PickUpType.TOGO ->
                         RoundedCornerShape(
                             topStart = 5.dp,
                             topEnd = 0.dp,
                             bottomEnd = 0.dp,
                             bottomStart = 5.dp
                         )
-                    }
-
                     PickUpType.FORHERE -> RoundedCornerShape(
                         topStart = 0.dp,
                         topEnd = 5.dp,
                         bottomEnd = 5.dp,
                         bottomStart = 0.dp
                     )
+                    PickUpType.NOTHING -> return
                 }
             )
             .background(
@@ -164,6 +163,8 @@ fun PickUpButton(
                         bottomEnd = 5.dp,
                         bottomStart = 0.dp
                     )
+
+                    else -> return
                 }
             )
             .padding(
@@ -176,6 +177,7 @@ fun PickUpButton(
                             end = 61.dp
                         )
                     }
+
                     PickUpType.FORHERE -> {
                         PaddingValues(
                             top = 11.dp,
@@ -184,6 +186,8 @@ fun PickUpButton(
                             end = 67.dp
                         )
                     }
+
+                    else -> return
                 }
             ),
         contentAlignment = Alignment.Center
@@ -223,6 +227,8 @@ fun PickUpButton(
                         textAlign = TextAlign.Center
                     )
                 }
+
+                else -> return
             }
         }
     }

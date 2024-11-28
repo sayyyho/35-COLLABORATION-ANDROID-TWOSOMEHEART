@@ -43,7 +43,7 @@ fun PersonalCupSelection(
             .padding(horizontal = 16.dp)
     ) {
         Icon(
-            imageVector = if (isPersonalCup.value) ImageVector.vectorResource(R.drawable.ic_modal_checkbox_select) else ImageVector.vectorResource(R.drawable.ic_checkbox_diselect),
+            imageVector = if (isPersonalCup.value) ImageVector.vectorResource(R.drawable.ic_modal_checkbox_select) else ImageVector.vectorResource(R.drawable.ic_modal_checkbox_diselect),
             contentDescription = stringResource(R.string.menu_detail_modal_personal_cup_checkbox),
             tint = Color.Unspecified,
             modifier = Modifier.noRippleClickable {

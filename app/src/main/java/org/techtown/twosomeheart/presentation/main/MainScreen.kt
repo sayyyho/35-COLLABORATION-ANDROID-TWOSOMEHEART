@@ -49,6 +49,7 @@ fun MainScreen(
                     detailNavGraph(
                         paddingValues = paddingValue,
                         navigateUp = navigator::navigateUp,
+                        navigateToMyMenu = { /*navigator::navigateToMyMenu*/ }
                     )
                 }
             }

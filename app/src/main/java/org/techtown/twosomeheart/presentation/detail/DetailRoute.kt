@@ -3,33 +3,49 @@ package org.techtown.twosomeheart.presentation.detail
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarData
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import kotlinx.collections.immutable.toPersistentList
+import kotlinx.coroutines.launch
 import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.BlackBottomButton
 import org.techtown.twosomeheart.core.component.Topbar
@@ -38,10 +54,18 @@ import org.techtown.twosomeheart.core.util.UiState
 import org.techtown.twosomeheart.presentation.detail.component.MenuDetailAllergyText
 import org.techtown.twosomeheart.presentation.detail.component.MenuDetailContent
 import org.techtown.twosomeheart.presentation.detail.component.MenuNutritionColumn
+import org.techtown.twosomeheart.presentation.detail.modal.DetailModalSideEffect
 import org.techtown.twosomeheart.presentation.detail.modal.component.DetailModalBottomSheet
+import org.techtown.twosomeheart.presentation.detail.model.CoffeeBeanType
 import org.techtown.twosomeheart.presentation.detail.model.DetailModel
+import org.techtown.twosomeheart.presentation.detail.model.PickUpType
+import org.techtown.twosomeheart.presentation.detail.model.SizeType
+import org.techtown.twosomeheart.presentation.detail.model.TemperatureType
 import org.techtown.twosomeheart.ui.theme.Gray20
+import org.techtown.twosomeheart.ui.theme.Gray90
+import org.techtown.twosomeheart.ui.theme.Red30
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
+import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
@@ -49,35 +73,111 @@ fun DetailRoute(
     menuId: Long,
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
+    navigateToMyMenu: () -> Unit,
     viewModel: DetailViewModel = viewModel()
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+    val detailState by viewModel.detailState.collectAsStateWithLifecycle()
+
+    val modalState by viewModel.detailModalState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.getMenuDetail(menuId)
     }
 
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val context = LocalContext.current
+    val snackBarHost = remember { SnackbarHostState() }
+
+    LaunchedEffect(viewModel.sideEffect, lifecycleOwner) {
+        viewModel.sideEffect.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
+            .collect { sideEffect ->
+                when (sideEffect) {
+                    is DetailModalSideEffect.SnackBar -> {
+                        snackBarHost.currentSnackbarData?.dismiss()
+                        snackBarHost.showSnackbar(
+                            message = context.getString(sideEffect.message),
+                            actionLabel = context.getString(R.string.menu_detail_modal_snackbar_list),
+                            duration = SnackbarDuration.Short
+                        )
+                    }
+
+                    DetailModalSideEffect.NavigateToMyMenu -> navigateToMyMenu()
+                    DetailModalSideEffect.OnClickOrderButton -> viewModel.updateIsShowBottomSheet()
+                }
+            }
+    }
+
     DetailScreen(
         paddingValues = paddingValues,
         navigateUp = navigateUp,
-        state = state.uiState,
-        onStarButtonClick = {}
+        navigateToMyMenu = viewModel::snackBarListActionButtonClick,
+        detailState = detailState.uiState,
+        modalUiState = modalState.uiState,
+        onStarButtonClick = viewModel::onStarButtonClick,
+        onTemperatureButtonClick = viewModel::onTempatureButtonClick,
+        onSizeButtonClick = viewModel::onSizeButtonClick,
+        onCoffeeBeanButtonClick = viewModel::onCoffeeBeanButtonClick,
+        onPickUpButtonClick = viewModel::onPickUpButtonClick,
+        onPersonalCupButtonClick = viewModel::onPersonalCupButtonClick,
+        onOrderButtonClick = viewModel::onClickOrderButton,
+        isEnabled = modalState.isEnabled,
+        isShowBottomSheet = detailState.isShowBottomSheet,
+        updateMenuId = viewModel::updateLikeMenuId,
+        updateMenuName = viewModel::updateLikeName,
+        updateMenuPrice = viewModel::updateLikePrice,
+        updateIsEnabled = viewModel::updateIsEnabled,
+        updateIsShowBottomSheet = viewModel::updateIsShowBottomSheet,
+        snackBarHost = snackBarHost
     )
 
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
-    state: UiState<DetailModel>,
+    navigateToMyMenu: () -> Unit,
+    detailState: UiState<DetailModel>,
+    modalUiState: UiState<Int>,
     onStarButtonClick: () -> Unit,
-    modifier: Modifier = Modifier
+    onTemperatureButtonClick: (TemperatureType) -> Unit,
+    onSizeButtonClick: (SizeType) -> Unit,
+    onCoffeeBeanButtonClick: (CoffeeBeanType) -> Unit,
+    onPickUpButtonClick: (PickUpType) -> Unit,
+    onPersonalCupButtonClick: (Boolean) -> Unit,
+    onOrderButtonClick: () -> Unit,
+    updateMenuId: (Long) -> Unit,
+    updateMenuName: (String) -> Unit,
+    updateMenuPrice: (Int) -> Unit,
+    updateIsEnabled: () -> Unit,
+    updateIsShowBottomSheet: () -> Unit,
+    snackBarHost: SnackbarHostState,
+    modifier: Modifier = Modifier,
+    isEnabled: Boolean = false,
+    isShowBottomSheet: Boolean = false,
 ) {
+    val sheetState = rememberModalBottomSheetState()
+    val coroutineScope = rememberCoroutineScope()
 
-    val showBottomSheet =  remember { mutableStateOf(false) }
+    LaunchedEffect(modalUiState) {
+        snapshotFlow { modalUiState }
+            .collect { state ->
+                if (state is UiState.Success) {
+                    updateIsShowBottomSheet()
+                }
+            }
+    }
 
     Scaffold(
+        snackbarHost = {
+            SnackbarHost(hostState = snackBarHost) { snackbarData ->
+                DetailModalSnackbar(
+                    snackbarData = snackbarData,
+                    navigateToMyMenu = navigateToMyMenu
+                )
+            }
+        },
         modifier = modifier
             .background(White)
             .padding(paddingValues)
@@ -115,7 +215,7 @@ fun DetailScreen(
                     .fillMaxWidth()
                     .padding(16.dp)
                     .noRippleClickable {
-                        showBottomSheet.value = true
+                        onOrderButtonClick()
                     }
             )
         }
@@ -127,7 +227,7 @@ fun DetailScreen(
                 .verticalScroll(rememberScrollState())
                 .fillMaxWidth()
         ) {
-            when (state) {
+            when (detailState) {
                 is UiState.Loading -> {}
 
                 is UiState.Empty -> {}
@@ -136,20 +236,46 @@ fun DetailScreen(
 
                 is UiState.Success -> {
 
-                    if(showBottomSheet.value){
+                    updateMenuId(detailState.data.menuId)
+                    updateMenuName(detailState.data.menuName)
+                    updateMenuPrice(detailState.data.menuPrice)
+
+                    if(isShowBottomSheet){
+
                         DetailModalBottomSheet(
-                            menuName = state.data.menuName,
+                            menuName = detailState.data.menuName,
+                            price = detailState.data.menuPrice,
+                            sheetState = sheetState,
+                            onDismissRequest = {
+                                coroutineScope.launch { sheetState.hide() }
+                            },
                             onStarButtonClick = {
                                 onStarButtonClick()
                             },
-                            onDismissRequest = {
-                                showBottomSheet.value = false
-                            }
+                            onTemperatureButtonClick = { temperatureType ->
+                                onTemperatureButtonClick(temperatureType)
+                                updateIsEnabled()
+                            },
+                            onSizeButtonClick = { sizeType ->
+                                onSizeButtonClick(sizeType)
+                                updateIsEnabled()
+                            },
+                            onCoffeeBeanButtonClick = { coffeeBeanType ->
+                                onCoffeeBeanButtonClick(coffeeBeanType)
+                            },
+                            onPickUpButtonClick = { pickUpType ->
+                                onPickUpButtonClick(pickUpType)
+                                updateIsEnabled()
+                            },
+                            onPersonalCupButtonClick = { isPersonalCup ->
+                                onPersonalCupButtonClick(isPersonalCup)
+                            },
+                            isEnabled = isEnabled
                         )
                     }
 
                     AsyncImage(
-                        model = state.data.menuImageUrl,
+                        model = detailState.data.menuImageUrl,
                         contentDescription = stringResource(R.string.menu_detail_image),
                         modifier = Modifier.fillMaxWidth(),
                         contentScale = ContentScale.Crop
@@ -158,12 +284,12 @@ fun DetailScreen(
                     Spacer(modifier = Modifier.height(26.dp))
 
                     MenuDetailContent(
-                        isBestMenu = state.data.menuStatus == "BEST",
-                        menuName = state.data.menuName,
-                        menuDescription = state.data.menuDescription,
-                        menuPrice = state.data.menuPrice,
-                        menuCaution = state.data.menuCaution,
-                        menuAllergy = state.data.menuAllergy
+                        isBestMenu = detailState.data.menuStatus == "BEST",
+                        menuName = detailState.data.menuName,
+                        menuDescription = detailState.data.menuDescription,
+                        menuPrice = detailState.data.menuPrice,
+                        menuCaution = detailState.data.menuCaution,
+                        menuAllergy = detailState.data.menuAllergy
                     )
 
                     HorizontalDivider(
@@ -172,18 +298,70 @@ fun DetailScreen(
                     )
 
                     MenuNutritionColumn(
-                        nutritionText = state.data.menuNutrition
+                        nutritionText = detailState.data.menuNutrition
                     )
 
-                    if (state.data.menuAllergy != null) {
+                    if (detailState.data.menuAllergy != null) {
                         MenuDetailAllergyText(
-                            allergyText = state.data.menuAllergy
+                            allergyText = detailState.data.menuAllergy
                         )
 
                         Spacer(modifier = Modifier.height(58.dp))
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun DetailModalSnackbar(
+    snackbarData: SnackbarData,
+    navigateToMyMenu: () -> Unit
+){
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                bottom = 23.dp,
+                start = 16.dp,
+                end = 16.dp
+            )
+            .background(
+                color = Gray90,
+                shape = RoundedCornerShape(7.dp)
+            )
+    ) {
+        Text(
+            text = snackbarData.visuals.message,
+            modifier = Modifier
+                .weight(1f)
+                .padding(
+                    top = 15.5.dp,
+                    bottom = 15.5.dp,
+                    start = 15.dp
+                ),
+            style = TwosomeHeartTypography.body1R14,
+            color = White
+        )
+
+        snackbarData.visuals.actionLabel?.let { actionLabel ->
+            Text(
+                text = actionLabel,
+                style = TwosomeHeartTypography.body1B14,
+                color = Red30,
+                modifier = Modifier
+                    .padding(
+                        top = 15.53.dp,
+                        bottom = 15.47.dp,
+                        end = 14.68.dp
+                    )
+                    .noRippleClickable {
+                        navigateToMyMenu()
+                        snackbarData.performAction()
+                    }
+            )
         }
     }
 }
@@ -195,7 +373,8 @@ fun DetailScreenPreview() {
         DetailScreen(
             paddingValues = PaddingValues(),
             navigateUp = {},
-            state = UiState.Success(
+            navigateToMyMenu = {},
+            detailState = UiState.Success(
                 DetailModel(
                     menuId = 1,
                     menuName = "바나나 샷 라떼",
@@ -217,7 +396,20 @@ fun DetailScreenPreview() {
                     menuImageUrl = "https://private-user-images.githubusercontent.com/69308068/389300533-8d353883-fb4b-4608-b0b4-24d2bc074133.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzI1MzI2OTksIm5iZiI6MTczMjUzMjM5OSwicGF0aCI6Ii82OTMwODA2OC8zODkzMDA1MzMtOGQzNTM4ODMtZmI0Yi00NjA4LWIwYjQtMjRkMmJjMDc0MTMzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDExMjUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMTI1VDEwNTk1OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMwZTViNmNmMDUwODlmYjRiNGUzZDYzYmY5MmQxOTE0ZTkyMzI3ODJkNDk2MjljZjZjMTRkODE1MzNiM2JkMzkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.BcvGmMQweWhlRzbTBNEGhu9K6WTQOUE6Fkntktloog0"
                 )
             ),
-            onStarButtonClick = {}
+            modalUiState = UiState.Success(1),
+            onStarButtonClick = { },
+            onTemperatureButtonClick = { },
+            onSizeButtonClick = { },
+            onCoffeeBeanButtonClick = { },
+            onPickUpButtonClick = { },
+            onPersonalCupButtonClick = { },
+            onOrderButtonClick = {},
+            updateMenuId = { },
+            updateMenuName = { },
+            updateMenuPrice = { },
+            updateIsEnabled = { },
+            snackBarHost = SnackbarHostState(),
+            updateIsShowBottomSheet = {}
         )
     }
 }

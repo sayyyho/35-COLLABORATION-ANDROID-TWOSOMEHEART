@@ -1,5 +1,6 @@
 package org.techtown.twosomeheart.presentation.detail.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -13,6 +14,7 @@ import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.Gray80
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
+import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun MenuDetailAllergyText(
@@ -22,6 +24,7 @@ fun MenuDetailAllergyText(
     Column(
         modifier = modifier
             .padding(start = 16.dp)
+            .background(White)
     ) {
         Text(
             text = stringResource(R.string.menu_detail_allergy_title_text),
