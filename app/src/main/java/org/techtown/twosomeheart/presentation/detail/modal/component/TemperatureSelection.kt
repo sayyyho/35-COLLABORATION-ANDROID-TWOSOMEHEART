@@ -40,9 +40,9 @@ import org.techtown.twosomeheart.ui.theme.White
 @Composable
 fun TemperatureSelection(
     onClick: (TemperatureType) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    val selectedType = remember { mutableStateOf<TemperatureType?>(null) }
+    val selectedType = remember { mutableStateOf(TemperatureType.NOTHING) }
 
     Column(
         modifier = modifier
@@ -131,6 +131,8 @@ fun TemperatureButton(
                         bottomEnd = 5.dp,
                         bottomStart = 0.dp
                     )
+
+                    else -> return
                 }
             )
             .background(
@@ -138,6 +140,7 @@ fun TemperatureButton(
                     when (temperatureType) {
                         TemperatureType.HOT -> Red40
                         TemperatureType.ICE -> Blue10
+                        else -> return
                     }
                 } else {
                     White
@@ -155,6 +158,7 @@ fun TemperatureButton(
                         bottomEnd = 5.dp,
                         bottomStart = 0.dp
                     )
+                    else -> return
                 }
             )
             .padding(
@@ -175,6 +179,7 @@ fun TemperatureButton(
                             end = 64.dp
                         )
                     }
+                    else -> return
                 }
             ),
         contentAlignment = Alignment.Center

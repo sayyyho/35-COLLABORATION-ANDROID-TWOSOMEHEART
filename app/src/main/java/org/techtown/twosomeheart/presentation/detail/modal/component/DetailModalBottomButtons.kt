@@ -107,9 +107,7 @@ fun ModalStarButton(
                     horizontal = 18.dp
                 )
                 .noRippleClickable {
-                    if(isEnabled) {
-                        onClick()
-                    }
+                   onClick()
                 }
         )
     }

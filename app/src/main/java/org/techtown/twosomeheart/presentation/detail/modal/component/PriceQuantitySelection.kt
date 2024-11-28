@@ -32,7 +32,6 @@ fun PriceQuantitySelection(
         modifier = modifier
             .fillMaxWidth()
             .background(White)
-            .padding(horizontal = 16.dp)
     ) {
 
         HorizontalDivider(
@@ -43,6 +42,7 @@ fun PriceQuantitySelection(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(horizontal = 16.dp)
         ) {
             Text(
                 text = price,

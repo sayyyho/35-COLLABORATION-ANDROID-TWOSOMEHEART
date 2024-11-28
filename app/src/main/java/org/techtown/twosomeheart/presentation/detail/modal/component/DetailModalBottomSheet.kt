@@ -15,9 +15,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +29,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import org.techtown.twosomeheart.R
+import org.techtown.twosomeheart.core.util.PriceFormatter.formatPriceWon
+import org.techtown.twosomeheart.presentation.detail.model.CoffeeBeanType
+import org.techtown.twosomeheart.presentation.detail.model.PickUpType
+import org.techtown.twosomeheart.presentation.detail.model.SizeType
+import org.techtown.twosomeheart.presentation.detail.model.TemperatureType
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
 import org.techtown.twosomeheart.ui.theme.White
@@ -36,11 +44,18 @@ import org.techtown.twosomeheart.ui.theme.White
 @Composable
 fun DetailModalBottomSheet(
     menuName: String,
-    onStarButtonClick: () -> Unit,
+    price: Int,
+    sheetState: SheetState,
     onDismissRequest: () -> Unit,
-    modifier: Modifier = Modifier
+    onStarButtonClick: () -> Unit,
+    onTemperatureButtonClick: (TemperatureType) -> Unit,
+    onSizeButtonClick: (SizeType) -> Unit,
+    onCoffeeBeanButtonClick: (CoffeeBeanType) -> Unit,
+    onPickUpButtonClick: (PickUpType) -> Unit,
+    onPersonalCupButtonClick: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    isEnabled: Boolean = false,
 ) {
-    val sheetState = rememberModalBottomSheetState()
 
     ModalBottomSheet(
         onDismissRequest = {
@@ -92,43 +107,50 @@ fun DetailModalBottomSheet(
                 item {
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    TemperatureSelection(onClick = {
-
-                    })
+                    TemperatureSelection(
+                        onClick = { temperatureType ->
+                            onTemperatureButtonClick(temperatureType)
+                        }
+                    )
 
                     Spacer(Modifier.height(16.dp))
 
-                    SizeSelection(onClick = {
-
-                    })
-
-                    Spacer(Modifier.height(24.dp))
-
-                    CoffeeBeanSelection(onClick = {
-
-                    })
+                    SizeSelection(
+                        onClick = { sizeType ->
+                            onSizeButtonClick(sizeType)
+                        }
+                    )
 
                     Spacer(Modifier.height(24.dp))
 
-                    PickUpSelection(onClick = {
+                    CoffeeBeanSelection(
+                        onClick = { coffeeBeanType ->
+                            onCoffeeBeanButtonClick(coffeeBeanType)
+                        }
+                    )
 
-                    })
+                    Spacer(Modifier.height(24.dp))
+
+                    PickUpSelection(
+                        onClick = { pickUpType ->
+                            onPickUpButtonClick(pickUpType)
+                        }
+                    )
 
                     Spacer(Modifier.height(16.dp))
 
                     PersonalCupSelection(
-                        onClick = {
-
+                        onClick = { isPersonalCup ->
+                            onPersonalCupButtonClick(isPersonalCup)
                         }
                     )
 
                     Spacer(Modifier.height(40.dp))
 
                     PersonalOptionSelection(
-                        onClick = {},
+                        onClick = { },
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
-
 
                 }
             }
@@ -137,10 +159,10 @@ fun DetailModalBottomSheet(
             Spacer(modifier = Modifier.height(24.dp))
 
             DetailModalBottomBar(
-                price = "1,000원",
+                price = formatPriceWon(price),
                 onQuantityButtonClick = {},
                 onStarButtonClick = { onStarButtonClick() },
-                isEnabled = true,
+                isEnabled = isEnabled,
                 modifier = modifier
                     .fillMaxWidth()
             )
@@ -149,12 +171,21 @@ fun DetailModalBottomSheet(
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun DetailModalBottomSheetPreview() {
     DetailModalBottomSheet(
         menuName = "바나나 샷 라떼",
+        price = 5500,
         onStarButtonClick = {},
-        onDismissRequest = {}
+        onDismissRequest = {},
+        onTemperatureButtonClick = {},
+        onSizeButtonClick = {},
+        onCoffeeBeanButtonClick = {},
+        onPickUpButtonClick = {},
+        onPersonalCupButtonClick = {},
+        modifier = Modifier,
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     )
 }

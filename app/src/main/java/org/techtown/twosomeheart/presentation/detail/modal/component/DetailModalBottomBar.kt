@@ -12,7 +12,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.techtown.twosomeheart.ui.theme.White
 
-
 @Composable
 fun DetailModalBottomBar(
     price: String,

@@ -31,7 +31,6 @@ import androidx.compose.ui.zIndex
 import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.extension.noRippleClickable
 import org.techtown.twosomeheart.presentation.detail.model.SizeType
-import org.techtown.twosomeheart.presentation.detail.model.TemperatureType
 import org.techtown.twosomeheart.ui.theme.Black
 import org.techtown.twosomeheart.ui.theme.Gray30
 import org.techtown.twosomeheart.ui.theme.Gray60
@@ -44,7 +43,7 @@ fun SizeSelection(
     onClick: (SizeType) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val selectedType = remember { mutableStateOf<SizeType?>(null) }
+    val selectedType = remember { mutableStateOf(SizeType.NOTHING) }
 
     Column(
         modifier = modifier
@@ -136,6 +135,7 @@ fun SizeButton(
                         bottomEnd = 5.dp,
                         bottomStart = 0.dp
                     )
+                    else -> return
                 }
             )
             .background(
@@ -153,6 +153,7 @@ fun SizeButton(
                         bottomEnd = 5.dp,
                         bottomStart = 0.dp
                     )
+                    else -> return
                 }
             )
             .padding(
@@ -191,6 +192,7 @@ fun SizeButton(
                             )
                         }
                     }
+                    else -> return
                 }
             ),
         contentAlignment = Alignment.Center
@@ -228,6 +230,8 @@ fun SizeButton(
                         textAlign = TextAlign.Center
                     )
                 }
+
+                else -> return
             }
         }
     }

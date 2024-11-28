@@ -55,7 +55,7 @@ fun OptionQuantityRow(
             OptionQuantityButton(
                 onClickMinusButton = { onClickMinusButton(optionType) },
                 onClickPlusButton = { onClickPlusButton(optionType) },
-                ammount = optionTypeQuantity
+                amount = optionTypeQuantity
             )
         }
     }
