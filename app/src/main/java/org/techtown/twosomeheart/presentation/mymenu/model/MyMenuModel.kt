@@ -10,3 +10,8 @@ data class MyMenuModel(
     val isChecked: Boolean,
     val id: Long
 )
+
+data class SelectedSummary(
+    val totalPrice: Int,
+    val itemCount: Int
+)

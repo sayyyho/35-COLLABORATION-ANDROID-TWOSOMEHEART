@@ -14,8 +14,12 @@ import kotlinx.coroutines.launch
 import org.techtown.twosomeheart.core.util.UiState
 import org.techtown.twosomeheart.data.ApiFactory
 import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
+import org.techtown.twosomeheart.presentation.mymenu.model.SelectedSummary
 
 class MyMenuViewModel : ViewModel() {
+
+    private val _selectedSummary = MutableStateFlow(SelectedSummary(0, 0))
+    val selectedSummary: StateFlow<SelectedSummary> = _selectedSummary.asStateFlow()
 
     private val twosomeService by lazy { ApiFactory.ServicePool.twosomeService }
 
@@ -104,6 +108,20 @@ class MyMenuViewModel : ViewModel() {
             _state.value = currentState.copy(
                 uiState = UiState.Success(updatedList.toPersistentList())
             )
+
+            // 총 금액 및 개수 계산
+            calculateSummary()
+        }
+    }
+
+    private fun calculateSummary() {
+        val currentState = _state.value
+        if (currentState.uiState is UiState.Success) {
+            val selectedItems = currentState.uiState.data.filter { it.isChecked }
+            val totalPrice = selectedItems.sumOf { it.menuPrice }
+            val itemCount = selectedItems.size
+
+            _selectedSummary.value = SelectedSummary(totalPrice, itemCount)
         }
     }
 }

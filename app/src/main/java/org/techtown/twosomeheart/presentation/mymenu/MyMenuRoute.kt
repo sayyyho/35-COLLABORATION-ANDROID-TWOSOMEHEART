@@ -46,6 +46,7 @@ import org.techtown.twosomeheart.presentation.mymenu.component.CustomDialog
 import org.techtown.twosomeheart.presentation.mymenu.component.MyMenuBottomSheet
 import org.techtown.twosomeheart.presentation.mymenu.component.MyMenuItem
 import org.techtown.twosomeheart.presentation.mymenu.model.MyMenuModel
+import org.techtown.twosomeheart.presentation.mymenu.model.SelectedSummary
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartColors
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTheme
 import org.techtown.twosomeheart.ui.theme.TwosomeHeartTypography
@@ -58,6 +59,7 @@ fun MyMenuRoute(
     viewModel: MyMenuViewModel = viewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val selectedSummary by viewModel.selectedSummary.collectAsStateWithLifecycle()
 
     LaunchedEffect(true) {
         viewModel.getMyMenu()
@@ -68,7 +70,8 @@ fun MyMenuRoute(
         state = state.uiState,
         navigateUp = navigateUp,
         toggleItemChecked = viewModel::toggleItemChecked,
-        deleteSelectedItems = viewModel::deleteSelectedItems
+        deleteSelectedItems = viewModel::deleteSelectedItems,
+        selectedSummary = selectedSummary
     )
 }
 
@@ -79,8 +82,10 @@ fun MyMenuScreen(
     state: UiState<PersistentList<MyMenuModel>>,
     navigateUp: () -> Unit,
     toggleItemChecked: (Int, Boolean, Boolean) -> Unit,
-    deleteSelectedItems: (isAll: Boolean) -> Unit
+    deleteSelectedItems: (isAll: Boolean) -> Unit,
+    selectedSummary: SelectedSummary
 ) {
+
 
     val isMyBottomSheetVisible by remember(state) {
         derivedStateOf {
@@ -232,8 +237,8 @@ fun MyMenuScreen(
             MyMenuBottomSheet(
                 modifier = Modifier
                     .align(Alignment.BottomCenter),
-                price = 5500,
-                count = stringResource(R.string.my_menu_select_count),
+                price = selectedSummary.totalPrice, // 선택된 총 금액 전달
+                count = selectedSummary.itemCount.toString(), // 선택된 총 개수 전달
                 place = stringResource(R.string.menu_ordered_store_name),
             )
         }
@@ -261,6 +266,10 @@ fun MyMenuScreenPreview() {
             navigateUp = {},
             toggleItemChecked = { _, _, _ -> },
             deleteSelectedItems = {},
+            selectedSummary = SelectedSummary(
+                itemCount = 0,
+                totalPrice = 0
+            ),
             state = UiState.Success(
                 persistentListOf(
                     MyMenuModel(
@@ -269,7 +278,7 @@ fun MyMenuScreenPreview() {
                         menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
                         menuOption = "아이스/라지/블랙그라운드/포장",
                         isChecked = true,
-                        id = 1
+                        id = 1,
                     ),
                     MyMenuModel(
                         menuName = "바나나 샷 아메리카노",
