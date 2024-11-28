@@ -51,6 +51,8 @@
     <string name="my_menu_item_move_ic">이동 아이콘</string>
     <string name="my_menu_order_message">주문하기</string>
     <string name="my_menu_order_price">주문 금액</string>
+    <string name="my_menu_navigate_text">My 투썸</string>
+
  
     //menu detail view
     <string name="menu_detail_nutrition_button">제품 영양 정보 버튼</string>
@@ -63,6 +65,7 @@
     <string name="menu_detail_allergy_title_text">알레르기 유발요인</string>
     <string name="menu_detail_order_text">주문하기</string>
     <string name="menu_detail_image">메뉴 상세보기 이미지</string>
+
 
     // menu detail modal view
     <string name ="menu_detail_modal_temperature_text">온도</string>
