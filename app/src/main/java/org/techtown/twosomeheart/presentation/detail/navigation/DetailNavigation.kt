@@ -18,11 +18,13 @@ fun NavController.navigateDetail(
 fun NavGraphBuilder.detailNavGraph(
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
+    navigateToMyMenu: () -> Unit
 ) {
     composable<Detail> {
         DetailRoute(
             paddingValues = paddingValues,
             navigateUp = navigateUp,
+            navigateToMyMenu = navigateToMyMenu
         )
     }
 }
