@@ -48,6 +48,8 @@ import org.techtown.twosomeheart.ui.theme.White
 fun MenuRoute(
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
+    navigateDetail: (Long) -> Unit,
+    navigateMyMenu: () -> Unit,
     viewModel: MenuViewModel = viewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -59,14 +61,18 @@ fun MenuRoute(
     MenuScreen(
         paddingValues = paddingValues,
         navigateUp = navigateUp,
+        navigateDetail = navigateDetail,
+        navigateMyMenu = navigateMyMenu,
         state = state.uiState
     )
 }
 
 @Composable
 fun MenuScreen(
-    paddingValues:PaddingValues,
+    paddingValues: PaddingValues,
     navigateUp: () -> Unit,
+    navigateDetail: (Long) -> Unit,
+    navigateMyMenu: () -> Unit,
     state: UiState<PersistentList<MenuModel>>,
     modifier: Modifier = Modifier
 ) {
@@ -138,6 +144,11 @@ fun MenuScreen(
                                 menuName = item.menuName,
                                 menuPrice = item.menuPrice,
                                 menuImage = item.menuImage,
+                                modifier = Modifier.noRippleClickable(onClick = {
+                                    navigateDetail(
+                                        item.menuId
+                                    )
+                                })
                             )
                             if (index != state.data.lastIndex) {
                                 Spacer(modifier = Modifier.height(24.dp))
@@ -153,7 +164,7 @@ fun MenuScreen(
         )
 
         FloatingActionButton(
-            onClick = { },
+            onClick = navigateMyMenu,
             shape = CircleShape,
             containerColor = Red30,
             modifier = Modifier
@@ -177,25 +188,31 @@ fun MenuScreenPreview() {
         MenuScreen(
             paddingValues = PaddingValues(),
             navigateUp = {},
+            navigateDetail = {},
+            navigateMyMenu = {},
             state = UiState.Success(
                 persistentListOf(
                     MenuModel(
+                        menuId = 1,
                         menuName = "바나나 샷 라떼",
                         menuPrice = 5500,
                         menuImage = R.drawable.img_menu_banana_latte,
                     ),
                     MenuModel(
+                        menuId = 2,
                         menuName = "바나나 샷 아메리카노",
                         menuPrice = 5800,
                         menuImage = R.drawable.img_menu_banana_ameicano,
                     ),
                     MenuModel(
+                        menuId = 3,
                         menuName = "디카페인 오틀리 콜르브루",
                         menuPrice = 6300,
                         menuImage = R.drawable.img_menu_ortley_coldbrew,
                         isBestMenu = true,
                     ),
                     MenuModel(
+                        menuId = 4,
                         menuName = "레몬 아샷추",
                         menuPrice = 5500,
                         menuImage = R.drawable.img_menu_lemon_americano,

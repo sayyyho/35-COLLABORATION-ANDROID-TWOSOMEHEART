@@ -18,11 +18,15 @@ fun NavController.navigateMenu(
 fun NavGraphBuilder.menuNavGraph(
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
+    navigateDetail: (Long) -> Unit,
+    navigateMyMenu: () -> Unit
 ) {
     composable<Menu> {
         MenuRoute(
             paddingValues = paddingValues,
             navigateUp = navigateUp,
+            navigateDetail = navigateDetail,
+            navigateMyMenu = navigateMyMenu,
         )
     }
 }
