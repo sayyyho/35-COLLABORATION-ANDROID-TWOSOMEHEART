@@ -39,7 +39,7 @@ class MyMenuViewModel : ViewModel() {
                 }.toPersistentList()
 
                 _state.value = _state.value.copy(
-                    uiState = UiState.Success(favoriteList)
+                    uiState = UiState.Success(favoriteList),
                 )
             }.onFailure { throwable ->
                 _state.value = _state.value.copy(

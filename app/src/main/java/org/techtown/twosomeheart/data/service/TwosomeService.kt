@@ -1,6 +1,7 @@
 package org.techtown.twosomeheart.data.service
 
 import org.techtown.twosomeheart.data.dto.response.ResponseMenuDetailDto
+import org.techtown.twosomeheart.data.dto.response.ResponseMyMenuDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 

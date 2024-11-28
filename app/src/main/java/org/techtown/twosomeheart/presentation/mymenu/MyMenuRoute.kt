@@ -123,8 +123,14 @@ fun MyMenuScreen(
             )
 
             Text(
-                text = "총 3개",
-                // TODO 서버통신 값 할당
+                text = when (state) {
+                    is UiState.Loading -> ""
+                    is UiState.Empty -> "항목이 없습니다."
+                    is UiState.Failure -> "불러오기에 실패했습니다."
+                    is UiState.Success -> {
+                        "총 ${state.data.size}개"
+                    }
+                },
                 style = TwosomeHeartTypography.caption1R12Tight,
                 color = TwosomeHeartColors.Gray90,
                 modifier = Modifier.padding(start = 16.dp, top = 23.dp)
