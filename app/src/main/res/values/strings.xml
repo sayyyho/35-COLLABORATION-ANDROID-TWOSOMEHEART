@@ -82,5 +82,8 @@
     <string name ="menu_detail_modal_personal_option">퍼스널 옵션</string>
     <string name ="menu_detail_modal_shop">장바구니</string>
     <string name ="menu_detail_modal_bar">모달 바텀 버튼</string>
-
+    <string name ="menu_detail_modal_like_failure_duplicate">이미 저장된 메뉴입니다</string>
+    <string name ="menu_detail_modal_like_failure">오류가 발생했습니다 다시 시도해주세요</string>
+    <string name ="menu_detail_modal_like_success">즐겨 찾기에 저장되었습니다</string>
+    <string name ="menu_detail_modal_snackbar_list">목록 보기</string>
 </resources>
