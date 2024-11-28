@@ -13,9 +13,9 @@ data class ResponseMenuDetailDto(
     @Serializable
     data class MenuDetail(
         @SerialName("allergy")
-        val allergy: String,
+        val allergy: String?,
         @SerialName("caution")
-        val caution: String,
+        val caution: String?,
         @SerialName("description")
         val description: String,
         @SerialName("id")
