@@ -64,4 +64,23 @@
     <string name="menu_detail_order_text">주문하기</string>
     <string name="menu_detail_image">메뉴 상세보기 이미지</string>
 
+    // menu detail modal view
+    <string name ="menu_detail_modal_temperature_text">온도</string>
+    <string name ="menu_detail_modal_size_text">사이즈</string>
+    <string name ="menu_detail_modal_size_regular_text">레귤러 (325ml)</string>
+    <string name ="menu_detail_modal_size_large_text">라지 (425ml)</string>
+    <string name ="menu_detail_modal_pickup_text">픽업방식</string>
+    <string name ="menu_detail_modal_pickup_togo_text">일회용컵</string>
+    <string name ="menu_detail_modal_pickup_forhere_text">머그컵</string>
+    <string name ="menu_detail_modal_pickup_caution">픽업방식 주의사항</string>
+    <string name ="menu_detail_modal_coffeebean_text">원두</string>
+    <string name ="menu_detail_modal_coffeebean_caution">원두 주의사항</string>
+    <string name ="menu_detail_modal_personal_cup_checkbox">개인컵 사용 체크박스</string>
+    <string name ="menu_detail_modal_personal_cup_text">개인컵 사용</string>
+    <string name ="menu_detail_modal_personal_cup_price_text">-300원</string>
+    <string name ="menu_detail_modal_personal_cup_caution">개인컵 사용 안내</string>
+    <string name ="menu_detail_modal_personal_option">퍼스널 옵션</string>
+    <string name ="menu_detail_modal_shop">장바구니</string>
+    <string name ="menu_detail_modal_bar">모달 바텀 버튼</string>
+
 </resources>
