@@ -38,4 +38,30 @@
     <string name="option_lightly">연하게</string>
     <string name="option_plus">"+ "</string>
     <string name="option_blank" />
+
+    // my menu view
+    <string name="my_menu_dialog_title">선택된 상품을 My 투썸에서 삭제할까요?</string>
+    <string name="my_menu_all_select_title">전체선택</string>
+    <string name="my_menu_select_delete_title">선택삭제</string>
+    <string name="my_menu_select_price">5500</string>
+    <string name="my_menu_select_count">1</string>
+    <string name="my_menu_select">선택</string>
+    <string name="my_menu_dialog_confirm">확인</string>
+    <string name="my_menu_dialog_cancel">취소</string>
+    <string name="my_menu_item_move_ic">이동 아이콘</string>
+    <string name="my_menu_order_message">주문하기</string>
+    <string name="my_menu_order_price">주문 금액</string>
+ 
+    //menu detail view
+    <string name="menu_detail_nutrition_button">제품 영양 정보 버튼</string>
+    <string name="menu_detail_nutrition_title_text">제품 영양 정보</string>
+    <string name="menu_detail_dot_nutrition_warning">제품 영양 정보 구분점</string>
+    <string name="menu_detail_nutrition_warning_text1">제품 이미지는 실제 제품과 다소 차이가 있을 수 있습니다.\n(매장 계절에 따라 대체 과일 데코레이션으로 운영될 수 있습니다.)</string>
+    <string name="menu_detail_nutrition_warning_text2">제품의 취급여부는 매장별로 상이할 수 있습니다.</string>
+    <string name="menu_detail_nutrition_warning_text3">어린이, 임산부 등 카페인 민감자는 섭취에 주의해주시기 바랍니다.</string>
+    <string name="menu_detail_top_bar">커피/음료</string>
+    <string name="menu_detail_allergy_title_text">알레르기 유발요인</string>
+    <string name="menu_detail_order_text">주문하기</string>
+    <string name="menu_detail_image">메뉴 상세보기 이미지</string>
+
 </resources>

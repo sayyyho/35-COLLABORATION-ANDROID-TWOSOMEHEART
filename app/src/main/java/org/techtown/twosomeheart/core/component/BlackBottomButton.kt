@@ -23,7 +23,7 @@ import org.techtown.twosomeheart.ui.theme.White
 fun BlackBottomButton(
     text: String,
     modifier: Modifier = Modifier,
-    font: TextStyle = TwosomeHeartTypography.titleB16,
+    font: TextStyle = TwosomeHeartTypography.title1B16,
     color: Color = White,
     padding: Int = 11,
 ) {
