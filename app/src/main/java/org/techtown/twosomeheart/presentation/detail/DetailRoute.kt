@@ -138,6 +138,8 @@ fun DetailScreen(
                         menuName = state.data.menuName,
                         menuDescription = state.data.menuDescription,
                         menuPrice = state.data.menuPrice,
+                        menuCaution = state.data.menuCaution,
+                        menuAllergy = state.data.menuAllergy
                     )
 
                     HorizontalDivider(
