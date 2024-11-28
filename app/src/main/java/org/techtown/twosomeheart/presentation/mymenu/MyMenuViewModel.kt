@@ -34,6 +34,7 @@ class MyMenuViewModel : ViewModel() {
                         menuPrice = item.price,
                         menuImage = item.imageUrl,
                         menuOption = "${item.temperature}/${item.size}/${item.coffeeBean}/${item.togo}${if(item.personal){"/개인컵"}else{""}}",
+                        id = item.id,
                         isChecked = false // 기본값 설정
                     )
                 }.toPersistentList()
@@ -45,6 +46,43 @@ class MyMenuViewModel : ViewModel() {
                 _state.value = _state.value.copy(
                     uiState = UiState.Failure
                 )
+            }
+        }
+    }
+
+    fun deleteSelectedItems(isAll: Boolean = false) {
+        viewModelScope.launch {
+            val currentState = _state.value
+            if (currentState.uiState is UiState.Success) {
+                val selectedIds = if (isAll) {
+                    currentState.uiState.data.map { it.id } // 전체 삭제 시 모든 ID 가져오기
+                } else {
+                    currentState.uiState.data.filter { it.isChecked }.map { it.id } // 선택된 ID만 가져오기
+                }
+
+                if (selectedIds.isNotEmpty()) {
+                    runCatching {
+                        twosomeService.deleteMyMenu(
+                            favoriteIds = if (!isAll) selectedIds.joinToString(",") else null,
+                            all = isAll
+                        )
+                    }.onSuccess {
+                        // 성공 시 UI 업데이트
+                        val updatedList = if (isAll) {
+                            persistentListOf() // 전체 삭제 시 빈 리스트 반환
+                        } else {
+                            currentState.uiState.data.filter { !it.isChecked }.toPersistentList()
+                        }
+
+                        _state.value = currentState.copy(
+                            uiState = UiState.Success(updatedList)
+                        )
+                    }.onFailure {
+                        _state.value = currentState.copy(
+                            uiState = UiState.Failure
+                        )
+                    }
+                }
             }
         }
     }

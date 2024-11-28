@@ -8,4 +8,5 @@ data class MyMenuModel(
     val menuImage: String,
     val menuOption: String,
     val isChecked: Boolean,
+    val id: Long
 )

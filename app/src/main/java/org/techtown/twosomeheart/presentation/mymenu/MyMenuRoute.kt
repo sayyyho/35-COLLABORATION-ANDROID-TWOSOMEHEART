@@ -67,7 +67,8 @@ fun MyMenuRoute(
         paddingValues = paddingValues,
         state = state.uiState,
         navigateUp = navigateUp,
-        toggleItemChecked = viewModel::toggleItemChecked
+        toggleItemChecked = viewModel::toggleItemChecked,
+        deleteSelectedItems = viewModel::deleteSelectedItems
     )
 }
 
@@ -77,7 +78,8 @@ fun MyMenuScreen(
     paddingValues: PaddingValues,
     state: UiState<PersistentList<MyMenuModel>>,
     navigateUp: () -> Unit,
-    toggleItemChecked: (Int, Boolean, Boolean) -> Unit
+    toggleItemChecked: (Int, Boolean, Boolean) -> Unit,
+    deleteSelectedItems: (isAll: Boolean) -> Unit
 ) {
 
     val isMyBottomSheetVisible by remember(state) {
@@ -239,8 +241,9 @@ fun MyMenuScreen(
         if (isDialogVisible) {
             CustomDialog(
                 title = stringResource(R.string.my_menu_dialog_title),
-                onClickCancel = { isDialogVisible = false }, // 다이얼로그 닫기
+                onClickCancel = { isDialogVisible = false },
                 onClickConfirm = {
+                    deleteSelectedItems(isAllSelect) // 선택 여부에 따라 전체/부분 삭제
                     isDialogVisible = false
                 }
             )
@@ -257,6 +260,7 @@ fun MyMenuScreenPreview() {
             paddingValues = PaddingValues(),
             navigateUp = {},
             toggleItemChecked = { _, _, _ -> },
+            deleteSelectedItems = {},
             state = UiState.Success(
                 persistentListOf(
                     MyMenuModel(
@@ -265,6 +269,7 @@ fun MyMenuScreenPreview() {
                         menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
                         menuOption = "아이스/라지/블랙그라운드/포장",
                         isChecked = true,
+                        id = 1
                     ),
                     MyMenuModel(
                         menuName = "바나나 샷 아메리카노",
@@ -272,21 +277,8 @@ fun MyMenuScreenPreview() {
                         menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
                         menuOption = "아이스/라지/블랙그라운드/포장/개인컵",
                         isChecked = false,
-                    ),
-                    MyMenuModel(
-                        menuName = "바나나 샷 아메리카노",
-                        menuPrice = 5800,
-                        menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
-                        menuOption = "아이스/라지/블랙그라운드/포장/개인컵",
-                        isChecked = false,
-                    ),
-                    MyMenuModel(
-                        menuName = "바나나 샷 아메리카노",
-                        menuPrice = 5800,
-                        menuImage = "https://github.com/user-attachments/assets/4b7b216c-0ea9-4034-a88c-953a6f761f98",
-                        menuOption = "아이스/라지/블랙그라운드/포장/개인컵",
-                        isChecked = false,
-                    ),
+                        id = 2
+                    )
                 )
             )
         )
