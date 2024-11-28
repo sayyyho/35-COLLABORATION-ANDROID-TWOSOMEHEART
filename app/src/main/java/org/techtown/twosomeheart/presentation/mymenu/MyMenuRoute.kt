@@ -120,7 +120,7 @@ fun MyMenuScreen(
                         modifier = Modifier.noRippleClickable(onClick = navigateUp)
                     )
                 },
-                text = stringResource(R.string.menu_top_bar),
+                text = stringResource(R.string.my_menu_navigate_text),
                 trailingIcon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_mymenu_plus),
