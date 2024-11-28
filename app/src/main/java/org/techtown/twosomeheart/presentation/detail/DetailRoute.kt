@@ -43,6 +43,7 @@ import org.techtown.twosomeheart.ui.theme.White
 
 @Composable
 fun DetailRoute(
+    menuId: Long,
     paddingValues: PaddingValues,
     navigateUp: () -> Unit,
     viewModel: DetailViewModel = viewModel()
@@ -50,7 +51,7 @@ fun DetailRoute(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        viewModel.getMenuDetail()
+        viewModel.getMenuDetail(menuId)
     }
 
     DetailScreen(
