@@ -18,6 +18,7 @@ import org.techtown.twosomeheart.presentation.detail.modal.DetailModalSideEffect
 import org.techtown.twosomeheart.presentation.detail.modal.DetailModalState
 import org.techtown.twosomeheart.presentation.detail.model.CoffeeBeanType
 import org.techtown.twosomeheart.presentation.detail.model.DetailModel
+import org.techtown.twosomeheart.presentation.detail.model.LikeModel
 import org.techtown.twosomeheart.presentation.detail.model.PickUpType
 import org.techtown.twosomeheart.presentation.detail.model.SizeType
 import org.techtown.twosomeheart.presentation.detail.model.TemperatureType
@@ -80,6 +81,7 @@ class DetailViewModel : ViewModel() {
                         )
                     )
                 }.onSuccess { response ->
+                    _sideEffect.emit(DetailModalSideEffect.CloseBottomSheet)
                     _detailModalState.value = _detailModalState.value.copy(uiState = UiState.Success(response.status))
                     _sideEffect.emit(DetailModalSideEffect.SnackBar(R.string.menu_detail_modal_like_success))
                 }.onFailure { throwable ->
@@ -167,6 +169,10 @@ class DetailViewModel : ViewModel() {
 
     fun updateIsShowBottomSheet() {
         _detailState.value = _detailState.value.copy(isShowBottomSheet = !_detailState.value.isShowBottomSheet)
+        _detailModalState.value = _detailModalState.value.copy(
+            likeModel = LikeModel(),
+            isEnabled = false
+        )
     }
 
     fun onClickOrderButton() = viewModelScope.launch {
