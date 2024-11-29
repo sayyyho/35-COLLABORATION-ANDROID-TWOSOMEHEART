@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -24,16 +23,16 @@ fun MenuDetailContent(
     menuName: String,
     menuDescription: String,
     menuPrice: Int,
-    menuCaution : String?,
-    menuAllergy : String?,
+    menuCaution: String?,
+    menuAllergy: String?,
     modifier: Modifier = Modifier
-){
+) {
     val cautionList = menuCaution?.split(",")?.map { it.trim() } ?: emptyList()
     val cautionAndAllergyList = (cautionList + listOfNotNull(menuAllergy)).distinct()
 
     Column(
         modifier = modifier
-            .padding(start = 16.dp)
+            .padding(horizontal = 16.dp)
             .background(White)
     ) {
         MenuStatusChip(isBestMenu = isBestMenu)
