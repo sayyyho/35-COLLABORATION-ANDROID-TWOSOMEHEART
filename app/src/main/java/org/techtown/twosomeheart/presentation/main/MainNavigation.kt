@@ -7,7 +7,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.rememberNavController
 import org.techtown.twosomeheart.core.Route
 import org.techtown.twosomeheart.presentation.detail.navigation.navigateDetail
-import org.techtown.twosomeheart.presentation.dummy.navigation.navigateDummy
 import org.techtown.twosomeheart.presentation.menu.navigation.Menu
 import org.techtown.twosomeheart.presentation.menu.navigation.navigateMenu
 import org.techtown.twosomeheart.presentation.mymenu.navigation.navigateMyMenu
@@ -19,10 +18,6 @@ class MainNavigation(
 ) {
     fun navigateUp() {
         navController.navigateUp()
-    }
-
-    fun navigateToDummy(navOptions: NavOptions? = null) {
-        navController.navigateDummy(navOptions = navOptions)
     }
 
     fun navigateToMenu(navOptions: NavOptions? = null) {

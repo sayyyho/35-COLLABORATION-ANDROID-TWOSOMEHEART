@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Twosome Heart</string>
-    <string name="dummy_example_string">dummy_string</string>
 
     //common
     <string name="minus">minus</string>
