@@ -92,7 +92,7 @@ fun DetailRoute(
             .collect { sideEffect ->
                 when (sideEffect) {
                     is DetailModalSideEffect.SnackBar -> {
-                        snackBarHost.currentSnackbarData?.dismiss() // dismiss any existing snackbar
+                        snackBarHost.currentSnackbarData?.dismiss()
                         snackBarHost.showSnackbar(
                             message = context.getString(sideEffect.message),
                             actionLabel = context.getString(R.string.menu_detail_modal_snackbar_list),
