@@ -1,27 +1,22 @@
-## MEMBER 💖
+## Contributors 💖
 
-|                **SOPT 35th ANDROID<br>TWOSOMEHEART**                |               **Hyeeum Song (LEAD)**  <br> [github](https://github.com/hyeeum)             |               **Yein Kang**  <br>[github](https://github.com/kangyein9892)           |               **Seho Park<br>**  [github](https://github.com/sayyyho)              |
+|                **SOPT 35th ANDROID<br>TWOSOMEHEART**                |               **Hyeeum Song (LEAD)**  <br> [@hyeeum](https://github.com/hyeeum)             |               **Yein Kang**  <br>[@kangyein9892](https://github.com/kangyein9892)           |               **Seho Park<br>**  [@sayyyho](https://github.com/sayyyho)              |
 |:---------------------------------------------------------:|:--------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|
 | <img width="250px" src="https://github.com/user-attachments/assets/0ffb0704-259d-421d-9c4f-50e35a996d7d"/> | <img width="200px" src="https://github.com/user-attachments/assets/b487bb69-9a16-4586-8f6d-07756edaef80"/>  | <img width="200px" src="https://github.com/user-attachments/assets/59f016c9-3d5c-44f3-9dd3-815ee46771e7"/> | <img width="200px" src="https://github.com/user-attachments/assets/2b1d9df7-e838-4848-915d-ad01eb13002c"/>
-| 단체사진 | `기초 세팅`,<br>`투썸오더`, `옵션` | `상품 상세`,<br>`모달` | `MY메뉴` |
+| 단체사진 | `기초 세팅`,<br>`투썸오더`, `옵션` , <br>`상품 상세 불러오기 api` | `상품 상세`,<br>`모달`,<br>`즐겨찾기 등록 api` | `MY메뉴` ,<br>`즐겨찾기 불러오기 api` ,<br>`즐겨찾기 삭제하기 api` |
 
 <br>
 
 ## SCREENSHOTS 📷  
-|       뷰       |                                                              1                                                              |                                                              2                                                              |
-|:-------------:|:---------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------:|
-| **투썸오더**  | <img width="200px" src="https://github.com/user-attachments/assets/9bd52262-8cc0-42ee-a384-d6323e5d01c5" alt="메뉴"> | None |
-| **상품 상세** | <img width="200px" src="https://github.com/user-attachments/assets/9f0ff17c-8b6e-4de8-b0e3-fd38fb846f1d" alt="상품 상세"> | 주의사항 토글 펼치기/접기 <br> 아이템 클릭 시 해당 상세화면으로 이동 |
-| **모달**      | <img width="200px" src="https://github.com/user-attachments/assets/b4f51d34-49bc-4d83-9630-8754682e0779" alt="옵션 선택 모달"> | 옵션 선택 <br> 즐겨찾기 클릭시 토스트 메세지 출력 |
-| **옵션**      | <img width="200px" src="https://github.com/user-attachments/assets/e1d33e0a-7a4e-47c0-974c-ce369011b922" alt="옵션 선택"> | 퍼스널 옵션 추가 및 초기화 |
-| **MY 메뉴**   | <img width="200px" src="https://github.com/user-attachments/assets/646a0d05-2260-4a85-a011-9ac0f4312e23" alt="선택 삭제"> <br>**선택 삭제** | <img width="200px" src="https://github.com/user-attachments/assets/c3588576-9f2f-40ad-b6e5-176d65111bf8" alt="전체 삭제"> <br>**전체 삭제** |
+
+|              투썸 오더           |              상품 상세          |              모달             |       옵션             |    MY 투썸            |
+|:-------:|:-------:|:-------:|:-------:|:-------:|
+|<img width="200px" src="https://github.com/user-attachments/assets/9bd52262-8cc0-42ee-a384-d6323e5d01c5" alt="메뉴"> | <img width="200px" src="https://github.com/user-attachments/assets/9f0ff17c-8b6e-4de8-b0e3-fd38fb846f1d" alt="상품 상세">|<img width="200px" src="https://github.com/user-attachments/assets/b4f51d34-49bc-4d83-9630-8754682e0779" alt="옵션 선택 모달">| <img width="200px" src="https://github.com/user-attachments/assets/e1d33e0a-7a4e-47c0-974c-ce369011b922" alt="옵션 선택"> |<img width="200px" src="https://github.com/user-attachments/assets/b5652e00-2da4-4e6c-a454-690939b86090" alt="선 삭제"> |
 
 <br>
 
 ## UI 설계 🎨
-- **[혜음](https://github.com/SOPT-all/35-COLLABORATION-ANDROID-TWOSOMEHEART/wiki/UI-%EC%84%A4%EA%B3%84-%E2%80%90-%ED%98%9C%EC%9D%8C)**
-- **[예인](https://github.com/SOPT-all/35-COLLABORATION-ANDROID-TWOSOMEHEART/wiki/UI-%EC%84%A4%EA%B3%84-%E2%80%90-%EC%98%88%EC%9D%B8)**
-- **[세호](https://github.com/SOPT-all/35-COLLABORATION-ANDROID-TWOSOMEHEART/wiki/UI-%EC%84%A4%EA%B3%84-%E2%80%90-%EC%84%B8%ED%98%B8)**
+- **[뷰스케치 피그마](https://www.figma.com/design/9iHO7KLYDBu5j9vV613CB9/%EC%95%88%EB%91%A5%EC%9D%B4%EB%93%A4-%EC%9E%91%EC%97%85%EA%B3%B5%EA%B0%84?node-id=21-18713&m=dev&t=KDP8LAiM5oyZO2FU-1)**
 
 <br>
 
