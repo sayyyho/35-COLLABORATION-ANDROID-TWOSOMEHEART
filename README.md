@@ -16,7 +16,7 @@
 <br>
 
 ## UI 설계 🎨
-- **[뷰스케치 피그마](https://www.figma.com/design/9iHO7KLYDBu5j9vV613CB9/%EC%95%88%EB%91%A5%EC%9D%B4%EB%93%A4-%EC%9E%91%EC%97%85%EA%B3%B5%EA%B0%84?node-id=21-18713&m=dev&t=KDP8LAiM5oyZO2FU-1)**
+- **[Figma](https://www.figma.com/design/9iHO7KLYDBu5j9vV613CB9/%EC%95%88%EB%91%A5%EC%9D%B4%EB%93%A4-%EC%9E%91%EC%97%85%EA%B3%B5%EA%B0%84?node-id=21-18713&m=dev&t=KDP8LAiM5oyZO2FU-1)**
 
 <br>
 
@@ -61,6 +61,16 @@
 <br>
 
 ## 프로젝트 기술 스택 선정 📚
+
+- 𝙎AA
+- 𝙆𝙤𝙩𝙡𝙞𝙣
+- 𝘾𝙤𝙧𝙤𝙪𝙩𝙞𝙣𝙚
+- 𝙐𝙞𝙎𝙩𝙖𝙩𝙚
+- 𝙎𝙩𝙖𝙩𝙚𝙁𝙡𝙤𝙬 & 𝙎𝙝𝙖𝙧𝙚𝙙𝙁𝙡𝙤𝙬
+- 𝙅𝙚𝙩𝙥𝙖𝙘𝙠𝙉𝙖𝙫𝙞𝙜𝙖𝙩𝙞𝙤𝙣
+- 𝙑𝙚𝙧𝙨𝙞𝙤𝙣 𝘾𝙖𝙩𝙖𝙡𝙤𝙜
+  
+<br>
 
 | 기술 스택 | 도입 이유 |
 | --- | --- |
