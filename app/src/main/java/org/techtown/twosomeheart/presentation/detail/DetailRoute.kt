@@ -25,10 +25,8 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,13 +37,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import kotlinx.collections.immutable.toPersistentList
-import kotlinx.coroutines.launch
 import org.techtown.twosomeheart.R
 import org.techtown.twosomeheart.core.component.BlackBottomButton
 import org.techtown.twosomeheart.core.component.Topbar
@@ -78,7 +77,6 @@ fun DetailRoute(
     viewModel: DetailViewModel = viewModel()
 ) {
     val detailState by viewModel.detailState.collectAsStateWithLifecycle()
-
     val modalState by viewModel.detailModalState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
@@ -94,7 +92,7 @@ fun DetailRoute(
             .collect { sideEffect ->
                 when (sideEffect) {
                     is DetailModalSideEffect.SnackBar -> {
-                        snackBarHost.currentSnackbarData?.dismiss()
+                        snackBarHost.currentSnackbarData?.dismiss() // dismiss any existing snackbar
                         snackBarHost.showSnackbar(
                             message = context.getString(sideEffect.message),
                             actionLabel = context.getString(R.string.menu_detail_modal_snackbar_list),
@@ -104,6 +102,7 @@ fun DetailRoute(
 
                     DetailModalSideEffect.NavigateToMyMenu -> navigateToMyMenu()
                     DetailModalSideEffect.OnClickOrderButton -> viewModel.updateIsShowBottomSheet()
+                    DetailModalSideEffect.CloseBottomSheet -> viewModel.updateIsShowBottomSheet()
                 }
             }
     }
@@ -113,7 +112,6 @@ fun DetailRoute(
         navigateUp = navigateUp,
         navigateToMyMenu = viewModel::snackBarListActionButtonClick,
         detailState = detailState.uiState,
-        modalUiState = modalState.uiState,
         onStarButtonClick = viewModel::onStarButtonClick,
         onTemperatureButtonClick = viewModel::onTempatureButtonClick,
         onSizeButtonClick = viewModel::onSizeButtonClick,
@@ -131,7 +129,6 @@ fun DetailRoute(
         snackBarHost = snackBarHost,
         onOptionButtonClick = navigateToOption
     )
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -141,7 +138,6 @@ fun DetailScreen(
     navigateUp: () -> Unit,
     navigateToMyMenu: () -> Unit,
     detailState: UiState<DetailModel>,
-    modalUiState: UiState<Int>,
     onStarButtonClick: () -> Unit,
     onTemperatureButtonClick: (TemperatureType) -> Unit,
     onSizeButtonClick: (SizeType) -> Unit,
@@ -160,27 +156,22 @@ fun DetailScreen(
     isShowBottomSheet: Boolean = false,
     onOptionButtonClick: () -> Unit
 ) {
-    val sheetState = rememberModalBottomSheetState()
-    val coroutineScope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
 
-    LaunchedEffect(modalUiState) {
-        snapshotFlow { modalUiState }
-            .collect { state ->
-                if (state is UiState.Success) {
-                    updateIsShowBottomSheet()
-                }
-            }
+    Popup(
+        alignment = Alignment.BottomCenter,
+        onDismissRequest = { snackBarHost.currentSnackbarData?.dismiss() },
+
+    ) {
+        SnackbarHost(hostState = snackBarHost) { snackbarData ->
+            DetailModalSnackbar(
+                snackbarData = snackbarData,
+                navigateToMyMenu = navigateToMyMenu
+            )
+        }
     }
 
     Scaffold(
-        snackbarHost = {
-            SnackbarHost(hostState = snackBarHost) { snackbarData ->
-                DetailModalSnackbar(
-                    snackbarData = snackbarData,
-                    navigateToMyMenu = navigateToMyMenu
-                )
-            }
-        },
         modifier = modifier
             .background(White)
             .padding(paddingValues)
@@ -216,6 +207,7 @@ fun DetailScreen(
                 text = stringResource(R.string.menu_detail_order_text),
                 modifier = Modifier
                     .fillMaxWidth()
+                    .background(White)
                     .padding(16.dp)
                     .noRippleClickable {
                         onOrderButtonClick()
@@ -229,6 +221,7 @@ fun DetailScreen(
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
                 .fillMaxWidth()
+                .background(White)
         ) {
             when (detailState) {
                 is UiState.Loading -> {}
@@ -243,14 +236,14 @@ fun DetailScreen(
                     updateMenuName(detailState.data.menuName)
                     updateMenuPrice(detailState.data.menuPrice)
 
-                    if(isShowBottomSheet){
+                    if (isShowBottomSheet) {
 
                         DetailModalBottomSheet(
                             menuName = detailState.data.menuName,
                             price = detailState.data.menuPrice,
                             sheetState = sheetState,
                             onDismissRequest = {
-                                coroutineScope.launch { sheetState.hide() }
+                                updateIsShowBottomSheet()
                             },
                             onStarButtonClick = {
                                 onStarButtonClick()
@@ -288,7 +281,7 @@ fun DetailScreen(
                     Spacer(modifier = Modifier.height(26.dp))
 
                     MenuDetailContent(
-                        isBestMenu = detailState.data.menuStatus == "BEST",
+                        isBestMenu = detailState.data.menuStatus == "Best",
                         menuName = detailState.data.menuName,
                         menuDescription = detailState.data.menuDescription,
                         menuPrice = detailState.data.menuPrice,
@@ -318,11 +311,12 @@ fun DetailScreen(
     }
 }
 
+
 @Composable
 fun DetailModalSnackbar(
     snackbarData: SnackbarData,
     navigateToMyMenu: () -> Unit
-){
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -400,7 +394,6 @@ fun DetailScreenPreview() {
                     menuImageUrl = "https://private-user-images.githubusercontent.com/69308068/389300533-8d353883-fb4b-4608-b0b4-24d2bc074133.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzI1MzI2OTksIm5iZiI6MTczMjUzMjM5OSwicGF0aCI6Ii82OTMwODA2OC8zODkzMDA1MzMtOGQzNTM4ODMtZmI0Yi00NjA4LWIwYjQtMjRkMmJjMDc0MTMzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDExMjUlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMTI1VDEwNTk1OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTMwZTViNmNmMDUwODlmYjRiNGUzZDYzYmY5MmQxOTE0ZTkyMzI3ODJkNDk2MjljZjZjMTRkODE1MzNiM2JkMzkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.BcvGmMQweWhlRzbTBNEGhu9K6WTQOUE6Fkntktloog0"
                 )
             ),
-            modalUiState = UiState.Success(1),
             onStarButtonClick = { },
             onTemperatureButtonClick = { },
             onSizeButtonClick = { },
