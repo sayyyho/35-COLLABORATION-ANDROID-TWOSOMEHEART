@@ -95,6 +95,13 @@ fun MyMenuScreen(
     var isDialogVisible by remember { mutableStateOf(false) }
     var isAllSelect by remember { mutableStateOf(false) }
 
+
+    LaunchedEffect(state) {
+        if (state is UiState.Success) {
+            isAllSelect = state.data.all { it.isChecked }
+        }
+    }
+
     Box(
         modifier = modifier
             .padding(paddingValues)
@@ -215,11 +222,7 @@ fun MyMenuScreen(
                                 menuPrice = item.menuPrice,
                                 menuImage = item.menuImage,
                                 menuOption = item.menuOption,
-                                isChecked = if (isAllSelect) {
-                                    true
-                                } else {
-                                    item.isChecked
-                                },
+                                isChecked = item.isChecked,
                                 onCheckedChange = { toggleItemChecked(index, false, false) }
                             )
                             if (index != state.data.lastIndex) {
@@ -237,8 +240,8 @@ fun MyMenuScreen(
             MyMenuBottomSheet(
                 modifier = Modifier
                     .align(Alignment.BottomCenter),
-                price = selectedSummary.totalPrice, // 선택된 총 금액 전달
-                count = selectedSummary.itemCount.toString(), // 선택된 총 개수 전달
+                price = selectedSummary.totalPrice,
+                count = selectedSummary.itemCount.toString(),
                 place = stringResource(R.string.menu_ordered_store_name),
             )
         }
@@ -248,7 +251,7 @@ fun MyMenuScreen(
                 title = stringResource(R.string.my_menu_dialog_title),
                 onClickCancel = { isDialogVisible = false },
                 onClickConfirm = {
-                    deleteSelectedItems(isAllSelect) // 선택 여부에 따라 전체/부분 삭제
+                    deleteSelectedItems(isAllSelect)
                     isDialogVisible = false
                 }
             )

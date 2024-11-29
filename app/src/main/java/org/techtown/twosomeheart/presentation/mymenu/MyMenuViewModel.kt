@@ -104,7 +104,10 @@ class MyMenuViewModel : ViewModel() {
                 val currentItem = updatedList[index]
                 updatedList[index] = currentItem.copy(isChecked = !currentItem.isChecked)
             }
-
+            val isAllSelected = updatedList.all { it.isChecked }
+            _state.value = currentState.copy(
+                uiState = UiState.Success(updatedList.toPersistentList())
+            )
             _state.value = currentState.copy(
                 uiState = UiState.Success(updatedList.toPersistentList())
             )
