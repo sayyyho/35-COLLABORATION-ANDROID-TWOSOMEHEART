@@ -30,7 +30,7 @@ class MyMenuViewModel : ViewModel() {
     fun getMyMenu() {
         viewModelScope.launch {
             runCatching {
-                twosomeService.getMyMenu() // BaseResponse<ResponseMyMenuDto> 반환
+                twosomeService.getMyMenu()
             }.onSuccess { response ->
                 val favoriteList = response.data.favoriteList.map { item ->
                     MyMenuModel(
@@ -39,7 +39,7 @@ class MyMenuViewModel : ViewModel() {
                         menuImage = item.imageUrl,
                         menuOption = "${item.temperature}/${item.size}/${item.coffeeBean}/${item.togo}${if(item.personal){"/개인컵"}else{""}}",
                         id = item.id,
-                        isChecked = false // 기본값 설정
+                        isChecked = false
                     )
                 }.toPersistentList()
 
@@ -59,9 +59,9 @@ class MyMenuViewModel : ViewModel() {
             val currentState = _state.value
             if (currentState.uiState is UiState.Success) {
                 val selectedIds = if (isAll) {
-                    currentState.uiState.data.map { it.id } // 전체 삭제 시 모든 ID 가져오기
+                    currentState.uiState.data.map { it.id }
                 } else {
-                    currentState.uiState.data.filter { it.isChecked }.map { it.id } // 선택된 ID만 가져오기
+                    currentState.uiState.data.filter { it.isChecked }.map { it.id }
                 }
 
                 if (selectedIds.isNotEmpty()) {
@@ -71,9 +71,8 @@ class MyMenuViewModel : ViewModel() {
                             all = isAll
                         )
                     }.onSuccess {
-                        // 성공 시 UI 업데이트
                         val updatedList = if (isAll) {
-                            persistentListOf() // 전체 삭제 시 빈 리스트 반환
+                            persistentListOf()
                         } else {
                             currentState.uiState.data.filter { !it.isChecked }.toPersistentList()
                         }
@@ -104,15 +103,10 @@ class MyMenuViewModel : ViewModel() {
                 val currentItem = updatedList[index]
                 updatedList[index] = currentItem.copy(isChecked = !currentItem.isChecked)
             }
-            val isAllSelected = updatedList.all { it.isChecked }
-            _state.value = currentState.copy(
-                uiState = UiState.Success(updatedList.toPersistentList())
-            )
             _state.value = currentState.copy(
                 uiState = UiState.Success(updatedList.toPersistentList())
             )
 
-            // 총 금액 및 개수 계산
             calculateSummary()
         }
     }
