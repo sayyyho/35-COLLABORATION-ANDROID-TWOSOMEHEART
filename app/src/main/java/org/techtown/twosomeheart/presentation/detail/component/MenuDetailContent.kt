@@ -33,7 +33,7 @@ fun MenuDetailContent(
 
     Column(
         modifier = modifier
-            .padding(start = 16.dp)
+            .padding(horizontal = 16.dp)
             .background(White)
     ) {
         MenuStatusChip(isBestMenu = isBestMenu)
